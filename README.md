@@ -5,7 +5,7 @@ White-label branding for Filament panels. Let every tenant rebrand their admin p
 ## Requirements
 
 - PHP 8.2+
-- Laravel 11+
+
 - Filament v5
 
 ## Installation
