@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace FilamentWhiteLabel\Providers;
 
 use FilamentWhiteLabel\Commands\ClearWhiteLabelCacheCommand;
+use FilamentWhiteLabel\Commands\InstallWhiteLabelCommand;
 use FilamentWhiteLabel\Listeners\ApplyTenantEmailBranding;
 use FilamentWhiteLabel\Models\BrandSettings;
 use FilamentWhiteLabel\Observers\BrandSettingsObserver;
@@ -24,11 +25,10 @@ class FilamentWhiteLabelServiceProvider extends ServiceProvider
             __DIR__ . '/../../database/migrations/' => database_path('migrations'),
         ], 'filament-white-label-migrations');
 
-        $this->loadMigrationsFrom(__DIR__ . '/../../database/migrations');
-
         if ($this->app->runningInConsole()) {
             $this->commands([
                 ClearWhiteLabelCacheCommand::class,
+                InstallWhiteLabelCommand::class,
             ]);
         }
 

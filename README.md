@@ -15,10 +15,12 @@ White-label branding for Filament panels. Let every tenant rebrand their admin p
    composer require filament-white-label/filament-white-label
    ```
 
-2. Publish the config file:
+2. Run the install command:
    ```bash
-   php artisan vendor:publish --tag=filament-white-label-config
+   php artisan white-label:install
    ```
+
+   This publishes the config and migration files. Review them, then:
 
 3. Run the migration:
    ```bash
