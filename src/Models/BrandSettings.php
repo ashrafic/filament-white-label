@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace FilamentWhiteLabel\Models;
 
+use FilamentWhiteLabel\Security\CssSanitizer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
@@ -30,5 +31,12 @@ class BrandSettings extends Model
     public function tenant(): MorphTo
     {
         return $this->morphTo();
+    }
+
+    protected function setCustomCssAttribute(?string $value): void
+    {
+        $this->attributes['custom_css'] = filled($value)
+            ? CssSanitizer::sanitize($value)
+            : null;
     }
 }
