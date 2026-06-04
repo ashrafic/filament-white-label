@@ -13,18 +13,11 @@ class BrandSettings extends Model
     protected $fillable = [
         'tenant_type',
         'tenant_id',
-        'brand_name',
-        'logo_path',
-        'favicon_path',
-        'font_family',
-        'custom_css',
-        'email_from_address',
-        'email_from_name',
+        'panel_id',
         'metadata',
     ];
 
     protected $casts = [
-        'colors' => 'array',
         'metadata' => 'array',
     ];
 
@@ -33,10 +26,16 @@ class BrandSettings extends Model
         return $this->morphTo();
     }
 
-    protected function setCustomCssAttribute(?string $value): void
+    protected static function booted(): void
     {
-        $this->attributes['custom_css'] = filled($value)
-            ? CssSanitizer::sanitize($value)
-            : null;
+        static::saving(function (self $model): void {
+            $metadata = $model->metadata ?? [];
+
+            if (! empty($metadata['custom_css'])) {
+                $metadata['custom_css'] = CssSanitizer::sanitize($metadata['custom_css']);
+            }
+
+            $model->metadata = $metadata;
+        });
     }
 }
