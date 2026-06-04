@@ -19,6 +19,17 @@ class EditBrandSettings extends EditRecord
         return [];
     }
 
+    public function mount(int | string $record = null): void
+    {
+        $this->record = $this->resolveRecord();
+
+        $this->authorizeAccess();
+
+        $this->fillForm();
+
+        $this->previousUrl = url()->previous();
+    }
+
     protected function resolveRecord(mixed $key = null): Model
     {
         $tenant = Filament::getTenant();
