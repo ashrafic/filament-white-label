@@ -14,6 +14,7 @@ return [
         'brand_name' => env('APP_NAME', 'Filament'),
         'logo' => null,
         'favicon' => null,
+        'brand_logo_height' => null,
         'font_family' => 'Inter',
         'colors' => [
             'primary' => '#3b82f6',
@@ -25,6 +26,15 @@ return [
         ],
         'email_from_address' => env('MAIL_FROM_ADDRESS'),
         'email_from_name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Filament')),
+        'top_navigation' => false,
+        'sidebar_collapsible_on_desktop' => false,
+        'sidebar_fully_collapsible_on_desktop' => false,
+        'collapsible_navigation_groups' => true,
+        'breadcrumbs' => true,
+        'unsaved_changes_alerts' => false,
+        'spa_mode' => false,
+        'database_notifications' => false,
+        'database_notifications_polling' => '30s',
     ],
 
     'security' => [
@@ -34,7 +44,7 @@ return [
 
     'ui' => [
         'show_preview' => env('FILAMENT_WHITE_LABEL_PREVIEW', false),
-        'navigation_group' => 'Settings',
+        'navigation_group' => 'White Label',
         'navigation_sort' => 10,
     ],
 
@@ -50,4 +60,5 @@ return [
         'enabled' => true,
         'api_key' => env('GOOGLE_FONTS_API_KEY'),
     ],
+
 ];
