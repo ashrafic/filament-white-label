@@ -27,9 +27,9 @@ class BrandSettingsResource extends Resource
 
     protected static $navigationIcon = 'heroicon-o-paint-brush';
 
-    protected static $label = 'Brand Settings';
+    protected static ?string $label = 'Brand Settings';
 
-    protected static $pluralLabel = 'Brand Settings';
+    protected static ?string $pluralLabel = 'Brand Settings';
 
     public static function getNavigationGroup(): ?string
     {
