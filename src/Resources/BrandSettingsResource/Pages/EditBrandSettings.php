@@ -4,11 +4,16 @@ declare(strict_types=1);
 
 namespace FilamentWhiteLabel\Resources\BrandSettingsResource\Pages;
 
-use Filament\Facades\Filament;
+use Filament\Forms\Components\ColorPicker;
+use Filament\Forms\Components\FileUpload;
+use Filament\Forms\Components\Select;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
 use Filament\Resources\Pages\EditRecord;
-use FilamentWhiteLabel\Models\BrandSettings;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
+use FilamentWhiteLabel\Fonts\FontService;
 use FilamentWhiteLabel\Resources\BrandSettingsResource;
-use Illuminate\Database\Eloquent\Model;
 
 class EditBrandSettings extends EditRecord
 {
@@ -21,7 +26,7 @@ class EditBrandSettings extends EditRecord
 
     public function mount(int | string $record = null): void
     {
-        $this->record = $this->resolveRecord();
+        $this->record = BrandSettingsResource::resolveBrandSettingsRecord();
 
         $this->authorizeAccess();
 
@@ -30,42 +35,81 @@ class EditBrandSettings extends EditRecord
         $this->previousUrl = url()->previous();
     }
 
-    protected function resolveRecord(mixed $key = null): Model
+    public function form(Schema $schema): Schema
     {
-        $tenant = Filament::getTenant();
+        return $schema
+            ->columns(1)
+            ->schema([
+                Section::make('Brand Identity')->schema([
+                    TextInput::make('metadata.brand_name')
+                        ->label('Brand Name')
+                        ->required()
+                        ->maxLength(255)
+                        ->placeholder(config('app.name')),
 
-        if ($tenant) {
-            $settings = BrandSettings::query()
-                ->where('tenant_type', $tenant->getMorphClass())
-                ->where('tenant_id', $tenant->getKey())
-                ->first();
+                    FileUpload::make('metadata.logo_path')
+                        ->label('Logo')
+                        ->image()
+                        ->imageResizeMode('contain')
+                        ->imageCropAspectRatio('3:1')
+                        ->directory(BrandSettingsResource::storageDirectory('logos'))
+                        ->disk(config('filament-white-label.disk', 'public'))
+                        ->maxSize(2048)
+                        ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/svg+xml', 'image/webp']),
 
-            if (! $settings) {
-                $settings = BrandSettings::create([
-                    'tenant_type' => $tenant->getMorphClass(),
-                    'tenant_id' => $tenant->getKey(),
-                    'brand_name' => $tenant->name ?? config('app.name'),
-                    'font_family' => config('filament-white-label.defaults.font_family', 'Inter'),
-                    'colors' => config('filament-white-label.defaults.colors'),
-                ]);
-            }
+                    TextInput::make('metadata.brand_logo_height')
+                        ->label('Logo Height')
+                        ->placeholder('2.5rem')
+                        ->helperText('CSS height value. Leave empty for Filament default.'),
 
-            return $settings;
-        }
+                    FileUpload::make('metadata.favicon_path')
+                        ->label('Favicon')
+                        ->image()
+                        ->imageResizeMode('cover')
+                        ->imageCropAspectRatio('1:1')
+                        ->directory(BrandSettingsResource::storageDirectory('favicons'))
+                        ->disk(config('filament-white-label.disk', 'public'))
+                        ->maxSize(512)
+                        ->acceptedFileTypes(['image/png', 'image/x-icon', 'image/svg+xml']),
+                ])->columns(2),
 
-        $settings = BrandSettings::query()
-            ->whereNull('tenant_type')
-            ->whereNull('tenant_id')
-            ->first();
+                Section::make('Colors')->schema([
+                    ColorPicker::make('metadata.colors.primary')->label('Primary')->default('#3b82f6'),
+                    ColorPicker::make('metadata.colors.secondary')->label('Secondary')->default('#64748b'),
+                    ColorPicker::make('metadata.colors.danger')->label('Danger')->default('#ef4444'),
+                    ColorPicker::make('metadata.colors.warning')->label('Warning')->default('#f59e0b'),
+                    ColorPicker::make('metadata.colors.success')->label('Success')->default('#22c55e'),
+                    ColorPicker::make('metadata.colors.info')->label('Info')->default('#3b82f6'),
+                ])->columns(3),
 
-        if (! $settings) {
-            $settings = BrandSettings::create([
-                'brand_name' => config('filament-white-label.defaults.brand_name'),
-                'font_family' => config('filament-white-label.defaults.font_family', 'Inter'),
-                'colors' => config('filament-white-label.defaults.colors'),
+                Section::make('Typography')->schema([
+                    Select::make('metadata.font_family')
+                        ->label('Font Family')
+                        ->options(fn () => FontService::fontOptions())
+                        ->searchable()
+                        ->default('Inter'),
+                ]),
+
+                Section::make('Custom CSS')->schema([
+                    Textarea::make('metadata.custom_css')
+                        ->label('Custom CSS')
+                        ->rows(10)
+                        ->maxLength(config('filament-white-label.security.max_css_length', 50000))
+                        ->helperText('Custom CSS will be injected into your panel. <script> tags are automatically removed for security.')
+                        ->visible(fn () => ! config('filament-white-label.security.disable_custom_css', false)),
+                ])->collapsed(),
+
+                Section::make('Email Branding')->schema([
+                    TextInput::make('metadata.email_from_address')
+                        ->label('From Address')
+                        ->email()
+                        ->placeholder(config('mail.from.address')),
+
+                    TextInput::make('metadata.email_from_name')
+                        ->label('From Name')
+                        ->maxLength(255)
+                        ->placeholder(config('mail.from.name')),
+                ])->columns(2),
             ]);
-        }
-
-        return $settings;
     }
 }
