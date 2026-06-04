@@ -112,7 +112,7 @@ public function panel(Panel $panel): Panel
         ->brandLogo($this->whiteLabelLogo())
         ->colors($this->whiteLabelColors())
         ->favicon($this->whiteLabelFavicon())
-        ->fontFamily($this->whiteLabelFontFamily())
+        ->font($this->whiteLabelFontFamily())
         ->renderHook('panels::head.start', $this->whiteLabelHeadHook());
 }
 ```

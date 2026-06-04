@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FilamentWhiteLabel\Pages\Auth;
 
-use Filament\Pages\Auth\Login;
+use Filament\Auth\Pages\Login;
 use FilamentWhiteLabel\Services\BrandResolver;
 
 class BrandedLogin extends Login

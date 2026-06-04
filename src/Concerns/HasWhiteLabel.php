@@ -51,7 +51,7 @@ trait HasWhiteLabel
             ->brandLogo($this->whiteLabelLogo())
             ->favicon($this->whiteLabelFavicon())
             ->colors($this->whiteLabelColors())
-            ->fontFamily($this->whiteLabelFontFamily())
+            ->font($this->whiteLabelFontFamily())
             ->renderHook('panels::head.start', $this->whiteLabelHeadHook());
     }
 }

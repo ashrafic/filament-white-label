@@ -4,16 +4,17 @@ declare(strict_types=1);
 
 namespace FilamentWhiteLabel\Resources;
 
+use BackedEnum;
+use Filament\Actions\EditAction;
 use Filament\Facades\Filament;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
-use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Forms\Form;
 use Filament\Resources\Resource;
-use Filament\Tables\Actions\EditAction;
+use Filament\Schemas\Components\Section;
+use Filament\Schemas\Schema;
 use Filament\Tables\Columns\ImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
@@ -25,7 +26,7 @@ class BrandSettingsResource extends Resource
 {
     protected static ?string $model = BrandSettings::class;
 
-    protected static $navigationIcon = 'heroicon-o-paint-brush';
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-paint-brush';
 
     protected static ?string $label = 'Brand Settings';
 
@@ -41,9 +42,9 @@ class BrandSettingsResource extends Resource
         return config('filament-white-label.ui.navigation_sort', 10);
     }
 
-    public static function form(Form $form): Form
+    public static function form(Schema $schema): Schema
     {
-        return $form->schema([
+        return $schema->schema([
             Section::make('Brand Identity')->schema([
                 TextInput::make('brand_name')
                     ->label('Brand Name')
