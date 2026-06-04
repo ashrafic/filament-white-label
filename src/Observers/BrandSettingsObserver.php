@@ -11,11 +11,11 @@ class BrandSettingsObserver
 {
     public function saved(BrandSettings $brandSettings): void
     {
-        BrandResolver::clearCache($brandSettings->tenant);
+        BrandResolver::clearCache($brandSettings->tenant, $brandSettings->panel_id);
     }
 
     public function deleted(BrandSettings $brandSettings): void
     {
-        BrandResolver::clearCache($brandSettings->tenant);
+        BrandResolver::clearCache($brandSettings->tenant, $brandSettings->panel_id);
     }
 }
