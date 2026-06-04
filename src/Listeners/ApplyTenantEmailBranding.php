@@ -26,11 +26,12 @@ class ApplyTenantEmailBranding
         }
 
         $message = $event->message;
+        $metadata = $settings->metadata;
 
-        if ($settings->email_from_address) {
+        if (! empty($metadata['email_from_address'])) {
             $message->from(
-                $settings->email_from_address,
-                $settings->email_from_name ?: $settings->brand_name ?: null
+                $metadata['email_from_address'],
+                $metadata['email_from_name'] ?? $metadata['brand_name'] ?? null
             );
         }
     }
