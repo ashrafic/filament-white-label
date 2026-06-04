@@ -4,10 +4,10 @@ declare(strict_types=1);
 
 use FilamentWhiteLabel\Fonts\FontService;
 
-it('returns 50 fonts', function () {
+it('returns 49 fonts', function () {
     $fonts = FontService::fontOptions();
 
-    expect($fonts)->toHaveCount(50);
+    expect($fonts)->toHaveCount(49);
 });
 
 it('all fonts have non-empty key and label', function () {

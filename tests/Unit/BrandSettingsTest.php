@@ -3,38 +3,41 @@
 declare(strict_types=1);
 
 use FilamentWhiteLabel\Models\BrandSettings;
+use FilamentWhiteLabel\Security\CssSanitizer;
 
-it('has correct fillable fields', function () {
+test('model has correct fillable fields', function () {
     $model = new BrandSettings();
 
     expect($model->getFillable())->toBe([
         'tenant_type',
         'tenant_id',
-        'brand_name',
-        'logo_path',
-        'favicon_path',
-        'font_family',
-        'custom_css',
-        'email_from_address',
-        'email_from_name',
+        'panel_id',
         'metadata',
     ]);
 });
 
-it('casts colors to array', function () {
-    $model = new BrandSettings();
+test('metadata is cast to array', function () {
+    $model = new BrandSettings(['metadata' => ['brand_name' => 'Test']]);
 
-    expect($model->getCasts())->toHaveKey('colors', 'array');
+    expect($model->metadata)->toBeArray()
+        ->and($model->metadata['brand_name'])->toBe('Test');
 });
 
-it('casts metadata to array', function () {
+test('metadata defaults to null when not set', function () {
     $model = new BrandSettings();
 
-    expect($model->getCasts())->toHaveKey('metadata', 'array');
+    expect($model->metadata)->toBeNull();
 });
 
-it('has tenant morphTo relationship', function () {
-    $model = new BrandSettings();
+test('css is sanitized on save', function () {
+    $model = new BrandSettings([
+        'metadata' => [
+            'custom_css' => '<script>alert("xss")</script> body { color: red; }',
+        ],
+    ]);
 
-    expect(method_exists($model, 'tenant'))->toBeTrue();
+    $model->save();
+
+    expect($model->metadata['custom_css'])->not()->toContain('<script>')
+        ->and($model->metadata['custom_css'])->toContain('body { color: red; }');
 });
