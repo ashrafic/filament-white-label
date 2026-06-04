@@ -39,21 +39,16 @@ White-label branding for Filament panels. Let every tenant rebrand their admin p
 
 ## Quick Start
 
-Add the `HasWhiteLabel` concern to your PanelProvider:
+Just chain `->whiteLabel()` on your panel:
 
 ```php
-use FilamentWhiteLabel\Concerns\HasWhiteLabel;
-
 class AdminPanelProvider extends PanelProvider
 {
-    use HasWhiteLabel;
-
     public function panel(Panel $panel): Panel
     {
         return $panel
             ->id('admin')
-            ->tenant(Team::class)
-            ->when(true, fn (Panel $p) => $this->whiteLabel($p))
+            ->whiteLabel()
             ->resources([
                 \FilamentWhiteLabel\Resources\BrandSettingsResource::class,
             ]);
@@ -61,7 +56,9 @@ class AdminPanelProvider extends PanelProvider
 }
 ```
 
-That's it. Every tenant can now customize their logo, colors, font, favicon, and CSS through the Brand Settings resource.
+You can also pass a condition: `->whiteLabel(app()->environment('production'))`.
+
+That's it. No traits, no closures. Every tenant sees their own logo, colors, font, favicon, and CSS through the Brand Settings resource.
 
 ### Branded Login Page (Optional)
 
@@ -100,36 +97,22 @@ All configuration is in `config/filament-white-label.php`. Key options:
 
 ## Granular Integration
 
-Pick and choose which features to apply:
+Apply individual features:
 
 ```php
+use FilamentWhiteLabel\FilamentWhiteLabel;
+
 public function panel(Panel $panel): Panel
 {
     return $panel
         ->id('admin')
-        ->tenant(Team::class)
-        ->brandName($this->whiteLabelBrandName())
-        ->brandLogo($this->whiteLabelLogo())
-        ->colors($this->whiteLabelColors())
-        ->favicon($this->whiteLabelFavicon())
-        ->font($this->whiteLabelFontFamily())
-        ->renderHook('panels::head.start', $this->whiteLabelHeadHook());
+        ->brandName(fn () => FilamentWhiteLabel::brandName())
+        ->brandLogo(fn () => FilamentWhiteLabel::logoUrl())
+        ->colors(fn () => FilamentWhiteLabel::colors());
 }
 ```
 
-### Manual Integration (No Traits)
-
-```php
-public function panel(Panel $panel): Panel
-{
-    return $panel
-        ->id('admin')
-        ->tenant(Team::class)
-        ->brandName(fn () => \FilamentWhiteLabel\FilamentWhiteLabel::brandName())
-        ->brandLogo(fn () => \FilamentWhiteLabel\FilamentWhiteLabel::logoUrl())
-        ->colors(fn () => \FilamentWhiteLabel\FilamentWhiteLabel::colors());
-}
-```
+For featured-flag control with panel chaining, use the `$panel->whiteLabel()` with conditions:
 
 ## Security
 

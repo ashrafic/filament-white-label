@@ -4,11 +4,13 @@ declare(strict_types=1);
 
 namespace FilamentWhiteLabel\Providers;
 
+use Filament\Panel;
 use FilamentWhiteLabel\Commands\ClearWhiteLabelCacheCommand;
 use FilamentWhiteLabel\Commands\InstallWhiteLabelCommand;
 use FilamentWhiteLabel\Listeners\ApplyTenantEmailBranding;
 use FilamentWhiteLabel\Models\BrandSettings;
 use FilamentWhiteLabel\Observers\BrandSettingsObserver;
+use FilamentWhiteLabel\Services\BrandResolver;
 use Illuminate\Mail\Events\MessageSending;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
@@ -35,6 +37,20 @@ class FilamentWhiteLabelServiceProvider extends ServiceProvider
         if (config('filament-white-label.enabled', true)) {
             BrandSettings::observe(BrandSettingsObserver::class);
         }
+
+        Panel::macro('whiteLabel', function (bool $condition = true): Panel {
+            if (! $condition || ! config('filament-white-label.enabled', true)) {
+                return $this;
+            }
+
+            return $this
+                ->brandName(fn (): ?string => BrandResolver::brandName())
+                ->brandLogo(fn (): ?string => BrandResolver::logoUrl())
+                ->favicon(fn (): ?string => BrandResolver::faviconUrl())
+                ->colors(fn (): array => BrandResolver::colors())
+                ->font(fn (): ?string => BrandResolver::fontFamily())
+                ->renderHook('panels::head.start', fn (): string => BrandResolver::fontLinkTag() . BrandResolver::customCssTag());
+        });
     }
 
     public function register(): void
