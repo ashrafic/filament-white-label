@@ -18,9 +18,11 @@ trait HasBrandSettings
             }
 
             $tenant->brandSettings()->create([
-                'brand_name' => $tenant->name ?? config('app.name'),
-                'font_family' => config('filament-white-label.defaults.font_family', 'Inter'),
-                'colors' => config('filament-white-label.defaults.colors'),
+                'metadata' => [
+                    'brand_name' => $tenant->name ?? config('app.name'),
+                    'font_family' => config('filament-white-label.defaults.font_family', 'Inter'),
+                    'colors' => config('filament-white-label.defaults.colors'),
+                ],
             ]);
         });
     }
