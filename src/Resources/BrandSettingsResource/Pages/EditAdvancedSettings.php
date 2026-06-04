@@ -21,7 +21,7 @@ class EditAdvancedSettings extends EditRecord
         return [];
     }
 
-    public function mount(int | string $record = null): void
+    public function mount(int | string | null $record = null): void
     {
         $this->record = BrandSettingsResource::resolveBrandSettingsRecord();
 
