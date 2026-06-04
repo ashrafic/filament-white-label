@@ -23,13 +23,13 @@ use FilamentWhiteLabel\Resources\BrandSettingsResource\Pages\EditBrandSettings;
 
 class BrandSettingsResource extends Resource
 {
-    protected static ?string $model = BrandSettings::class;
+    protected static string $model = BrandSettings::class;
 
-    protected static ?string $navigationIcon = 'heroicon-o-paint-brush';
+    protected static string $navigationIcon = 'heroicon-o-paint-brush';
 
-    protected static ?string $label = 'Brand Settings';
+    protected static string $label = 'Brand Settings';
 
-    protected static ?string $pluralLabel = 'Brand Settings';
+    protected static string $pluralLabel = 'Brand Settings';
 
     public static function getNavigationGroup(): ?string
     {
