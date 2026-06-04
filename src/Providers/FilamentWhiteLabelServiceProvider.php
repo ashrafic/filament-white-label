@@ -46,9 +46,19 @@ class FilamentWhiteLabelServiceProvider extends ServiceProvider
             return $this
                 ->brandName(fn (): ?string => BrandResolver::brandName())
                 ->brandLogo(fn (): ?string => BrandResolver::logoUrl())
+                ->brandLogoHeight(fn (): ?string => BrandResolver::brandLogoHeight())
                 ->favicon(fn (): ?string => BrandResolver::faviconUrl())
                 ->colors(fn (): array => BrandResolver::colors())
                 ->font(fn (): ?string => BrandResolver::fontFamily())
+                ->topNavigation(fn (): bool => BrandResolver::topNavigation())
+                ->sidebarCollapsibleOnDesktop(fn (): bool => BrandResolver::sidebarCollapsibleOnDesktop())
+                ->sidebarFullyCollapsibleOnDesktop(fn (): bool => BrandResolver::sidebarFullyCollapsibleOnDesktop())
+                ->collapsibleNavigationGroups(fn (): bool => BrandResolver::collapsibleNavigationGroups())
+                ->breadcrumbs(fn (): bool => BrandResolver::breadcrumbs())
+                ->unsavedChangesAlerts(fn (): bool => BrandResolver::unsavedChangesAlerts())
+                ->spa(fn (): bool => BrandResolver::spaMode())
+                ->databaseNotifications(fn (): bool => BrandResolver::databaseNotifications())
+                ->databaseNotificationsPolling(fn (): ?string => BrandResolver::databaseNotificationsPolling())
                 ->renderHook('panels::head.start', fn (): string => BrandResolver::fontLinkTag() . BrandResolver::customCssTag());
         });
     }
