@@ -10,6 +10,7 @@ use Filament\Resources\Pages\EditRecord;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use FilamentWhiteLabel\Resources\WhiteLabelSettingsResource;
+use Illuminate\Database\Eloquent\Model;
 
 class EditAdvancedSettings extends EditRecord
 {
@@ -21,6 +22,24 @@ class EditAdvancedSettings extends EditRecord
     protected function getHeaderActions(): array
     {
         return [];
+    }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['metadata'] = array_merge(
+            $this->record->metadata ?? [],
+            $data['metadata'] ?? [],
+        );
+
+        return $data;
+    }
+
+    protected function handleRecordUpdate(Model $record, array $data): Model
+    {
+        $record = parent::handleRecordUpdate($record, $data);
+        $this->js('setTimeout(() => window.location.reload(), 250)');
+
+        return $record;
     }
 
     public function mount(int | string | null $record = null): void

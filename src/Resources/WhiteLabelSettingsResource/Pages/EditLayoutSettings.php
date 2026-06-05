@@ -9,6 +9,7 @@ use Filament\Resources\Pages\EditRecord;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use FilamentWhiteLabel\Resources\WhiteLabelSettingsResource;
+use Illuminate\Database\Eloquent\Model;
 
 class EditLayoutSettings extends EditRecord
 {
@@ -22,6 +23,24 @@ class EditLayoutSettings extends EditRecord
         return [];
     }
 
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['metadata'] = array_merge(
+            $this->record->metadata ?? [],
+            $data['metadata'] ?? [],
+        );
+
+        return $data;
+    }
+
+    protected function handleRecordUpdate(Model $record, array $data): Model
+    {
+        $record = parent::handleRecordUpdate($record, $data);
+        $this->js('setTimeout(() => window.location.reload(), 250)');
+
+        return $record;
+    }
+
     public function mount(int | string | null $record = null): void
     {
         $this->record = WhiteLabelSettingsResource::resolveRecord();
@@ -31,16 +50,6 @@ class EditLayoutSettings extends EditRecord
         $this->fillForm();
 
         $this->previousUrl = url()->previous();
-    }
-
-    protected function mutateFormDataBeforeSave(array $data): array
-    {
-        $data['metadata'] = array_merge(
-            $this->record->metadata ?? [],
-            $data['metadata'] ?? [],
-        );
-
-        return $data;
     }
 
     public function form(Schema $schema): Schema
