@@ -15,6 +15,7 @@ use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use FilamentWhiteLabel\Fonts\FontService;
 use FilamentWhiteLabel\Resources\WhiteLabelSettingsResource;
+use Illuminate\Database\Eloquent\Model;
 
 class EditWhiteLabelSettings extends EditRecord
 {
@@ -28,9 +29,10 @@ class EditWhiteLabelSettings extends EditRecord
         return [];
     }
 
-    protected function getRedirectUrl(): ?string
+    protected function handleRecordUpdate(Model $record): void
     {
-        return request()->url();
+        parent::handleRecordUpdate($record);
+        $this->js('window.location.reload()');
     }
 
     protected function mutateFormDataBeforeSave(array $data): array
