@@ -13,6 +13,7 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Pages\Page;
 use Filament\Resources\Resource;
+use Filament\Schemas\Components\Grid;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use Filament\Tables\Actions\EditAction;
@@ -74,14 +75,21 @@ class WhiteLabelSettingsResource extends Resource
             ->columns(1)
             ->schema([
                 Section::make('Brand Identity')->schema([
-                    TextInput::make('metadata.brand_name')
-                        ->label('Brand Name')
-                        ->required()
-                        ->maxLength(255)
-                        ->placeholder(config('app.name')),
+                    Grid::make(2)->schema([
+                        TextInput::make('metadata.brand_name')
+                            ->label('Brand Name')
+                            ->required()
+                            ->maxLength(255)
+                            ->placeholder(config('app.name')),
+
+                        TextInput::make('metadata.brand_logo_height')
+                            ->label('Logo Height')
+                            ->placeholder('2.5rem')
+                            ->helperText('CSS height value. Leave empty for Filament default.'),
+                    ]),
 
                     FileUpload::make('metadata.logo_path')
-                        ->label('Logo')
+                        ->label('Logo (Light)')
                         ->image()
                         ->imageResizeMode('contain')
                         ->imageCropAspectRatio('3:1')
@@ -90,10 +98,16 @@ class WhiteLabelSettingsResource extends Resource
                         ->maxSize(2048)
                         ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/svg+xml', 'image/webp']),
 
-                    TextInput::make('metadata.brand_logo_height')
-                        ->label('Logo Height')
-                        ->placeholder('2.5rem')
-                        ->helperText('CSS height value. Leave empty for Filament default.'),
+                    FileUpload::make('metadata.dark_mode_logo_path')
+                        ->label('Logo (Dark)')
+                        ->image()
+                        ->imageResizeMode('contain')
+                        ->imageCropAspectRatio('3:1')
+                        ->directory(static::storageDirectory('logos'))
+                        ->disk(config('filament-white-label.disk', 'public'))
+                        ->maxSize(2048)
+                        ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/svg+xml', 'image/webp'])
+                        ->helperText('Falls back to light logo if not set.'),
 
                     FileUpload::make('metadata.favicon_path')
                         ->label('Favicon')
@@ -104,7 +118,7 @@ class WhiteLabelSettingsResource extends Resource
                         ->disk(config('filament-white-label.disk', 'public'))
                         ->maxSize(512)
                         ->acceptedFileTypes(['image/png', 'image/x-icon', 'image/svg+xml']),
-                ])->columns(2),
+                ])->columns(1),
 
                 Section::make('Colors')->schema([
                     ColorPicker::make('metadata.colors.primary')->label('Primary')->default('#3b82f6'),
