@@ -28,6 +28,21 @@ class EditWhiteLabelSettings extends EditRecord
         return [];
     }
 
+    protected function getRedirectUrl(): ?string
+    {
+        return request()->url();
+    }
+
+    protected function mutateFormDataBeforeSave(array $data): array
+    {
+        $data['metadata'] = array_merge(
+            $this->record->metadata ?? [],
+            $data['metadata'] ?? [],
+        );
+
+        return $data;
+    }
+
     public function mount(int | string | null $record = null): void
     {
         $this->record = WhiteLabelSettingsResource::resolveRecord();
