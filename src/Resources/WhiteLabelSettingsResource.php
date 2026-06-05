@@ -215,6 +215,16 @@ class WhiteLabelSettingsResource extends Resource
                     'brand_name' => $tenant?->name ?? config('app.name'),
                     'font_family' => config('filament-white-label.defaults.font_family', 'Inter'),
                     'colors' => config('filament-white-label.defaults.colors'),
+                    'topbar' => config('filament-white-label.defaults.topbar', true),
+                    'top_navigation' => config('filament-white-label.defaults.top_navigation', false),
+                    'sidebar_collapsible_on_desktop' => config('filament-white-label.defaults.sidebar_collapsible_on_desktop', false),
+                    'sidebar_fully_collapsible_on_desktop' => config('filament-white-label.defaults.sidebar_fully_collapsible_on_desktop', false),
+                    'collapsible_navigation_groups' => config('filament-white-label.defaults.collapsible_navigation_groups', true),
+                    'breadcrumbs' => config('filament-white-label.defaults.breadcrumbs', true),
+                    'unsaved_changes_alerts' => config('filament-white-label.defaults.unsaved_changes_alerts', false),
+                    'spa_mode' => config('filament-white-label.defaults.spa_mode', false),
+                    'database_notifications' => config('filament-white-label.defaults.database_notifications', false),
+                    'database_notifications_polling' => config('filament-white-label.defaults.database_notifications_polling', '30s'),
                 ],
             ]);
         }

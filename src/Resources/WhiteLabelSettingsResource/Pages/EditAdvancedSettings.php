@@ -42,20 +42,24 @@ class EditAdvancedSettings extends EditRecord
                 Section::make('Behavior')->schema([
                     Toggle::make('metadata.unsaved_changes_alerts')
                         ->label('Unsaved Changes Alerts')
+                        ->default(config('filament-white-label.defaults.unsaved_changes_alerts', false))
                         ->helperText('Warn before leaving pages with unsaved changes.'),
 
                     Toggle::make('metadata.spa_mode')
                         ->label('SPA Mode')
+                        ->default(config('filament-white-label.defaults.spa_mode', false))
                         ->helperText('Single-page application mode for faster navigation.'),
                 ])->columns(2),
 
                 Section::make('Notifications')->schema([
                     Toggle::make('metadata.database_notifications')
                         ->label('Database Notifications')
+                        ->default(config('filament-white-label.defaults.database_notifications', false))
                         ->helperText('Enable database notifications in the topbar/sidebar.'),
 
                     Select::make('metadata.database_notifications_polling')
                         ->label('Polling Interval')
+                        ->default(config('filament-white-label.defaults.database_notifications_polling', '30s'))
                         ->options([
                             null => 'Default (30s)',
                             '10s' => '10 seconds',

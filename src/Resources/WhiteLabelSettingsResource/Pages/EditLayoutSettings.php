@@ -51,11 +51,13 @@ class EditLayoutSettings extends EditRecord
                 Section::make('Navigation')->schema([
                     Toggle::make('metadata.topbar')
                         ->label('Top Bar')
+                        ->default(config('filament-white-label.defaults.topbar', true))
                         ->helperText('Show the top bar with user menu and notifications.'),
 
                     Toggle::make('metadata.top_navigation')
                         ->label('Top Navigation')
                         ->live()
+                        ->default(config('filament-white-label.defaults.top_navigation', false))
                         ->helperText('Move navigation from sidebar to top bar. Disables sidebar.'),
                 ])->columns(2),
 
@@ -65,21 +67,25 @@ class EditLayoutSettings extends EditRecord
                         Toggle::make('metadata.sidebar_collapsible_on_desktop')
                             ->label('Collapsible Sidebar')
                             ->live()
+                            ->default(config('filament-white-label.defaults.sidebar_collapsible_on_desktop', false))
                             ->helperText('Allows sidebar to collapse to icons only.'),
 
                         Toggle::make('metadata.sidebar_fully_collapsible_on_desktop')
                             ->label('Fully Collapsible Sidebar')
                             ->visible(fn ($get) => $get('metadata.sidebar_collapsible_on_desktop'))
+                            ->default(config('filament-white-label.defaults.sidebar_fully_collapsible_on_desktop', false))
                             ->helperText('Allows sidebar to hide completely.'),
 
                         Toggle::make('metadata.collapsible_navigation_groups')
                             ->label('Collapsible Navigation Groups')
+                            ->default(config('filament-white-label.defaults.collapsible_navigation_groups', true))
                             ->helperText('Allow navigation groups to be expanded/collapsed.'),
                     ])->columns(2),
 
                 Section::make('Display')->schema([
                     Toggle::make('metadata.breadcrumbs')
                         ->label('Breadcrumbs')
+                        ->default(config('filament-white-label.defaults.breadcrumbs', true))
                         ->helperText('Show breadcrumb navigation.'),
                 ]),
             ]);
