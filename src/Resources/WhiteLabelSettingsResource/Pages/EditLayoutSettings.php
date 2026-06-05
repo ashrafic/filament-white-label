@@ -23,10 +23,12 @@ class EditLayoutSettings extends EditRecord
         return [];
     }
 
-    protected function handleRecordUpdate(Model $record): void
+    protected function handleRecordUpdate(Model $record, array $data): Model
     {
-        parent::handleRecordUpdate($record);
+        $record = parent::handleRecordUpdate($record, $data);
         $this->js('window.location.reload()');
+
+        return $record;
     }
 
     protected function mutateFormDataBeforeSave(array $data): array
