@@ -58,36 +58,40 @@ class EditWhiteLabelSettings extends EditRecord
                             ->helperText('CSS height value. Leave empty for Filament default.'),
                     ]),
 
-                    FileUpload::make('metadata.logo_path')
-                        ->label('Logo (Light)')
-                        ->image()
-                        ->imageResizeMode('contain')
-                        ->imageCropAspectRatio('3:1')
-                        ->directory(WhiteLabelSettingsResource::storageDirectory('logos'))
-                        ->disk(config('filament-white-label.disk', 'public'))
-                        ->maxSize(2048)
-                        ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/svg+xml', 'image/webp']),
+                    Grid::make(2)->schema([
+                        FileUpload::make('metadata.logo_path')
+                            ->label('Logo (Light)')
+                            ->image()
+                            ->imageResizeMode('contain')
+                            ->imageCropAspectRatio('3:1')
+                            ->directory(WhiteLabelSettingsResource::storageDirectory('logos'))
+                            ->disk(config('filament-white-label.disk', 'public'))
+                            ->maxSize(2048)
+                            ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/svg+xml', 'image/webp']),
 
-                    FileUpload::make('metadata.dark_mode_logo_path')
-                        ->label('Logo (Dark)')
-                        ->image()
-                        ->imageResizeMode('contain')
-                        ->imageCropAspectRatio('3:1')
-                        ->directory(WhiteLabelSettingsResource::storageDirectory('logos'))
-                        ->disk(config('filament-white-label.disk', 'public'))
-                        ->maxSize(2048)
-                        ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/svg+xml', 'image/webp'])
-                        ->helperText('Falls back to light logo if not set.'),
+                        FileUpload::make('metadata.dark_mode_logo_path')
+                            ->label('Logo (Dark)')
+                            ->image()
+                            ->imageResizeMode('contain')
+                            ->imageCropAspectRatio('3:1')
+                            ->directory(WhiteLabelSettingsResource::storageDirectory('logos'))
+                            ->disk(config('filament-white-label.disk', 'public'))
+                            ->maxSize(2048)
+                            ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/svg+xml', 'image/webp'])
+                            ->helperText('Falls back to light logo if not set.'),
+                    ]),
 
-                    FileUpload::make('metadata.favicon_path')
-                        ->label('Favicon')
-                        ->image()
-                        ->imageResizeMode('cover')
-                        ->imageCropAspectRatio('1:1')
-                        ->directory(WhiteLabelSettingsResource::storageDirectory('favicons'))
-                        ->disk(config('filament-white-label.disk', 'public'))
-                        ->maxSize(512)
-                        ->acceptedFileTypes(['image/png', 'image/x-icon', 'image/svg+xml']),
+                    Grid::make(2)->schema([
+                        FileUpload::make('metadata.favicon_path')
+                            ->label('Favicon')
+                            ->image()
+                            ->imageResizeMode('cover')
+                            ->imageCropAspectRatio('1:1')
+                            ->directory(WhiteLabelSettingsResource::storageDirectory('favicons'))
+                            ->disk(config('filament-white-label.disk', 'public'))
+                            ->maxSize(512)
+                            ->acceptedFileTypes(['image/png', 'image/x-icon', 'image/svg+xml']),
+                    ]),
                 ])->columns(1),
 
                 Section::make('Colors')->schema([
