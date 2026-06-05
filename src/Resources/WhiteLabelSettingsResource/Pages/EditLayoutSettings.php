@@ -14,6 +14,9 @@ class EditLayoutSettings extends EditRecord
 {
     protected static string $resource = WhiteLabelSettingsResource::class;
 
+    protected static ?string $title = 'Layout';
+    protected static ?string $navigationLabel = 'Layout';
+
     protected function getHeaderActions(): array
     {
         return [];

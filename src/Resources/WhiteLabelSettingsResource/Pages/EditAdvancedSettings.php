@@ -16,6 +16,9 @@ class EditAdvancedSettings extends EditRecord
 {
     protected static string $resource = WhiteLabelSettingsResource::class;
 
+    protected static ?string $title = 'Advanced';
+    protected static ?string $navigationLabel = 'Advanced';
+
     protected function getHeaderActions(): array
     {
         return [];

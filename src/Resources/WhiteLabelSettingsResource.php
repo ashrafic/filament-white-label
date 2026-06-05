@@ -31,13 +31,15 @@ class WhiteLabelSettingsResource extends Resource
 
     protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-swatch';
 
-    protected static ?string $label = 'Brand Settings';
+    protected static ?string $navigationLabel = 'White Label';
 
-    protected static ?string $pluralLabel = 'Brand Settings';
+    protected static ?string $label = 'White Label Settings';
+
+    protected static ?string $pluralLabel = 'White Label Settings';
 
     public static function getNavigationGroup(): ?string
     {
-        return config('filament-white-label.ui.navigation_group', 'White Label');
+        return null;
     }
 
     public static function getNavigationSort(): ?int
@@ -47,11 +49,23 @@ class WhiteLabelSettingsResource extends Resource
 
     public static function getRecordSubNavigation(Page $page): array
     {
-        return $page->generateNavigationItems([
-            EditWhiteLabelSettings::class,
-            EditLayoutSettings::class,
-            EditAdvancedSettings::class,
-        ]);
+        return [
+            \Filament\Navigation\NavigationItem::make('Brand')
+                ->label('Brand')
+                ->icon('heroicon-o-paint-brush')
+                ->url(fn () => static::getUrl('index'))
+                ->isActiveWhen(fn () => $page instanceof EditWhiteLabelSettings),
+            \Filament\Navigation\NavigationItem::make('Layout')
+                ->label('Layout')
+                ->icon('heroicon-o-rectangle-group')
+                ->url(fn () => static::getUrl('layout'))
+                ->isActiveWhen(fn () => $page instanceof EditLayoutSettings),
+            \Filament\Navigation\NavigationItem::make('Advanced')
+                ->label('Advanced')
+                ->icon('heroicon-o-cog-6-tooth')
+                ->url(fn () => static::getUrl('advanced'))
+                ->isActiveWhen(fn () => $page instanceof EditAdvancedSettings),
+        ];
     }
 
     public static function form(Schema $schema): Schema
