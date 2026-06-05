@@ -26,7 +26,7 @@ class EditLayoutSettings extends EditRecord
     protected function handleRecordUpdate(Model $record, array $data): Model
     {
         $record = parent::handleRecordUpdate($record, $data);
-        $this->js('window.location.reload()');
+        $this->redirect(request()->url(), navigate: false);
 
         return $record;
     }
