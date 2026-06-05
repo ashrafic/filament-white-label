@@ -9,7 +9,6 @@ use Filament\Resources\Pages\EditRecord;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
 use FilamentWhiteLabel\Resources\WhiteLabelSettingsResource;
-use Illuminate\Database\Eloquent\Model;
 
 class EditLayoutSettings extends EditRecord
 {
@@ -23,12 +22,15 @@ class EditLayoutSettings extends EditRecord
         return [];
     }
 
-    protected function handleRecordUpdate(Model $record, array $data): Model
+    public function mount(int | string | null $record = null): void
     {
-        $record = parent::handleRecordUpdate($record, $data);
-        $this->redirect(request()->url(), navigate: false);
+        $this->record = WhiteLabelSettingsResource::resolveRecord();
 
-        return $record;
+        $this->authorizeAccess();
+
+        $this->fillForm();
+
+        $this->previousUrl = url()->previous();
     }
 
     protected function mutateFormDataBeforeSave(array $data): array
@@ -41,17 +43,6 @@ class EditLayoutSettings extends EditRecord
         return $data;
     }
 
-    public function mount(int | string | null $record = null): void
-    {
-        $this->record = WhiteLabelSettingsResource::resolveRecord();
-
-        $this->authorizeAccess();
-
-        $this->fillForm();
-
-        $this->previousUrl = url()->previous();
-    }
-
     public function form(Schema $schema): Schema
     {
         return $schema
@@ -60,24 +51,31 @@ class EditLayoutSettings extends EditRecord
                 Section::make('Navigation')->schema([
                     Toggle::make('metadata.topbar')
                         ->label('Top Bar')
-                        ->helperText('Show the top bar. Disable for minimal header.'),
+                        ->helperText('Show the top bar with user menu and notifications.'),
 
                     Toggle::make('metadata.top_navigation')
                         ->label('Top Navigation')
-                        ->helperText('Use top navigation bar instead of sidebar.'),
-
-                    Toggle::make('metadata.sidebar_collapsible_on_desktop')
-                        ->label('Collapsible Sidebar')
-                        ->helperText('Allows sidebar to collapse (icons only when collapsed).'),
-
-                    Toggle::make('metadata.sidebar_fully_collapsible_on_desktop')
-                        ->label('Fully Collapsible Sidebar')
-                        ->helperText('Allows sidebar to hide completely. Requires Collapsible Sidebar to be ON.'),
-
-                    Toggle::make('metadata.collapsible_navigation_groups')
-                        ->label('Collapsible Navigation Groups')
-                        ->helperText('Allow navigation groups to be collapsed.'),
+                        ->live()
+                        ->helperText('Move navigation from sidebar to top bar. Disables sidebar.'),
                 ])->columns(2),
+
+                Section::make('Sidebar')
+                    ->visible(fn ($get) => ! $get('metadata.top_navigation'))
+                    ->schema([
+                        Toggle::make('metadata.sidebar_collapsible_on_desktop')
+                            ->label('Collapsible Sidebar')
+                            ->live()
+                            ->helperText('Allows sidebar to collapse to icons only.'),
+
+                        Toggle::make('metadata.sidebar_fully_collapsible_on_desktop')
+                            ->label('Fully Collapsible Sidebar')
+                            ->visible(fn ($get) => $get('metadata.sidebar_collapsible_on_desktop'))
+                            ->helperText('Allows sidebar to hide completely.'),
+
+                        Toggle::make('metadata.collapsible_navigation_groups')
+                            ->label('Collapsible Navigation Groups')
+                            ->helperText('Allow navigation groups to be expanded/collapsed.'),
+                    ])->columns(2),
 
                 Section::make('Display')->schema([
                     Toggle::make('metadata.breadcrumbs')
