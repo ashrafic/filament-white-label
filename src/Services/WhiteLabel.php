@@ -196,6 +196,18 @@ class WhiteLabel
 
     // -- Internal --
 
+    private const FILAMENT_DEFAULTS = [
+        'topbar' => true,
+        'top_navigation' => false,
+        'sidebar_collapsible_on_desktop' => false,
+        'sidebar_fully_collapsible_on_desktop' => false,
+        'collapsible_navigation_groups' => true,
+        'breadcrumbs' => true,
+        'unsaved_changes_alerts' => false,
+        'spa_mode' => false,
+        'database_notifications' => false,
+    ];
+
     protected static function boolOrDefault(string $key): bool
     {
         $settings = static::resolve();
@@ -204,7 +216,13 @@ class WhiteLabel
             return (bool) $settings->metadata[$key];
         }
 
-        return (bool) config("filament-white-label.defaults.{$key}");
+        $configValue = config("filament-white-label.defaults.{$key}");
+
+        if ($configValue !== null) {
+            return (bool) $configValue;
+        }
+
+        return static::FILAMENT_DEFAULTS[$key] ?? false;
     }
 
     protected static function resolveFromCache(?Model $tenant, ?string $panelId): ?WhiteLabelSettings
