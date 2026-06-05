@@ -6,7 +6,6 @@ namespace FilamentWhiteLabel\Resources\WhiteLabelSettingsResource\Pages;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
-use Filament\Forms\Get;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
@@ -65,7 +64,7 @@ class EditAdvancedSettings extends EditRecord
                             '2m' => '2 minutes',
                             '5m' => '5 minutes',
                         ])
-                        ->visible(fn (Get $get) => $get('metadata.database_notifications')),
+                        ->visible(fn ($get) => $get('metadata.database_notifications')),
                 ])->columns(2),
             ]);
     }

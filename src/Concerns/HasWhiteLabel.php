@@ -25,6 +25,11 @@ trait HasWhiteLabel
         return fn (): ?string => WhiteLabel::brandLogoHeight();
     }
 
+    public function whiteLabelDarkModeBrandLogo(): Closure
+    {
+        return fn (): ?string => WhiteLabel::darkModeBrandLogoUrl();
+    }
+
     public function whiteLabelFavicon(): Closure
     {
         return fn (): ?string => WhiteLabel::faviconUrl();
@@ -100,6 +105,7 @@ trait HasWhiteLabel
             ->brandName($this->whiteLabelBrandName())
             ->brandLogo($this->whiteLabelLogo())
             ->brandLogoHeight($this->whiteLabelBrandLogoHeight())
+            ->darkModeBrandLogo($this->whiteLabelDarkModeBrandLogo())
             ->favicon($this->whiteLabelFavicon())
             ->colors($this->whiteLabelColors())
             ->font($this->whiteLabelFontFamily())

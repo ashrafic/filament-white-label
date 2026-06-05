@@ -65,6 +65,17 @@ class EditWhiteLabelSettings extends EditRecord
                         ->placeholder('2.5rem')
                         ->helperText('CSS height value. Leave empty for Filament default.'),
 
+                    FileUpload::make('metadata.dark_mode_logo_path')
+                        ->label('Dark Mode Logo')
+                        ->image()
+                        ->imageResizeMode('contain')
+                        ->imageCropAspectRatio('3:1')
+                        ->directory(WhiteLabelSettingsResource::storageDirectory('logos'))
+                        ->disk(config('filament-white-label.disk', 'public'))
+                        ->maxSize(2048)
+                        ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/svg+xml', 'image/webp'])
+                        ->helperText('Logo shown in dark mode. Falls back to main logo if not set.'),
+
                     FileUpload::make('metadata.favicon_path')
                         ->label('Favicon')
                         ->image()

@@ -47,6 +47,7 @@ class FilamentWhiteLabelServiceProvider extends ServiceProvider
                 ->brandName(fn (): ?string => WhiteLabel::brandName())
                 ->brandLogo(fn (): ?string => WhiteLabel::logoUrl())
                 ->brandLogoHeight(fn (): ?string => WhiteLabel::brandLogoHeight())
+                ->darkModeBrandLogo(fn (): ?string => WhiteLabel::darkModeBrandLogoUrl())
                 ->favicon(fn (): ?string => WhiteLabel::faviconUrl())
                 ->colors(fn (): array => WhiteLabel::colors())
                 ->font(fn (): ?string => WhiteLabel::fontFamily())

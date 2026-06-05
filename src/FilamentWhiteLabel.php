@@ -12,6 +12,7 @@ class FilamentWhiteLabel
     public static function logoUrl(): ?string { return WhiteLabel::logoUrl(); }
     public static function faviconUrl(): ?string { return WhiteLabel::faviconUrl(); }
     public static function brandLogoHeight(): ?string { return WhiteLabel::brandLogoHeight(); }
+    public static function darkModeBrandLogoUrl(): ?string { return WhiteLabel::darkModeBrandLogoUrl(); }
     public static function colors(): array { return WhiteLabel::colors(); }
     public static function fontFamily(): string { return WhiteLabel::fontFamily(); }
     public static function customCss(): ?string { return WhiteLabel::customCss(); }

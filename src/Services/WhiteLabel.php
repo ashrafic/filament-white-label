@@ -69,6 +69,18 @@ class WhiteLabel
             ?? config('filament-white-label.defaults.brand_logo_height');
     }
 
+    public static function darkModeBrandLogoUrl(): ?string
+    {
+        $settings = static::resolve();
+
+        if ($settings && ! empty($settings->metadata['dark_mode_logo_path'])) {
+            return Storage::disk(config('filament-white-label.disk', 'public'))
+                ->url($settings->metadata['dark_mode_logo_path']);
+        }
+
+        return config('filament-white-label.defaults.dark_mode_logo');
+    }
+
     public static function colors(): array
     {
         $defaults = config('filament-white-label.defaults.colors', []);

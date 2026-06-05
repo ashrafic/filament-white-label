@@ -13,6 +13,7 @@ test('all closure methods return Closure instances', function () {
         'whiteLabelBrandName',
         'whiteLabelLogo',
         'whiteLabelBrandLogoHeight',
+        'whiteLabelDarkModeBrandLogo',
         'whiteLabelFavicon',
         'whiteLabelColors',
         'whiteLabelFontFamily',

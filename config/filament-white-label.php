@@ -13,6 +13,7 @@ return [
     'defaults' => [
         'brand_name' => env('APP_NAME', 'Filament'),
         'logo' => null,
+        'dark_mode_logo' => null,
         'favicon' => null,
         'brand_logo_height' => null,
         'font_family' => 'Inter',
