@@ -62,22 +62,22 @@ class EditLayoutSettings extends EditRecord
                 ])->columns(2),
 
                 Section::make('Sidebar')
-                    ->visible(fn ($get) => ! $get('metadata.top_navigation'))
                     ->schema([
                         Toggle::make('metadata.sidebar_collapsible_on_desktop')
                             ->label('Collapsible Sidebar')
-                            ->live()
+                            ->disabled(fn ($get) => (bool) $get('metadata.top_navigation'))
                             ->default(config('filament-white-label.defaults.sidebar_collapsible_on_desktop', false))
                             ->helperText('Allows sidebar to collapse to icons only.'),
 
                         Toggle::make('metadata.sidebar_fully_collapsible_on_desktop')
                             ->label('Fully Collapsible Sidebar')
-                            ->visible(fn ($get) => $get('metadata.sidebar_collapsible_on_desktop'))
+                            ->disabled(fn ($get) => (bool) $get('metadata.top_navigation'))
                             ->default(config('filament-white-label.defaults.sidebar_fully_collapsible_on_desktop', false))
                             ->helperText('Allows sidebar to hide completely.'),
 
                         Toggle::make('metadata.collapsible_navigation_groups')
                             ->label('Collapsible Navigation Groups')
+                            ->disabled(fn ($get) => (bool) $get('metadata.top_navigation'))
                             ->default(config('filament-white-label.defaults.collapsible_navigation_groups', true))
                             ->helperText('Allow navigation groups to be expanded/collapsed.'),
                     ])->columns(2),
