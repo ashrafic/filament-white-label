@@ -8,7 +8,7 @@ use FilamentWhiteLabel\Security\CssSanitizer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
 
-class BrandSettings extends Model
+class WhiteLabelSettings extends Model
 {
     protected $table = 'white_label_settings';
 

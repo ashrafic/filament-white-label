@@ -6,14 +6,14 @@ namespace FilamentWhiteLabel\Services;
 
 use Filament\Facades\Filament;
 use FilamentWhiteLabel\Fonts\FontService;
-use FilamentWhiteLabel\Models\BrandSettings;
+use FilamentWhiteLabel\Models\WhiteLabelSettings;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Storage;
 
-class BrandResolver
+class WhiteLabel
 {
-    public static function resolve(): ?BrandSettings
+    public static function resolve(): ?WhiteLabelSettings
     {
         if (! config('filament-white-label.enabled', true)) {
             return null;
@@ -190,7 +190,7 @@ class BrandResolver
         return $fallback;
     }
 
-    protected static function resolveFromCache(?Model $tenant, ?string $panelId): ?BrandSettings
+    protected static function resolveFromCache(?Model $tenant, ?string $panelId): ?WhiteLabelSettings
     {
         $ttl = config('filament-white-label.cache_ttl', 300);
 
@@ -201,9 +201,9 @@ class BrandResolver
         return Cache::get(static::cacheKey($tenant, $panelId));
     }
 
-    protected static function resolveFromDatabase(?Model $tenant, ?string $panelId): ?BrandSettings
+    protected static function resolveFromDatabase(?Model $tenant, ?string $panelId): ?WhiteLabelSettings
     {
-        $settings = BrandSettings::query()
+        $settings = WhiteLabelSettings::query()
             ->where('tenant_type', $tenant->getMorphClass())
             ->where('tenant_id', $tenant->getKey())
             ->where(fn ($q) => $q->where('panel_id', $panelId)->orWhereNull('panel_id'))
@@ -230,7 +230,7 @@ class BrandResolver
         return 'filament-white-label:global:panel:' . ($panelId ?? 'null');
     }
 
-    protected static function resolveGlobal(?string $panelId): ?BrandSettings
+    protected static function resolveGlobal(?string $panelId): ?WhiteLabelSettings
     {
         $cacheKey = static::cacheKey(null, $panelId);
         $cached = Cache::get($cacheKey);
@@ -239,7 +239,7 @@ class BrandResolver
             return $cached;
         }
 
-        $settings = BrandSettings::query()
+        $settings = WhiteLabelSettings::query()
             ->whereNull('tenant_type')
             ->whereNull('tenant_id')
             ->where(fn ($q) => $q->where('panel_id', $panelId)->orWhereNull('panel_id'))

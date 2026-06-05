@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FilamentWhiteLabel\Listeners;
 
-use FilamentWhiteLabel\Services\BrandResolver;
+use FilamentWhiteLabel\Services\WhiteLabel;
 use Illuminate\Mail\Events\MessageSending;
 
 class ApplyTenantEmailBranding
@@ -19,7 +19,7 @@ class ApplyTenantEmailBranding
             return;
         }
 
-        $settings = BrandResolver::resolve();
+        $settings = WhiteLabel::resolve();
 
         if (! $settings) {
             return;

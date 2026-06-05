@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace FilamentWhiteLabel\Resources\BrandSettingsResource\Pages;
+namespace FilamentWhiteLabel\Resources\WhiteLabelSettingsResource\Pages;
 
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Toggle;
@@ -10,11 +10,11 @@ use Filament\Forms\Get;
 use Filament\Resources\Pages\EditRecord;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
-use FilamentWhiteLabel\Resources\BrandSettingsResource;
+use FilamentWhiteLabel\Resources\WhiteLabelSettingsResource;
 
 class EditAdvancedSettings extends EditRecord
 {
-    protected static string $resource = BrandSettingsResource::class;
+    protected static string $resource = WhiteLabelSettingsResource::class;
 
     protected function getHeaderActions(): array
     {
@@ -23,7 +23,7 @@ class EditAdvancedSettings extends EditRecord
 
     public function mount(int | string | null $record = null): void
     {
-        $this->record = BrandSettingsResource::resolveBrandSettingsRecord();
+        $this->record = WhiteLabelSettingsResource::resolveRecord();
 
         $this->authorizeAccess();
 

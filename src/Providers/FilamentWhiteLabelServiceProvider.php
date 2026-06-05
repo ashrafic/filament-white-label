@@ -8,9 +8,9 @@ use Filament\Panel;
 use FilamentWhiteLabel\Commands\ClearWhiteLabelCacheCommand;
 use FilamentWhiteLabel\Commands\InstallWhiteLabelCommand;
 use FilamentWhiteLabel\Listeners\ApplyTenantEmailBranding;
-use FilamentWhiteLabel\Models\BrandSettings;
-use FilamentWhiteLabel\Observers\BrandSettingsObserver;
-use FilamentWhiteLabel\Services\BrandResolver;
+use FilamentWhiteLabel\Models\WhiteLabelSettings;
+use FilamentWhiteLabel\Observers\WhiteLabelSettingsObserver;
+use FilamentWhiteLabel\Services\WhiteLabel;
 use Illuminate\Mail\Events\MessageSending;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
@@ -35,7 +35,7 @@ class FilamentWhiteLabelServiceProvider extends ServiceProvider
         }
 
         if (config('filament-white-label.enabled', true)) {
-            BrandSettings::observe(BrandSettingsObserver::class);
+            WhiteLabelSettings::observe(WhiteLabelSettingsObserver::class);
         }
 
         Panel::macro('whiteLabel', function (bool $condition = true): Panel {
@@ -44,22 +44,22 @@ class FilamentWhiteLabelServiceProvider extends ServiceProvider
             }
 
             return $this
-                ->brandName(fn (): ?string => BrandResolver::brandName())
-                ->brandLogo(fn (): ?string => BrandResolver::logoUrl())
-                ->brandLogoHeight(fn (): ?string => BrandResolver::brandLogoHeight())
-                ->favicon(fn (): ?string => BrandResolver::faviconUrl())
-                ->colors(fn (): array => BrandResolver::colors())
-                ->font(fn (): ?string => BrandResolver::fontFamily())
-                ->topNavigation(fn (): bool => BrandResolver::topNavigation())
-                ->sidebarCollapsibleOnDesktop(fn (): bool => BrandResolver::sidebarCollapsibleOnDesktop())
-                ->sidebarFullyCollapsibleOnDesktop(fn (): bool => BrandResolver::sidebarFullyCollapsibleOnDesktop())
-                ->collapsibleNavigationGroups(fn (): bool => BrandResolver::collapsibleNavigationGroups())
-                ->breadcrumbs(fn (): bool => BrandResolver::breadcrumbs())
-                ->unsavedChangesAlerts(fn (): bool => BrandResolver::unsavedChangesAlerts())
-                ->spa(fn (): bool => BrandResolver::spaMode())
-                ->databaseNotifications(fn (): bool => BrandResolver::databaseNotifications())
-                ->databaseNotificationsPolling(fn (): ?string => BrandResolver::databaseNotificationsPolling())
-                ->renderHook('panels::head.start', fn (): string => BrandResolver::fontLinkTag() . BrandResolver::customCssTag());
+                ->brandName(fn (): ?string => WhiteLabel::brandName())
+                ->brandLogo(fn (): ?string => WhiteLabel::logoUrl())
+                ->brandLogoHeight(fn (): ?string => WhiteLabel::brandLogoHeight())
+                ->favicon(fn (): ?string => WhiteLabel::faviconUrl())
+                ->colors(fn (): array => WhiteLabel::colors())
+                ->font(fn (): ?string => WhiteLabel::fontFamily())
+                ->topNavigation(fn (): bool => WhiteLabel::topNavigation())
+                ->sidebarCollapsibleOnDesktop(fn (): bool => WhiteLabel::sidebarCollapsibleOnDesktop())
+                ->sidebarFullyCollapsibleOnDesktop(fn (): bool => WhiteLabel::sidebarFullyCollapsibleOnDesktop())
+                ->collapsibleNavigationGroups(fn (): bool => WhiteLabel::collapsibleNavigationGroups())
+                ->breadcrumbs(fn (): bool => WhiteLabel::breadcrumbs())
+                ->unsavedChangesAlerts(fn (): bool => WhiteLabel::unsavedChangesAlerts())
+                ->spa(fn (): bool => WhiteLabel::spaMode())
+                ->databaseNotifications(fn (): bool => WhiteLabel::databaseNotifications())
+                ->databaseNotificationsPolling(fn (): ?string => WhiteLabel::databaseNotificationsPolling())
+                ->renderHook('panels::head.start', fn (): string => WhiteLabel::fontLinkTag() . WhiteLabel::customCssTag());
         });
     }
 

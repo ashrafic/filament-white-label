@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace FilamentWhiteLabel\Commands;
 
-use FilamentWhiteLabel\Services\BrandResolver;
+use FilamentWhiteLabel\Services\WhiteLabel;
 use Illuminate\Console\Command;
 
 class ClearWhiteLabelCacheCommand extends Command
@@ -20,7 +20,7 @@ class ClearWhiteLabelCacheCommand extends Command
         $tenantId = $this->option('tenant');
         $panelId = $this->option('panel');
 
-        BrandResolver::clearCache(null, $panelId);
+        WhiteLabel::clearCache(null, $panelId);
 
         $this->info('White-label cache cleared.');
 

@@ -6,88 +6,88 @@ namespace FilamentWhiteLabel\Concerns;
 
 use Closure;
 use Filament\Panel;
-use FilamentWhiteLabel\Services\BrandResolver;
+use FilamentWhiteLabel\Services\WhiteLabel;
 
 trait HasWhiteLabel
 {
     public function whiteLabelBrandName(): Closure
     {
-        return fn (): ?string => BrandResolver::brandName();
+        return fn (): ?string => WhiteLabel::brandName();
     }
 
     public function whiteLabelLogo(): Closure
     {
-        return fn (): ?string => BrandResolver::logoUrl();
+        return fn (): ?string => WhiteLabel::logoUrl();
     }
 
     public function whiteLabelBrandLogoHeight(): Closure
     {
-        return fn (): ?string => BrandResolver::brandLogoHeight();
+        return fn (): ?string => WhiteLabel::brandLogoHeight();
     }
 
     public function whiteLabelFavicon(): Closure
     {
-        return fn (): ?string => BrandResolver::faviconUrl();
+        return fn (): ?string => WhiteLabel::faviconUrl();
     }
 
     public function whiteLabelColors(): Closure
     {
-        return fn (): array => BrandResolver::colors();
+        return fn (): array => WhiteLabel::colors();
     }
 
     public function whiteLabelFontFamily(): Closure
     {
-        return fn (): string => BrandResolver::fontFamily();
+        return fn (): string => WhiteLabel::fontFamily();
     }
 
     public function whiteLabelHeadHook(): Closure
     {
-        return fn (): string => BrandResolver::fontLinkTag() . BrandResolver::customCssTag();
+        return fn (): string => WhiteLabel::fontLinkTag() . WhiteLabel::customCssTag();
     }
 
     public function whiteLabelTopNavigation(): Closure
     {
-        return fn (): bool => BrandResolver::topNavigation();
+        return fn (): bool => WhiteLabel::topNavigation();
     }
 
     public function whiteLabelSidebarCollapsibleOnDesktop(): Closure
     {
-        return fn (): bool => BrandResolver::sidebarCollapsibleOnDesktop();
+        return fn (): bool => WhiteLabel::sidebarCollapsibleOnDesktop();
     }
 
     public function whiteLabelSidebarFullyCollapsibleOnDesktop(): Closure
     {
-        return fn (): bool => BrandResolver::sidebarFullyCollapsibleOnDesktop();
+        return fn (): bool => WhiteLabel::sidebarFullyCollapsibleOnDesktop();
     }
 
     public function whiteLabelCollapsibleNavigationGroups(): Closure
     {
-        return fn (): bool => BrandResolver::collapsibleNavigationGroups();
+        return fn (): bool => WhiteLabel::collapsibleNavigationGroups();
     }
 
     public function whiteLabelBreadcrumbs(): Closure
     {
-        return fn (): bool => BrandResolver::breadcrumbs();
+        return fn (): bool => WhiteLabel::breadcrumbs();
     }
 
     public function whiteLabelUnsavedChangesAlerts(): Closure
     {
-        return fn (): bool => BrandResolver::unsavedChangesAlerts();
+        return fn (): bool => WhiteLabel::unsavedChangesAlerts();
     }
 
     public function whiteLabelSpaMode(): Closure
     {
-        return fn (): bool => BrandResolver::spaMode();
+        return fn (): bool => WhiteLabel::spaMode();
     }
 
     public function whiteLabelDatabaseNotifications(): Closure
     {
-        return fn (): bool => BrandResolver::databaseNotifications();
+        return fn (): bool => WhiteLabel::databaseNotifications();
     }
 
     public function whiteLabelDatabaseNotificationsPolling(): Closure
     {
-        return fn (): ?string => BrandResolver::databaseNotificationsPolling();
+        return fn (): ?string => WhiteLabel::databaseNotificationsPolling();
     }
 
     public function whiteLabel(Panel $panel): Panel

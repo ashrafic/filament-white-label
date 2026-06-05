@@ -2,40 +2,59 @@
 
 declare(strict_types=1);
 
-namespace FilamentWhiteLabel\Resources\BrandSettingsResource\Pages;
+namespace FilamentWhiteLabel\Resources;
 
+use BackedEnum;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
-use Filament\Resources\Pages\EditRecord;
+use Filament\Pages\Page;
+use Filament\Resources\Resource;
 use Filament\Schemas\Components\Section;
 use Filament\Schemas\Schema;
+use Filament\Tables\Actions\EditAction;
+use Filament\Tables\Columns\ImageColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Table;
 use FilamentWhiteLabel\Fonts\FontService;
-use FilamentWhiteLabel\Resources\BrandSettingsResource;
+use FilamentWhiteLabel\Models\WhiteLabelSettings;
+use FilamentWhiteLabel\Resources\WhiteLabelSettingsResource\Pages\EditAdvancedSettings;
+use FilamentWhiteLabel\Resources\WhiteLabelSettingsResource\Pages\EditWhiteLabelSettings;
+use FilamentWhiteLabel\Resources\WhiteLabelSettingsResource\Pages\EditLayoutSettings;
 
-class EditBrandSettings extends EditRecord
+class WhiteLabelSettingsResource extends Resource
 {
-    protected static string $resource = BrandSettingsResource::class;
+    protected static ?string $model = WhiteLabelSettings::class;
 
-    protected function getHeaderActions(): array
+    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-swatch';
+
+    protected static ?string $label = 'Brand Settings';
+
+    protected static ?string $pluralLabel = 'Brand Settings';
+
+    public static function getNavigationGroup(): ?string
     {
-        return [];
+        return config('filament-white-label.ui.navigation_group', 'White Label');
     }
 
-    public function mount(int | string | null $record = null): void
+    public static function getNavigationSort(): ?int
     {
-        $this->record = BrandSettingsResource::resolveBrandSettingsRecord();
-
-        $this->authorizeAccess();
-
-        $this->fillForm();
-
-        $this->previousUrl = url()->previous();
+        return config('filament-white-label.ui.navigation_sort', 10);
     }
 
-    public function form(Schema $schema): Schema
+    public static function getRecordSubNavigation(Page $page): array
+    {
+        return $page->generateNavigationItems([
+            EditWhiteLabelSettings::class,
+            EditLayoutSettings::class,
+            EditAdvancedSettings::class,
+        ]);
+    }
+
+    public static function form(Schema $schema): Schema
     {
         return $schema
             ->columns(1)
@@ -52,7 +71,7 @@ class EditBrandSettings extends EditRecord
                         ->image()
                         ->imageResizeMode('contain')
                         ->imageCropAspectRatio('3:1')
-                        ->directory(BrandSettingsResource::storageDirectory('logos'))
+                        ->directory(static::storageDirectory('logos'))
                         ->disk(config('filament-white-label.disk', 'public'))
                         ->maxSize(2048)
                         ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/svg+xml', 'image/webp']),
@@ -67,7 +86,7 @@ class EditBrandSettings extends EditRecord
                         ->image()
                         ->imageResizeMode('cover')
                         ->imageCropAspectRatio('1:1')
-                        ->directory(BrandSettingsResource::storageDirectory('favicons'))
+                        ->directory(static::storageDirectory('favicons'))
                         ->disk(config('filament-white-label.disk', 'public'))
                         ->maxSize(512)
                         ->acceptedFileTypes(['image/png', 'image/x-icon', 'image/svg+xml']),
@@ -111,5 +130,75 @@ class EditBrandSettings extends EditRecord
                         ->placeholder(config('mail.from.name')),
                 ])->columns(2),
             ]);
+    }
+
+    public static function table(Table $table): Table
+    {
+        return $table
+            ->columns([
+                ImageColumn::make('metadata.logo_path')->label('Logo')->circular()->size(40),
+                TextColumn::make('metadata.brand_name')->label('Brand')->searchable(),
+                TextColumn::make('metadata.email_from_address')->label('Email From'),
+                TextColumn::make('updated_at')->label('Last Updated')->dateTime(),
+            ])
+            ->actions([
+                EditAction::make(),
+            ]);
+    }
+
+    public static function getPages(): array
+    {
+        return [
+            'index' => EditWhiteLabelSettings::route('/'),
+            'layout' => EditLayoutSettings::route('/layout'),
+            'advanced' => EditAdvancedSettings::route('/advanced'),
+        ];
+    }
+
+    public static function resolveRecord(): WhiteLabelSettings
+    {
+        $tenant = Filament::getTenant();
+        $panelId = Filament::getCurrentPanel()?->getId();
+
+        $query = WhiteLabelSettings::query();
+
+        if ($tenant) {
+            $query->where('tenant_type', $tenant->getMorphClass())
+                  ->where('tenant_id', $tenant->getKey());
+        } else {
+            $query->whereNull('tenant_type')->whereNull('tenant_id');
+        }
+
+        $query->where(fn ($q) => $q->where('panel_id', $panelId)->orWhereNull('panel_id'))
+              ->orderByRaw('panel_id IS NOT NULL DESC');
+
+        $settings = $query->first();
+
+        if (! $settings) {
+            $settings = WhiteLabelSettings::create([
+                'tenant_type' => $tenant?->getMorphClass(),
+                'tenant_id' => $tenant?->getKey(),
+                'panel_id' => $panelId,
+                'metadata' => [
+                    'brand_name' => $tenant?->name ?? config('app.name'),
+                    'font_family' => config('filament-white-label.defaults.font_family', 'Inter'),
+                    'colors' => config('filament-white-label.defaults.colors'),
+                ],
+            ]);
+        }
+
+        return $settings;
+    }
+
+    public static function storageDirectory(string $type): string
+    {
+        $prefix = config('filament-white-label.storage_path_prefix', 'brand');
+        $tenant = Filament::getTenant();
+
+        if ($tenant) {
+            return "{$prefix}/{$tenant->getMorphClass()}-{$tenant->getKey()}/{$type}";
+        }
+
+        return "{$prefix}/global/{$type}";
     }
 }
