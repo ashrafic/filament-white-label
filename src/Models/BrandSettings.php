@@ -10,6 +10,8 @@ use Illuminate\Database\Eloquent\Relations\MorphTo;
 
 class BrandSettings extends Model
 {
+    protected $table = 'white_label_settings';
+
     protected $fillable = [
         'tenant_type',
         'tenant_id',

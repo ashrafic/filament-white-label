@@ -8,7 +8,7 @@ return new class extends Migration
 {
     public function up(): void
     {
-        Schema::create('brand_settings', function (Blueprint $table) {
+        Schema::create('white_label_settings', function (Blueprint $table) {
             $table->id();
             $table->nullableMorphs('tenant');
             $table->string('panel_id')->nullable();
@@ -21,6 +21,6 @@ return new class extends Migration
 
     public function down(): void
     {
-        Schema::dropIfExists('brand_settings');
+        Schema::dropIfExists('white_label_settings');
     }
 };
