@@ -50,6 +50,11 @@ trait HasWhiteLabel
         return fn (): string => WhiteLabel::fontLinkTag() . WhiteLabel::customCssTag();
     }
 
+    public function whiteLabelTopbar(): Closure
+    {
+        return fn (): bool => WhiteLabel::topbar();
+    }
+
     public function whiteLabelTopNavigation(): Closure
     {
         return fn (): bool => WhiteLabel::topNavigation();
@@ -109,6 +114,7 @@ trait HasWhiteLabel
             ->favicon($this->whiteLabelFavicon())
             ->colors($this->whiteLabelColors())
             ->font($this->whiteLabelFontFamily())
+            ->topbar($this->whiteLabelTopbar())
             ->topNavigation($this->whiteLabelTopNavigation())
             ->sidebarCollapsibleOnDesktop($this->whiteLabelSidebarCollapsibleOnDesktop())
             ->sidebarFullyCollapsibleOnDesktop($this->whiteLabelSidebarFullyCollapsibleOnDesktop())

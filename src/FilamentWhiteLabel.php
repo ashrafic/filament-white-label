@@ -18,6 +18,7 @@ class FilamentWhiteLabel
     public static function customCss(): ?string { return WhiteLabel::customCss(); }
     public static function customCssTag(): string { return WhiteLabel::customCssTag(); }
     public static function fontLinkTag(): string { return WhiteLabel::fontLinkTag(); }
+    public static function topbar(): bool { return WhiteLabel::topbar(); }
     public static function topNavigation(): bool { return WhiteLabel::topNavigation(); }
     public static function sidebarCollapsibleOnDesktop(): bool { return WhiteLabel::sidebarCollapsibleOnDesktop(); }
     public static function sidebarFullyCollapsibleOnDesktop(): bool { return WhiteLabel::sidebarFullyCollapsibleOnDesktop(); }

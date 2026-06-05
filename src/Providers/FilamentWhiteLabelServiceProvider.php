@@ -51,6 +51,7 @@ class FilamentWhiteLabelServiceProvider extends ServiceProvider
                 ->favicon(fn (): ?string => WhiteLabel::faviconUrl())
                 ->colors(fn (): array => WhiteLabel::colors())
                 ->font(fn (): ?string => WhiteLabel::fontFamily())
+                ->topbar(fn (): bool => WhiteLabel::topbar())
                 ->topNavigation(fn (): bool => WhiteLabel::topNavigation())
                 ->sidebarCollapsibleOnDesktop(fn (): bool => WhiteLabel::sidebarCollapsibleOnDesktop())
                 ->sidebarFullyCollapsibleOnDesktop(fn (): bool => WhiteLabel::sidebarFullyCollapsibleOnDesktop())

@@ -27,6 +27,7 @@ return [
         ],
         'email_from_address' => env('MAIL_FROM_ADDRESS'),
         'email_from_name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Filament')),
+        'topbar' => true,
         'top_navigation' => false,
         'sidebar_collapsible_on_desktop' => false,
         'sidebar_fully_collapsible_on_desktop' => false,

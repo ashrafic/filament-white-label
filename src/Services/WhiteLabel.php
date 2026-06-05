@@ -136,46 +136,51 @@ class WhiteLabel
 
     // -- Layout Settings --
 
+    public static function topbar(): bool
+    {
+        return static::boolOrDefault('topbar');
+    }
+
     public static function topNavigation(): bool
     {
-        return static::boolOrDefault('top_navigation', false);
+        return static::boolOrDefault('top_navigation');
     }
 
     public static function sidebarCollapsibleOnDesktop(): bool
     {
-        return static::boolOrDefault('sidebar_collapsible_on_desktop', false);
+        return static::boolOrDefault('sidebar_collapsible_on_desktop');
     }
 
     public static function sidebarFullyCollapsibleOnDesktop(): bool
     {
-        return static::boolOrDefault('sidebar_fully_collapsible_on_desktop', false);
+        return static::boolOrDefault('sidebar_fully_collapsible_on_desktop');
     }
 
     public static function collapsibleNavigationGroups(): bool
     {
-        return static::boolOrDefault('collapsible_navigation_groups', true);
+        return static::boolOrDefault('collapsible_navigation_groups');
     }
 
     public static function breadcrumbs(): bool
     {
-        return static::boolOrDefault('breadcrumbs', true);
+        return static::boolOrDefault('breadcrumbs');
     }
 
     // -- Advanced Settings --
 
     public static function unsavedChangesAlerts(): bool
     {
-        return static::boolOrDefault('unsaved_changes_alerts', false);
+        return static::boolOrDefault('unsaved_changes_alerts');
     }
 
     public static function spaMode(): bool
     {
-        return static::boolOrDefault('spa_mode', false);
+        return static::boolOrDefault('spa_mode');
     }
 
     public static function databaseNotifications(): bool
     {
-        return static::boolOrDefault('database_notifications', false);
+        return static::boolOrDefault('database_notifications');
     }
 
     public static function databaseNotificationsPolling(): ?string
@@ -191,7 +196,7 @@ class WhiteLabel
 
     // -- Internal --
 
-    protected static function boolOrDefault(string $key, bool $fallback): bool
+    protected static function boolOrDefault(string $key): bool
     {
         $settings = static::resolve();
 
@@ -199,7 +204,7 @@ class WhiteLabel
             return (bool) $settings->metadata[$key];
         }
 
-        return $fallback;
+        return (bool) config("filament-white-label.defaults.{$key}");
     }
 
     protected static function resolveFromCache(?Model $tenant, ?string $panelId): ?WhiteLabelSettings

@@ -18,6 +18,7 @@ test('all closure methods return Closure instances', function () {
         'whiteLabelColors',
         'whiteLabelFontFamily',
         'whiteLabelHeadHook',
+        'whiteLabelTopbar',
         'whiteLabelTopNavigation',
         'whiteLabelSidebarCollapsibleOnDesktop',
         'whiteLabelSidebarFullyCollapsibleOnDesktop',

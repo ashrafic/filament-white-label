@@ -39,17 +39,21 @@ class EditLayoutSettings extends EditRecord
             ->columns(1)
             ->schema([
                 Section::make('Navigation')->schema([
+                    Toggle::make('metadata.topbar')
+                        ->label('Top Bar')
+                        ->helperText('Show the top bar. Disable for minimal header.'),
+
                     Toggle::make('metadata.top_navigation')
                         ->label('Top Navigation')
                         ->helperText('Use top navigation bar instead of sidebar.'),
 
                     Toggle::make('metadata.sidebar_collapsible_on_desktop')
                         ->label('Collapsible Sidebar')
-                        ->helperText('Allow sidebar to collapse on desktop.'),
+                        ->helperText('Allows sidebar to collapse (icons only when collapsed).'),
 
                     Toggle::make('metadata.sidebar_fully_collapsible_on_desktop')
                         ->label('Fully Collapsible Sidebar')
-                        ->helperText('Allow sidebar to fully collapse (icons only).'),
+                        ->helperText('Allows sidebar to hide completely. Requires Collapsible Sidebar to be ON.'),
 
                     Toggle::make('metadata.collapsible_navigation_groups')
                         ->label('Collapsible Navigation Groups')
