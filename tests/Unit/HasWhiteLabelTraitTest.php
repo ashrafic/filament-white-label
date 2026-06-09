@@ -5,7 +5,8 @@ declare(strict_types=1);
 use FilamentWhiteLabel\Concerns\HasWhiteLabel;
 
 test('all closure methods return Closure instances', function () {
-    $trait = new class {
+    $trait = new class
+    {
         use HasWhiteLabel;
     };
 

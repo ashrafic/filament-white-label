@@ -43,6 +43,7 @@ class InstallWhiteLabelCommand extends Command
 
         if (File::exists($configPath)) {
             $this->line('  ⏭  Config already published — skipping.');
+
             return;
         }
 

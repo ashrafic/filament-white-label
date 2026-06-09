@@ -20,11 +20,11 @@ class FilamentWhiteLabelServiceProvider extends ServiceProvider
     public function boot(): void
     {
         $this->publishes([
-            __DIR__ . '/../../config/filament-white-label.php' => config_path('filament-white-label.php'),
+            __DIR__.'/../../config/filament-white-label.php' => config_path('filament-white-label.php'),
         ], 'filament-white-label-config');
 
         $this->publishes([
-            __DIR__ . '/../../database/migrations/' => database_path('migrations'),
+            __DIR__.'/../../database/migrations/' => database_path('migrations'),
         ], 'filament-white-label-migrations');
 
         if ($this->app->runningInConsole()) {
@@ -61,14 +61,14 @@ class FilamentWhiteLabelServiceProvider extends ServiceProvider
                 ->spa(fn (): bool => WhiteLabel::spaMode())
                 ->databaseNotifications(fn (): bool => WhiteLabel::databaseNotifications())
                 ->databaseNotificationsPolling(fn (): ?string => WhiteLabel::databaseNotificationsPolling())
-                ->renderHook('panels::head.start', fn (): string => WhiteLabel::fontLinkTag() . WhiteLabel::customCssTag());
+                ->renderHook('panels::head.start', fn (): string => WhiteLabel::fontLinkTag().WhiteLabel::customCssTag());
         });
     }
 
     public function register(): void
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/../../config/filament-white-label.php',
+            __DIR__.'/../../config/filament-white-label.php',
             'filament-white-label'
         );
 

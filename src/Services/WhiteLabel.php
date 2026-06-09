@@ -27,6 +27,7 @@ class WhiteLabel
             if ($cached) {
                 return $cached;
             }
+
             return static::resolveFromDatabase($tenant, $panelId);
         }
 
@@ -116,7 +117,7 @@ class WhiteLabel
             return '';
         }
 
-        return '<style>' . e($css) . '</style>';
+        return '<style>'.e($css).'</style>';
     }
 
     public static function fontLinkTag(): string
@@ -250,6 +251,7 @@ class WhiteLabel
             if ($ttl > 0) {
                 Cache::put(static::cacheKey($tenant, $panelId), $settings, $ttl);
             }
+
             return $settings;
         }
 
@@ -259,10 +261,10 @@ class WhiteLabel
     protected static function cacheKey(?Model $tenant, ?string $panelId): string
     {
         if ($tenant) {
-            return 'filament-white-label:tenant:' . $tenant->getMorphClass() . ':' . $tenant->getKey() . ':panel:' . ($panelId ?? 'null');
+            return 'filament-white-label:tenant:'.$tenant->getMorphClass().':'.$tenant->getKey().':panel:'.($panelId ?? 'null');
         }
 
-        return 'filament-white-label:global:panel:' . ($panelId ?? 'null');
+        return 'filament-white-label:global:panel:'.($panelId ?? 'null');
     }
 
     protected static function resolveGlobal(?string $panelId): ?WhiteLabelSettings

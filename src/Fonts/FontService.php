@@ -68,12 +68,12 @@ class FontService
         }
 
         $familyParam = urlencode($family);
-        $weightsParam = implode(';', array_map(fn(int $w) => "0,{$w}", $weights));
+        $weightsParam = implode(';', array_map(fn (int $w) => "0,{$w}", $weights));
 
         $href = "https://fonts.googleapis.com/css2?family={$familyParam}:wght@{$weightsParam}&display=swap";
 
         return '<link rel="preconnect" href="https://fonts.googleapis.com">'
-            . '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
-            . '<link href="' . e($href) . '" rel="stylesheet">';
+            .'<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+            .'<link href="'.e($href).'" rel="stylesheet">';
     }
 }

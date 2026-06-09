@@ -11,6 +11,7 @@ use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
+use Filament\Navigation\NavigationItem;
 use Filament\Pages\Page;
 use Filament\Resources\Resource;
 use Filament\Schemas\Components\Grid;
@@ -23,14 +24,14 @@ use Filament\Tables\Table;
 use FilamentWhiteLabel\Fonts\FontService;
 use FilamentWhiteLabel\Models\WhiteLabelSettings;
 use FilamentWhiteLabel\Resources\WhiteLabelSettingsResource\Pages\EditAdvancedSettings;
-use FilamentWhiteLabel\Resources\WhiteLabelSettingsResource\Pages\EditWhiteLabelSettings;
 use FilamentWhiteLabel\Resources\WhiteLabelSettingsResource\Pages\EditLayoutSettings;
+use FilamentWhiteLabel\Resources\WhiteLabelSettingsResource\Pages\EditWhiteLabelSettings;
 
 class WhiteLabelSettingsResource extends Resource
 {
     protected static ?string $model = WhiteLabelSettings::class;
 
-    protected static string | BackedEnum | null $navigationIcon = 'heroicon-o-swatch';
+    protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-swatch';
 
     protected static ?string $navigationLabel = 'White Label';
 
@@ -51,17 +52,17 @@ class WhiteLabelSettingsResource extends Resource
     public static function getRecordSubNavigation(Page $page): array
     {
         return [
-            \Filament\Navigation\NavigationItem::make('Brand')
+            NavigationItem::make('Brand')
                 ->label('Brand')
                 ->icon('heroicon-o-paint-brush')
                 ->url(fn () => static::getUrl('index'))
                 ->isActiveWhen(fn () => $page instanceof EditWhiteLabelSettings),
-            \Filament\Navigation\NavigationItem::make('Layout')
+            NavigationItem::make('Layout')
                 ->label('Layout')
                 ->icon('heroicon-o-rectangle-group')
                 ->url(fn () => static::getUrl('layout'))
                 ->isActiveWhen(fn () => $page instanceof EditLayoutSettings),
-            \Filament\Navigation\NavigationItem::make('Advanced')
+            NavigationItem::make('Advanced')
                 ->label('Advanced')
                 ->icon('heroicon-o-cog-6-tooth')
                 ->url(fn () => static::getUrl('advanced'))
@@ -196,13 +197,13 @@ class WhiteLabelSettingsResource extends Resource
 
         if ($tenant) {
             $query->where('tenant_type', $tenant->getMorphClass())
-                  ->where('tenant_id', $tenant->getKey());
+                ->where('tenant_id', $tenant->getKey());
         } else {
             $query->whereNull('tenant_type')->whereNull('tenant_id');
         }
 
         $query->where(fn ($q) => $q->where('panel_id', $panelId)->orWhereNull('panel_id'))
-              ->orderByRaw('panel_id IS NOT NULL DESC');
+            ->orderByRaw('panel_id IS NOT NULL DESC');
 
         $settings = $query->first();
 

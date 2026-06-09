@@ -22,6 +22,7 @@ class EditWhiteLabelSettings extends EditRecord
     protected static string $resource = WhiteLabelSettingsResource::class;
 
     protected static ?string $title = 'Brand';
+
     protected static ?string $navigationLabel = 'Brand';
 
     protected function getHeaderActions(): array
@@ -47,7 +48,7 @@ class EditWhiteLabelSettings extends EditRecord
         return $record;
     }
 
-    public function mount(int | string | null $record = null): void
+    public function mount(int|string|null $record = null): void
     {
         $this->record = WhiteLabelSettingsResource::resolveRecord();
 

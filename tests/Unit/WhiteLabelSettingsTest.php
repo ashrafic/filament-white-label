@@ -3,10 +3,9 @@
 declare(strict_types=1);
 
 use FilamentWhiteLabel\Models\WhiteLabelSettings;
-use FilamentWhiteLabel\Security\CssSanitizer;
 
 test('model has correct fillable fields', function () {
-    $model = new WhiteLabelSettings();
+    $model = new WhiteLabelSettings;
 
     expect($model->getFillable())->toBe([
         'tenant_type',
@@ -24,7 +23,7 @@ test('metadata is cast to array', function () {
 });
 
 test('metadata defaults to null when not set', function () {
-    $model = new WhiteLabelSettings();
+    $model = new WhiteLabelSettings;
 
     expect($model->metadata)->toBeNull();
 });

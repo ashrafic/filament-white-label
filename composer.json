@@ -51,6 +51,11 @@
             ]
         }
     },
+    "scripts": {
+        "test": "pest",
+        "lint": "pint",
+        "lint:fix": "pint --fix"
+    },
     "minimum-stability": "stable",
     "prefer-stable": true
 }

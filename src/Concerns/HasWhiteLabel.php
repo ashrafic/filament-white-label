@@ -47,7 +47,7 @@ trait HasWhiteLabel
 
     public function whiteLabelHeadHook(): Closure
     {
-        return fn (): string => WhiteLabel::fontLinkTag() . WhiteLabel::customCssTag();
+        return fn (): string => WhiteLabel::fontLinkTag().WhiteLabel::customCssTag();
     }
 
     public function whiteLabelTopbar(): Closure
