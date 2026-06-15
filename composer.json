@@ -1,5 +1,5 @@
 {
-    "name": "filament-white-label/filament-white-label",
+    "name": "ashrafic/filament-white-label",
     "description": "White-label branding for Filament panels. Let every tenant rebrand their admin panel in minutes — no code required.",
     "type": "library",
     "license": "MIT",
@@ -56,6 +56,4 @@
         "lint": "pint",
         "lint:fix": "pint --fix"
     },
-    "minimum-stability": "stable",
-    "prefer-stable": true
 }

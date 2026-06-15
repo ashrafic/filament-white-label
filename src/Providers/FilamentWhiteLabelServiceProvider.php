@@ -7,18 +7,17 @@ namespace FilamentWhiteLabel\Providers;
 use Filament\Panel;
 use FilamentWhiteLabel\Commands\ClearWhiteLabelCacheCommand;
 use FilamentWhiteLabel\Commands\InstallWhiteLabelCommand;
-use FilamentWhiteLabel\Listeners\ApplyTenantEmailBranding;
 use FilamentWhiteLabel\Models\WhiteLabelSettings;
 use FilamentWhiteLabel\Observers\WhiteLabelSettingsObserver;
 use FilamentWhiteLabel\Services\WhiteLabel;
-use Illuminate\Mail\Events\MessageSending;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class FilamentWhiteLabelServiceProvider extends ServiceProvider
 {
     public function boot(): void
     {
+        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'filament-white-label');
+
         $this->publishes([
             __DIR__.'/../../config/filament-white-label.php' => config_path('filament-white-label.php'),
         ], 'filament-white-label-config');
@@ -61,7 +60,8 @@ class FilamentWhiteLabelServiceProvider extends ServiceProvider
                 ->spa(fn (): bool => WhiteLabel::spaMode())
                 ->databaseNotifications(fn (): bool => WhiteLabel::databaseNotifications())
                 ->databaseNotificationsPolling(fn (): ?string => WhiteLabel::databaseNotificationsPolling())
-                ->renderHook('panels::head.start', fn (): string => WhiteLabel::fontLinkTag().WhiteLabel::customCssTag());
+                ->renderHook('panels::head.end', fn (): string => WhiteLabel::fontLinkTag().WhiteLabel::customCssTag())
+                ->renderHook('panels::footer', fn (): string => WhiteLabel::footerHtml());
         });
     }
 
@@ -71,12 +71,5 @@ class FilamentWhiteLabelServiceProvider extends ServiceProvider
             __DIR__.'/../../config/filament-white-label.php',
             'filament-white-label'
         );
-
-        if (config('filament-white-label.email.enabled', true)) {
-            Event::listen(
-                MessageSending::class,
-                ApplyTenantEmailBranding::class
-            );
-        }
     }
 }

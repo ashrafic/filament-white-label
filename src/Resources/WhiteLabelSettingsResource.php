@@ -6,7 +6,6 @@ namespace FilamentWhiteLabel\Resources;
 
 use BackedEnum;
 use Filament\Facades\Filament;
-use Filament\Forms\Components\ColorPicker;
 use Filament\Forms\Components\FileUpload;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\Textarea;
@@ -26,6 +25,7 @@ use FilamentWhiteLabel\Models\WhiteLabelSettings;
 use FilamentWhiteLabel\Resources\WhiteLabelSettingsResource\Pages\EditAdvancedSettings;
 use FilamentWhiteLabel\Resources\WhiteLabelSettingsResource\Pages\EditLayoutSettings;
 use FilamentWhiteLabel\Resources\WhiteLabelSettingsResource\Pages\EditWhiteLabelSettings;
+use FilamentWhiteLabel\Services\WhiteLabel;
 
 class WhiteLabelSettingsResource extends Resource
 {
@@ -94,7 +94,6 @@ class WhiteLabelSettingsResource extends Resource
                             ->label('Logo (Light)')
                             ->image()
                             ->imageResizeMode('contain')
-                            ->imageCropAspectRatio('3:1')
                             ->directory(static::storageDirectory('logos'))
                             ->disk(config('filament-white-label.disk', 'public'))
                             ->maxSize(2048)
@@ -104,7 +103,6 @@ class WhiteLabelSettingsResource extends Resource
                             ->label('Logo (Dark)')
                             ->image()
                             ->imageResizeMode('contain')
-                            ->imageCropAspectRatio('3:1')
                             ->directory(static::storageDirectory('logos'))
                             ->disk(config('filament-white-label.disk', 'public'))
                             ->maxSize(2048)
@@ -126,12 +124,35 @@ class WhiteLabelSettingsResource extends Resource
                 ])->columns(1),
 
                 Section::make('Colors')->schema([
-                    ColorPicker::make('metadata.colors.primary')->label('Primary')->default('#3b82f6'),
-                    ColorPicker::make('metadata.colors.secondary')->label('Secondary')->default('#64748b'),
-                    ColorPicker::make('metadata.colors.danger')->label('Danger')->default('#ef4444'),
-                    ColorPicker::make('metadata.colors.warning')->label('Warning')->default('#f59e0b'),
-                    ColorPicker::make('metadata.colors.success')->label('Success')->default('#22c55e'),
-                    ColorPicker::make('metadata.colors.info')->label('Info')->default('#3b82f6'),
+                    Select::make('metadata.colors.primary')->label('Primary')
+                        ->default('#3b82f6')
+                        ->options(fn () => EditWhiteLabelSettings::paletteOptions())
+                        ->searchable(),
+
+                    Select::make('metadata.colors.secondary')->label('Secondary')
+                        ->default('#64748b')
+                        ->options(fn () => EditWhiteLabelSettings::paletteOptions())
+                        ->searchable(),
+
+                    Select::make('metadata.colors.danger')->label('Danger')
+                        ->default('#ef4444')
+                        ->options(fn () => EditWhiteLabelSettings::paletteOptions())
+                        ->searchable(),
+
+                    Select::make('metadata.colors.warning')->label('Warning')
+                        ->default('#f59e0b')
+                        ->options(fn () => EditWhiteLabelSettings::paletteOptions())
+                        ->searchable(),
+
+                    Select::make('metadata.colors.success')->label('Success')
+                        ->default('#22c55e')
+                        ->options(fn () => EditWhiteLabelSettings::paletteOptions())
+                        ->searchable(),
+
+                    Select::make('metadata.colors.info')->label('Info')
+                        ->default('#3b82f6')
+                        ->options(fn () => EditWhiteLabelSettings::paletteOptions())
+                        ->searchable(),
                 ])->columns(3),
 
                 Section::make('Typography')->schema([
@@ -150,18 +171,6 @@ class WhiteLabelSettingsResource extends Resource
                         ->helperText('Custom CSS will be injected into your panel. <script> tags are automatically removed for security.')
                         ->visible(fn () => ! config('filament-white-label.security.disable_custom_css', false)),
                 ])->collapsed(),
-
-                Section::make('Email Branding')->schema([
-                    TextInput::make('metadata.email_from_address')
-                        ->label('From Address')
-                        ->email()
-                        ->placeholder(config('mail.from.address')),
-
-                    TextInput::make('metadata.email_from_name')
-                        ->label('From Name')
-                        ->maxLength(255)
-                        ->placeholder(config('mail.from.name')),
-                ])->columns(2),
             ]);
     }
 
@@ -171,7 +180,6 @@ class WhiteLabelSettingsResource extends Resource
             ->columns([
                 ImageColumn::make('metadata.logo_path')->label('Logo')->circular()->size(40),
                 TextColumn::make('metadata.brand_name')->label('Brand')->searchable(),
-                TextColumn::make('metadata.email_from_address')->label('Email From'),
                 TextColumn::make('updated_at')->label('Last Updated')->dateTime(),
             ])
             ->actions([
@@ -215,7 +223,7 @@ class WhiteLabelSettingsResource extends Resource
                 'metadata' => [
                     'brand_name' => $tenant?->name ?? config('app.name'),
                     'font_family' => config('filament-white-label.defaults.font_family', 'Inter'),
-                    'colors' => config('filament-white-label.defaults.colors'),
+                    'colors' => WhiteLabel::defaultColors(),
                     'topbar' => config('filament-white-label.defaults.topbar', true),
                     'top_navigation' => config('filament-white-label.defaults.top_navigation', false),
                     'sidebar_collapsible_on_desktop' => config('filament-white-label.defaults.sidebar_collapsible_on_desktop', false),
@@ -226,6 +234,21 @@ class WhiteLabelSettingsResource extends Resource
                     'spa_mode' => config('filament-white-label.defaults.spa_mode', false),
                     'database_notifications' => config('filament-white-label.defaults.database_notifications', false),
                     'database_notifications_polling' => config('filament-white-label.defaults.database_notifications_polling', '30s'),
+                    'border_radius' => config('filament-white-label.defaults.border_radius', 'default'),
+                    'input_border_radius' => config('filament-white-label.defaults.input_border_radius'),
+                    'badge_shape' => config('filament-white-label.defaults.badge_shape', 'default'),
+                    'shadow_intensity' => config('filament-white-label.defaults.shadow_intensity', 'default'),
+                    'container_width' => config('filament-white-label.defaults.container_width'),
+                    'sidebar_width' => config('filament-white-label.defaults.sidebar_width'),
+                    'heading_size' => config('filament-white-label.defaults.heading_size', 'default'),
+                    'nav_item_spacing' => config('filament-white-label.defaults.nav_item_spacing', 'default'),
+                    'font_scale' => config('filament-white-label.defaults.font_scale'),
+                    'form_density' => config('filament-white-label.defaults.form_density', 'default'),
+                    'table_row_density' => config('filament-white-label.defaults.table_row_density', 'default'),
+                    'modal_size' => config('filament-white-label.defaults.modal_size', 'default'),
+                    'transition_speed' => config('filament-white-label.defaults.transition_speed', 'default'),
+                    'footer_text' => config('filament-white-label.defaults.footer_text'),
+                    'footer_links' => config('filament-white-label.defaults.footer_links', []),
                 ],
             ]);
         }

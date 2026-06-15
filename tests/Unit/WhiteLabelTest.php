@@ -34,4 +34,26 @@ test('config defaults are set correctly', function () {
     expect(config('filament-white-label.defaults.spa_mode'))->toBeFalse();
     expect(config('filament-white-label.defaults.topbar'))->toBeTrue();
     expect(config('filament-white-label.defaults.collapsible_navigation_groups'))->toBeTrue();
+    expect(config('filament-white-label.defaults.footer_text'))->toBeNull();
+    expect(config('filament-white-label.defaults.footer_links'))->toBe([]);
+});
+
+test('footer metadata is stored and retrieved correctly', function () {
+    $settings = new WhiteLabelSettings([
+        'metadata' => [
+            'footer_text' => 'ACME Admin Portal',
+            'footer_links' => [
+                ['label' => 'Terms', 'url' => 'https://example.com/terms'],
+                ['label' => 'Privacy', 'url' => 'https://example.com/privacy'],
+            ],
+        ],
+    ]);
+    $settings->save();
+
+    expect($settings->metadata['footer_text'])->toBe('ACME Admin Portal');
+    expect($settings->metadata['footer_links'])->toHaveCount(2);
+    expect($settings->metadata['footer_links'][0]['label'])->toBe('Terms');
+    expect($settings->metadata['footer_links'][0]['url'])->toBe('https://example.com/terms');
+    expect($settings->metadata['footer_links'][1]['label'])->toBe('Privacy');
+    expect($settings->metadata['footer_links'][1]['url'])->toBe('https://example.com/privacy');
 });

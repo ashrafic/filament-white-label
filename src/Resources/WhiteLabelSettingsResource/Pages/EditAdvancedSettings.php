@@ -90,6 +90,63 @@ class EditAdvancedSettings extends EditRecord
                         ])
                         ->visible(fn ($get) => $get('metadata.database_notifications')),
                 ])->columns(2),
+
+                Section::make('Styling')->schema([
+                    Select::make('metadata.font_scale')
+                        ->label('Font Scale')
+                        ->default(null)
+                        ->options([
+                            null => 'Default (100%)',
+                            '90%' => '90% (Compact)',
+                            '100%' => '100% (Default)',
+                            '110%' => '110% (Large)',
+                            '120%' => '120% (Extra Large)',
+                        ])
+                        ->helperText('Global font size multiplier for accessibility or density.'),
+
+                    Select::make('metadata.form_density')
+                        ->label('Form Density')
+                        ->default('default')
+                        ->options([
+                            'default' => 'Default',
+                            'compact' => 'Compact',
+                            'spacious' => 'Spacious',
+                        ])
+                        ->helperText('Padding and spacing within form sections and fields.'),
+
+                    Select::make('metadata.table_row_density')
+                        ->label('Table Row Density')
+                        ->default('default')
+                        ->options([
+                            'default' => 'Default',
+                            'compact' => 'Compact',
+                            'spacious' => 'Spacious',
+                        ])
+                        ->helperText('Vertical padding of table rows.'),
+
+                    Select::make('metadata.modal_size')
+                        ->label('Default Modal Size')
+                        ->default('default')
+                        ->options([
+                            'default' => 'Default',
+                            'small' => 'Small (480px)',
+                            'medium' => 'Medium (640px)',
+                            'large' => 'Large (800px)',
+                            'extra-large' => 'Extra Large (1024px)',
+                        ])
+                        ->helperText('Default max-width for modal dialogs.'),
+
+                    Select::make('metadata.transition_speed')
+                        ->label('Transition Speed')
+                        ->default('default')
+                        ->options([
+                            'default' => 'Default',
+                            'none' => 'None',
+                            'fast' => 'Fast',
+                            'slow' => 'Slow',
+                        ])
+                        ->helperText('Duration of CSS transitions on buttons, dropdowns, modals, and sidebar.'),
+                ])->columns(2),
             ]);
     }
 }

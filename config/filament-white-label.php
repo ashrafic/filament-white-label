@@ -18,15 +18,13 @@ return [
         'brand_logo_height' => null,
         'font_family' => 'Inter',
         'colors' => [
-            'primary' => '#3b82f6',
-            'secondary' => '#64748b',
-            'danger' => '#ef4444',
-            'warning' => '#f59e0b',
-            'success' => '#22c55e',
-            'info' => '#3b82f6',
+            'primary' => null,
+            'secondary' => null,
+            'danger' => null,
+            'warning' => null,
+            'success' => null,
+            'info' => null,
         ],
-        'email_from_address' => env('MAIL_FROM_ADDRESS'),
-        'email_from_name' => env('MAIL_FROM_NAME', env('APP_NAME', 'Filament')),
         'topbar' => true,
         'top_navigation' => false,
         'sidebar_collapsible_on_desktop' => false,
@@ -37,6 +35,24 @@ return [
         'spa_mode' => false,
         'database_notifications' => false,
         'database_notifications_polling' => '30s',
+
+        'border_radius' => 'default',
+        'input_border_radius' => null,
+        'badge_shape' => 'default',
+        'shadow_intensity' => 'default',
+
+        'container_width' => null,
+        'sidebar_width' => null,
+        'heading_size' => 'default',
+        'nav_item_spacing' => 'default',
+
+        'font_scale' => null,
+        'form_density' => 'default',
+        'table_row_density' => 'default',
+        'modal_size' => 'default',
+        'transition_speed' => 'default',
+        'footer_text' => null,
+        'footer_links' => [],
     ],
 
     'security' => [
@@ -48,10 +64,6 @@ return [
         'show_preview' => env('FILAMENT_WHITE_LABEL_PREVIEW', false),
         'navigation_group' => 'White Label',
         'navigation_sort' => 10,
-    ],
-
-    'email' => [
-        'enabled' => env('FILAMENT_WHITE_LABEL_EMAIL_ENABLED', true),
     ],
 
     'login' => [

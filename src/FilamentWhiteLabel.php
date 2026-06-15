@@ -108,6 +108,81 @@ class FilamentWhiteLabel
         return WhiteLabel::databaseNotificationsPolling();
     }
 
+    public static function borderRadius(): ?string
+    {
+        return WhiteLabel::borderRadius();
+    }
+
+    public static function inputBorderRadius(): ?string
+    {
+        return WhiteLabel::inputBorderRadius();
+    }
+
+    public static function badgeShape(): ?string
+    {
+        return WhiteLabel::badgeShape();
+    }
+
+    public static function shadowIntensity(): ?string
+    {
+        return WhiteLabel::shadowIntensity();
+    }
+
+    public static function containerWidth(): ?string
+    {
+        return WhiteLabel::containerWidth();
+    }
+
+    public static function sidebarWidth(): ?string
+    {
+        return WhiteLabel::sidebarWidth();
+    }
+
+    public static function headingSize(): ?string
+    {
+        return WhiteLabel::headingSize();
+    }
+
+    public static function navItemSpacing(): ?string
+    {
+        return WhiteLabel::navItemSpacing();
+    }
+
+    public static function fontScale(): ?string
+    {
+        return WhiteLabel::fontScale();
+    }
+
+    public static function formDensity(): ?string
+    {
+        return WhiteLabel::formDensity();
+    }
+
+    public static function tableRowDensity(): ?string
+    {
+        return WhiteLabel::tableRowDensity();
+    }
+
+    public static function modalSize(): ?string
+    {
+        return WhiteLabel::modalSize();
+    }
+
+    public static function transitionSpeed(): ?string
+    {
+        return WhiteLabel::transitionSpeed();
+    }
+
+    public static function footerText(): ?string
+    {
+        return WhiteLabel::footerText();
+    }
+
+    public static function footerLinks(): array
+    {
+        return WhiteLabel::footerLinks();
+    }
+
     public static function clearCache(): void
     {
         WhiteLabel::clearCache();

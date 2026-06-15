@@ -100,6 +100,11 @@ trait HasWhiteLabel
         return fn (): ?string => WhiteLabel::databaseNotificationsPolling();
     }
 
+    public function whiteLabelFooter(): Closure
+    {
+        return fn (): string => WhiteLabel::footerHtml();
+    }
+
     public function whiteLabel(Panel $panel): Panel
     {
         if (! config('filament-white-label.enabled', true)) {
@@ -124,6 +129,7 @@ trait HasWhiteLabel
             ->spa($this->whiteLabelSpaMode())
             ->databaseNotifications($this->whiteLabelDatabaseNotifications())
             ->databaseNotificationsPolling($this->whiteLabelDatabaseNotificationsPolling())
-            ->renderHook('panels::head.start', $this->whiteLabelHeadHook());
+            ->renderHook('panels::head.end', $this->whiteLabelHeadHook())
+            ->renderHook('panels::footer', $this->whiteLabelFooter());
     }
 }
