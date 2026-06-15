@@ -55,5 +55,5 @@
         "test": "pest",
         "lint": "pint",
         "lint:fix": "pint --fix"
-    },
+    }
 }
