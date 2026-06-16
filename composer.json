@@ -1,0 +1,59 @@
+{
+    "name": "ashrafic/filament-white-label",
+    "description": "White-label branding for Filament panels. Let every tenant rebrand their admin panel in minutes — no code required.",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ashraful Islam",
+            "email": "ashraful@example.com"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "filament/filament": "^5.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0",
+        "pestphp/pest": "^3.0",
+        "laravel/pint": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "FilamentWhiteLabel\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "FilamentWhiteLabel\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "FilamentWhiteLabel\\Providers\\FilamentWhiteLabelServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true,
+            "php-http/discovery": true
+        },
+        "audit": {
+            "ignore": [
+                "PKSA-mdq4-51ck-6kdq",
+                "PKSA-8qx3-n5y5-vvnd",
+                "PKSA-q46n-4fdk-zjr4",
+                "PKSA-qzrn-rnz3-85w1",
+                "PKSA-w7xr-vk7n-rstm"
+            ]
+        }
+    },
+    "scripts": {
+        "test": "pest",
+        "lint": "pint",
+        "lint:fix": "pint --fix"
+    }
+}

@@ -1,26 +1,45 @@
-/.phpunit.cache
-/node_modules
-/public/build
-/public/hot
-/public/storage
-/storage/*.key
-/vendor
-.env
-.env.backup
-.env.production
+/internal/
+AGENTS.md
+
+# Laravel / PHP
+/vendor/
+composer.lock
 .phpunit.result.cache
-Homestead.json
-Homestead.yaml
-auth.json
+.phpunit.cache
+.php-cs-fixer.cache
+.env
+.env.*
+!.env.example
+
+# Node / Frontend
+/node_modules/
 npm-debug.log
 yarn-error.log
+package-lock.json
+yarn.lock
+
+# Build artifacts (keep resources/dist for plugins, ignore general build dirs)
+/build/
+/coverage/
+/.cache/
+
+# IDEs & OS
+/.idea/
+/.vscode/
+*.sublime-project
+*.sublime-workspace
 .DS_Store
 Thumbs.db
-.idea
-.vscode
-*.sublime-*
-.php_cs.cache
-*.cache
-composer.lock
-package-lock.json
-internal/
+
+# Logs
+*.log
+/logs/
+
+# Test artifacts
+phpunit.xml
+/infection.json
+
+# Temporary files
+*.swp
+*.swo
+*~
