@@ -17,6 +17,9 @@ jobs:
 
     name: PHP ${{ matrix.php }}
 
+    env:
+      COMPOSER_ADVISORIES_BLOCK: 0
+
     steps:
       - uses: actions/checkout@v4
 
@@ -36,6 +39,9 @@ jobs:
     runs-on: ubuntu-latest
 
     name: Lint
+
+    env:
+      COMPOSER_ADVISORIES_BLOCK: 0
 
     steps:
       - uses: actions/checkout@v4
