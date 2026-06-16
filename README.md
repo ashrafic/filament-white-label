@@ -1,10 +1,18 @@
+<div class="filament-hidden">
+
 # Filament White-Label
+
+---
+
+</div>
 
 > Total panel rebranding. For you and every tenant. No code.
 
 Logo, colors, fonts, layout, CSS, footer — every tenant gets their own brand. Or rebrand your own portal in a single-tenant setup. Install, add one line to your PanelProvider, done.
 
 ---
+
+<div class="filament-hidden">
 
 [![Packagist Version](https://img.shields.io/packagist/v/ashrafic/filament-white-label?style=flat-square&color=blue&logo=packagist)](https://packagist.org/packages/ashrafic/filament-white-label)
 [![Docs](https://img.shields.io/badge/docs-filament--white--label-blue?style=flat-square&logo=readthedocs)](https://docs.ashraficlabs.com/filament-white-label)
@@ -13,6 +21,8 @@ Logo, colors, fonts, layout, CSS, footer — every tenant gets their own brand. 
 [![License](https://img.shields.io/badge/license-MIT-green?style=flat-square&logo=open-source-initiative)](LICENSE.md)
 
 ---
+
+</div>
 
 ## Installation
 
