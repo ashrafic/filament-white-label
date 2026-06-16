@@ -6,11 +6,11 @@ Logo, colors, fonts, layout, CSS, footer — every tenant gets their own brand. 
 
 ---
 
-[![Packagist Version](https://img.shields.io/packagist/v/ashrafic/filament-white-label?style=flat-square&color=blue)](https://packagist.org/packages/ashrafic/filament-white-label)
-[![Packagist Downloads](https://img.shields.io/packagist/dt/ashrafic/filament-white-label?style=flat-square)](https://packagist.org/packages/ashrafic/filament-white-label)
-[![PHP Version](https://img.shields.io/badge/php-%5E8.2-777bb4?style=flat-square&logo=php)](https://php.net)
-[![Filament](https://img.shields.io/badge/filament-%5E5.0-fbbf24?style=flat-square)](https://filamentphp.com)
-[![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)](LICENSE.md)
+[![Packagist Version](https://img.shields.io/packagist/v/ashrafic/filament-white-label?style=flat-square&color=blue&logo=packagist)](https://packagist.org/packages/ashrafic/filament-white-label)
+[![Docs](https://img.shields.io/badge/docs-filament--white--label-blue?style=flat-square&logo=readthedocs)](https://docs.ashraficlabs.com/filament-white-label)
+[![PHP Version](https://img.shields.io/badge/php-%5E8.2-777bb4?style=flat-square&logo=php&logoColor=white)](https://php.net)
+[![Filament](https://img.shields.io/badge/filament-%5E5.0-fbbf24?style=flat-square&logo=laravel)](https://filamentphp.com)
+[![License](https://img.shields.io/badge/license-MIT-green?style=flat-square&logo=open-source-initiative)](LICENSE.md)
 
 ---
 
