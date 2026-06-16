@@ -2,7 +2,7 @@
 
 > Total panel rebranding. For you and every tenant. No code.
 
-A Composer plugin that lets each tenant in your multi-tenant Filament app — or you in a single-tenant setup — customize their panel's entire look from a clean UI. Logo, colors, fonts, layout, CSS, footer, and more.
+Logo, colors, fonts, layout, CSS, footer — every tenant gets their own brand. Or rebrand your own portal in a single-tenant setup. Install, add one line to your PanelProvider, done.
 
 ---
 
