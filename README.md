@@ -1,6 +1,6 @@
 # Filament White-Label
 
-> Give every tenant their own brand. No code.
+> Total panel rebranding. For you and every tenant. No code.
 
 A Composer plugin that lets each tenant in your multi-tenant Filament app — or you in a single-tenant setup — customize their panel's entire look from a clean UI. Logo, colors, fonts, layout, CSS, footer, and more.
 
