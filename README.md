@@ -64,6 +64,22 @@ Full docs at **[docs.ashraficlabs.com/filament-white-label](https://docs.ashrafi
 
 ---
 
+## Screenshots
+
+| Brand Identity | Colors |
+|---|---|
+| [![Brand Identity](https://docs.ashraficlabs.com/filament-white-label/assets/screenshots/brand-identity.png)](https://docs.ashraficlabs.com/filament-white-label/features/brand-settings) | [![Colors](https://docs.ashraficlabs.com/filament-white-label/assets/screenshots/colors.png)](https://docs.ashraficlabs.com/filament-white-label/features/brand-settings) |
+
+| Typography, Styling & Custom CSS | Layout: Navigation, Sidebar, Display |
+|---|---|
+| [![Typography & CSS](https://docs.ashraficlabs.com/filament-white-label/assets/screenshots/typography-style-custom-css.png)](https://docs.ashraficlabs.com/filament-white-label/features/brand-settings) | [![Layout](https://docs.ashraficlabs.com/filament-white-label/assets/screenshots/layout-nav-sidebar-display.png)](https://docs.ashraficlabs.com/filament-white-label/features/layout-settings) |
+
+| Dimensions & Footer | Advanced Settings |
+|---|---|
+| [![Dimensions & Footer](https://docs.ashraficlabs.com/filament-white-label/assets/screenshots/dimension-footer.png)](https://docs.ashraficlabs.com/filament-white-label/features/layout-settings) | [![Advanced](https://docs.ashraficlabs.com/filament-white-label/assets/screenshots/advanced.png)](https://docs.ashraficlabs.com/filament-white-label/features/advanced-settings) |
+
+---
+
 ## What You Can Customize
 
 | Category | Highlights |
