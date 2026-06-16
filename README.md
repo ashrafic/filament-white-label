@@ -1,8 +1,8 @@
 # Filament White-Label
 
-> Give every tenant their own brand. No code.
+> Total panel rebranding. For you and every tenant. No code.
 
-A Composer plugin that lets each tenant in your multi-tenant Filament app — or you in a single-tenant setup — customize their panel's entire look from a clean UI. Logo, colors, fonts, layout, CSS, footer, and more.
+Logo, colors, fonts, layout, CSS, footer — every tenant gets their own brand. Or rebrand your own portal in a single-tenant setup. Install, add one line to your PanelProvider, done.
 
 ---
 
@@ -61,6 +61,22 @@ Full docs at **[docs.ashraficlabs.com/filament-white-label](https://docs.ashrafi
 | [Resolution Flow](https://docs.ashraficlabs.com/filament-white-label/reference/resolution-flow) | Tenant → panel → global → config defaults |
 | [Cache & Security](https://docs.ashraficlabs.com/filament-white-label/reference/cache-and-security) | Caching strategy, CSS sanitization, threat mitigations |
 | [Events](https://docs.ashraficlabs.com/filament-white-label/reference/events) | WhiteLabelSettingsSaved, WhiteLabelSettingsDeleted |
+
+---
+
+## Screenshots
+
+| Brand Identity | Colors |
+|---|---|
+| [![Brand Identity](https://docs.ashraficlabs.com/filament-white-label/assets/screenshots/brand-identity.png)](https://docs.ashraficlabs.com/filament-white-label/features/brand-settings) | [![Colors](https://docs.ashraficlabs.com/filament-white-label/assets/screenshots/colors.png)](https://docs.ashraficlabs.com/filament-white-label/features/brand-settings) |
+
+| Typography, Styling & Custom CSS | Layout: Navigation, Sidebar, Display |
+|---|---|
+| [![Typography & CSS](https://docs.ashraficlabs.com/filament-white-label/assets/screenshots/typography-style-custom-css.png)](https://docs.ashraficlabs.com/filament-white-label/features/brand-settings) | [![Layout](https://docs.ashraficlabs.com/filament-white-label/assets/screenshots/layout-nav-sidebar-display.png)](https://docs.ashraficlabs.com/filament-white-label/features/layout-settings) |
+
+| Dimensions & Footer | Advanced Settings |
+|---|---|
+| [![Dimensions & Footer](https://docs.ashraficlabs.com/filament-white-label/assets/screenshots/dimension-footer.png)](https://docs.ashraficlabs.com/filament-white-label/features/layout-settings) | [![Advanced](https://docs.ashraficlabs.com/filament-white-label/assets/screenshots/advanced.png)](https://docs.ashraficlabs.com/filament-white-label/features/advanced-settings) |
 
 ---
 
