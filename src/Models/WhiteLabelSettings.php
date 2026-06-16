@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace FilamentWhiteLabel\Models;
 
+use FilamentWhiteLabel\Events\WhiteLabelSettingsDeleted;
+use FilamentWhiteLabel\Events\WhiteLabelSettingsSaved;
 use FilamentWhiteLabel\Security\CssSanitizer;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -21,6 +23,11 @@ class WhiteLabelSettings extends Model
 
     protected $casts = [
         'metadata' => 'array',
+    ];
+
+    protected $dispatchesEvents = [
+        'saved' => WhiteLabelSettingsSaved::class,
+        'deleted' => WhiteLabelSettingsDeleted::class,
     ];
 
     public function tenant(): MorphTo
