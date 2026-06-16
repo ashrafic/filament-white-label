@@ -7,9 +7,11 @@ namespace FilamentWhiteLabel\Providers;
 use Filament\Panel;
 use FilamentWhiteLabel\Commands\ClearWhiteLabelCacheCommand;
 use FilamentWhiteLabel\Commands\InstallWhiteLabelCommand;
-use FilamentWhiteLabel\Models\WhiteLabelSettings;
-use FilamentWhiteLabel\Observers\WhiteLabelSettingsObserver;
+use FilamentWhiteLabel\Events\WhiteLabelSettingsDeleted;
+use FilamentWhiteLabel\Events\WhiteLabelSettingsSaved;
+use FilamentWhiteLabel\Listeners\ClearWhiteLabelCache;
 use FilamentWhiteLabel\Services\WhiteLabel;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
 
 class FilamentWhiteLabelServiceProvider extends ServiceProvider
@@ -34,7 +36,8 @@ class FilamentWhiteLabelServiceProvider extends ServiceProvider
         }
 
         if (config('filament-white-label.enabled', true)) {
-            WhiteLabelSettings::observe(WhiteLabelSettingsObserver::class);
+            Event::listen(WhiteLabelSettingsSaved::class, ClearWhiteLabelCache::class);
+            Event::listen(WhiteLabelSettingsDeleted::class, ClearWhiteLabelCache::class);
         }
 
         Panel::macro('whiteLabel', function (bool $condition = true): Panel {
