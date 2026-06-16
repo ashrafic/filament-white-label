@@ -45,18 +45,22 @@ Done. Your tenants see a **White Label** settings page.
 
 ## Documentation
 
-Full documentation at **[docs.ashraficlabs.com/filament-white-label](https://docs.ashraficlabs.com/filament-white-label)**
+Full docs at **[docs.ashraficlabs.com/filament-white-label](https://docs.ashraficlabs.com/filament-white-label)**
 
 | | |
 |---|---|
-| [Installation](https://docs.ashraficlabs.com/filament-white-label/installation) | Requirements, setup, trait, first launch |
-| [Integration](https://docs.ashraficlabs.com/filament-white-label/integration) | Macro, granular trait, manual, conditional, login page |
-| [Brand Settings](https://docs.ashraficlabs.com/filament-white-label/brand) | Name, logos, favicon, colors, fonts, CSS theme, custom CSS |
-| [Layout Settings](https://docs.ashraficlabs.com/filament-white-label/layout) | Navigation, sidebar, breadcrumbs, dimensions, footer |
-| [Advanced Settings](https://docs.ashraficlabs.com/filament-white-label/advanced) | SPA mode, notifications, density, modals, transitions |
-| [Configuration](https://docs.ashraficlabs.com/filament-white-label/configuration) | Full config reference — every option with defaults |
-| [How It Works](https://docs.ashraficlabs.com/filament-white-label/how-it-works) | Resolution flow, cache, multi-panel, operating modes |
-| [Security](https://docs.ashraficlabs.com/filament-white-label/security) | CSS sanitization, file upload scoping, threat mitigations |
+| [Getting Started](https://docs.ashraficlabs.com/filament-white-label/getting-started) | Overview, requirements, quick start |
+| [Installation](https://docs.ashraficlabs.com/filament-white-label/installation) | Composer, install command, trait setup |
+| [Configuration](https://docs.ashraficlabs.com/filament-white-label/configuration) | Full config reference — every option |
+| [Features Overview](https://docs.ashraficlabs.com/filament-white-label/features) | All customization surfaces at a glance |
+| [Brand Settings](https://docs.ashraficlabs.com/filament-white-label/features/brand-settings) | Name, logos, colors, fonts, CSS theme, custom CSS |
+| [Layout Settings](https://docs.ashraficlabs.com/filament-white-label/features/layout-settings) | Navigation, sidebar, breadcrumbs, dimensions, footer |
+| [Advanced Settings](https://docs.ashraficlabs.com/filament-white-label/features/advanced-settings) | SPA mode, notifications, density, modals, transitions |
+| [Branded Login](https://docs.ashraficlabs.com/filament-white-label/features/branded-login) | Tenant-branded auth page |
+| [Integration Patterns](https://docs.ashraficlabs.com/filament-white-label/features/integration-patterns) | Macro, granular trait, manual, conditional |
+| [Resolution Flow](https://docs.ashraficlabs.com/filament-white-label/reference/resolution-flow) | Tenant → panel → global → config defaults |
+| [Cache & Security](https://docs.ashraficlabs.com/filament-white-label/reference/cache-and-security) | Caching strategy, CSS sanitization, threat mitigations |
+| [Events](https://docs.ashraficlabs.com/filament-white-label/reference/events) | WhiteLabelSettingsSaved, WhiteLabelSettingsDeleted |
 
 ---
 
