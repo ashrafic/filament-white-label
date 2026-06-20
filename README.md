@@ -53,7 +53,7 @@ Done. Your tenants see a **White Label** settings page.
 
 ---
 
-## Documentation
+## Guides
 
 Full docs at **[docs.ashraficlabs.com/filament-white-label](https://docs.ashraficlabs.com/filament-white-label)**
 
@@ -144,3 +144,19 @@ MIT. See [LICENSE.md](LICENSE.md).
 ---
 
 Full docs at **[docs.ashraficlabs.com/filament-white-label](https://docs.ashraficlabs.com/filament-white-label)**
+
+---
+
+<br>
+<br>
+
+<p align="center">
+  <a href="https://ashraficlabs.com">
+    <img src="https://ashraficlabs.com/brand/ashrafic-labs-logo-horizontal-primary.svg" alt="Ashrafic Labs" width="200" />
+  </a>
+</p>
+
+<p align="center">
+  <em>Built with precision for professionals.</em><br>
+  <a href="mailto:packages@ashraficlabs.com">packages@ashraficlabs.com</a>
+</p>
