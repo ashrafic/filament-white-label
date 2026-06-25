@@ -117,10 +117,10 @@ class EditLayoutSettings extends EditRecord
                         ->label(__('filament-white-label::filament-white-label.resource.fields.content_width.label'))
                         ->default(null)
                         ->options(fn () => [
-                            null     => __('filament-white-label::filament-white-label.resource.options.default'),
+                            null => __('filament-white-label::filament-white-label.resource.options.default'),
                             '1024px' => __('filament-white-label::filament-white-label.resource.options.content_width.1024'),
                             '1280px' => __('filament-white-label::filament-white-label.resource.options.content_width.1280'),
-                            'full'   => __('filament-white-label::filament-white-label.resource.options.content_width.full'),
+                            'full' => __('filament-white-label::filament-white-label.resource.options.content_width.full'),
                         ])
                         ->helperText(__('filament-white-label::filament-white-label.resource.fields.content_width.helper_text')),
 
@@ -128,10 +128,10 @@ class EditLayoutSettings extends EditRecord
                         ->label(__('filament-white-label::filament-white-label.resource.fields.sidebar_width.label'))
                         ->default(null)
                         ->options(fn () => [
-                            null     => __('filament-white-label::filament-white-label.resource.options.sidebar_width.320'),
-                            '260px'  => __('filament-white-label::filament-white-label.resource.options.sidebar_width.260'),
-                            '300px'  => __('filament-white-label::filament-white-label.resource.options.sidebar_width.300'),
-                            '340px'  => __('filament-white-label::filament-white-label.resource.options.sidebar_width.340'),
+                            null => __('filament-white-label::filament-white-label.resource.options.sidebar_width.320'),
+                            '260px' => __('filament-white-label::filament-white-label.resource.options.sidebar_width.260'),
+                            '300px' => __('filament-white-label::filament-white-label.resource.options.sidebar_width.300'),
+                            '340px' => __('filament-white-label::filament-white-label.resource.options.sidebar_width.340'),
                         ])
                         ->helperText(__('filament-white-label::filament-white-label.resource.fields.sidebar_width.helper_text')),
 
@@ -140,8 +140,8 @@ class EditLayoutSettings extends EditRecord
                         ->default('default')
                         ->options(fn () => [
                             'default' => __('filament-white-label::filament-white-label.resource.options.default'),
-                            'small'   => __('filament-white-label::filament-white-label.resource.options.page_heading_size.small'),
-                            'large'   => __('filament-white-label::filament-white-label.resource.options.page_heading_size.large'),
+                            'small' => __('filament-white-label::filament-white-label.resource.options.page_heading_size.small'),
+                            'large' => __('filament-white-label::filament-white-label.resource.options.page_heading_size.large'),
                         ])
                         ->helperText(__('filament-white-label::filament-white-label.resource.fields.page_heading_size.helper_text')),
 
@@ -149,8 +149,8 @@ class EditLayoutSettings extends EditRecord
                         ->label(__('filament-white-label::filament-white-label.resource.fields.nav_item_spacing.label'))
                         ->default('default')
                         ->options(fn () => [
-                            'default'  => __('filament-white-label::filament-white-label.resource.options.nav_item_spacing.default'),
-                            'compact'  => __('filament-white-label::filament-white-label.resource.options.nav_item_spacing.compact'),
+                            'default' => __('filament-white-label::filament-white-label.resource.options.nav_item_spacing.default'),
+                            'compact' => __('filament-white-label::filament-white-label.resource.options.nav_item_spacing.compact'),
                             'spacious' => __('filament-white-label::filament-white-label.resource.options.nav_item_spacing.spacious'),
                         ])
                         ->helperText(__('filament-white-label::filament-white-label.resource.fields.nav_item_spacing.helper_text')),

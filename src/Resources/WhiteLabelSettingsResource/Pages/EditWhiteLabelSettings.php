@@ -330,11 +330,11 @@ class EditWhiteLabelSettings extends EditRecord
                         ->default('default')
                         ->options(fn () => [
                             'default' => __('filament-white-label::filament-white-label.resource.options.default'),
-                            'none'    => __('filament-white-label::filament-white-label.resource.options.none'),
-                            'small'   => __('filament-white-label::filament-white-label.resource.options.small'),
-                            'medium'  => __('filament-white-label::filament-white-label.resource.options.medium'),
-                            'large'   => __('filament-white-label::filament-white-label.resource.options.large'),
-                            'pill'    => __('filament-white-label::filament-white-label.resource.options.pill'),
+                            'none' => __('filament-white-label::filament-white-label.resource.options.none'),
+                            'small' => __('filament-white-label::filament-white-label.resource.options.small'),
+                            'medium' => __('filament-white-label::filament-white-label.resource.options.medium'),
+                            'large' => __('filament-white-label::filament-white-label.resource.options.large'),
+                            'pill' => __('filament-white-label::filament-white-label.resource.options.pill'),
                         ])
                         ->helperText(__('filament-white-label::filament-white-label.resource.fields.border_radius.helper_text')),
 
@@ -342,13 +342,13 @@ class EditWhiteLabelSettings extends EditRecord
                         ->label(__('filament-white-label::filament-white-label.resource.fields.input_border_radius.label'))
                         ->default(null)
                         ->options(fn () => [
-                            null        => __('filament-white-label::filament-white-label.resource.options.inherit'),
-                            'default'   => __('filament-white-label::filament-white-label.resource.options.default'),
-                            'none'      => __('filament-white-label::filament-white-label.resource.options.none'),
-                            'small'     => __('filament-white-label::filament-white-label.resource.options.small'),
-                            'medium'    => __('filament-white-label::filament-white-label.resource.options.medium'),
-                            'large'     => __('filament-white-label::filament-white-label.resource.options.large'),
-                            'pill'      => __('filament-white-label::filament-white-label.resource.options.pill'),
+                            null => __('filament-white-label::filament-white-label.resource.options.inherit'),
+                            'default' => __('filament-white-label::filament-white-label.resource.options.default'),
+                            'none' => __('filament-white-label::filament-white-label.resource.options.none'),
+                            'small' => __('filament-white-label::filament-white-label.resource.options.small'),
+                            'medium' => __('filament-white-label::filament-white-label.resource.options.medium'),
+                            'large' => __('filament-white-label::filament-white-label.resource.options.large'),
+                            'pill' => __('filament-white-label::filament-white-label.resource.options.pill'),
                         ])
                         ->helperText(__('filament-white-label::filament-white-label.resource.fields.input_border_radius.helper_text')),
 
@@ -356,9 +356,9 @@ class EditWhiteLabelSettings extends EditRecord
                         ->label(__('filament-white-label::filament-white-label.resource.fields.shadow_intensity.label'))
                         ->default('default')
                         ->options(fn () => [
-                            'default'    => __('filament-white-label::filament-white-label.resource.options.default'),
-                            'none'       => __('filament-white-label::filament-white-label.resource.options.none'),
-                            'subtle'     => __('filament-white-label::filament-white-label.resource.options.subtle'),
+                            'default' => __('filament-white-label::filament-white-label.resource.options.default'),
+                            'none' => __('filament-white-label::filament-white-label.resource.options.none'),
+                            'subtle' => __('filament-white-label::filament-white-label.resource.options.subtle'),
                             'pronounced' => __('filament-white-label::filament-white-label.resource.options.pronounced'),
                         ])
                         ->helperText(__('filament-white-label::filament-white-label.resource.fields.shadow_intensity.helper_text')),
@@ -368,9 +368,9 @@ class EditWhiteLabelSettings extends EditRecord
                         ->default('default')
                         ->options(fn () => [
                             'default' => __('filament-white-label::filament-white-label.resource.options.default'),
-                            'sharp'   => __('filament-white-label::filament-white-label.resource.options.sharp'),
+                            'sharp' => __('filament-white-label::filament-white-label.resource.options.sharp'),
                             'rounded' => __('filament-white-label::filament-white-label.resource.options.rounded'),
-                            'pill'    => __('filament-white-label::filament-white-label.resource.options.pill'),
+                            'pill' => __('filament-white-label::filament-white-label.resource.options.pill'),
                         ])
                         ->helperText(__('filament-white-label::filament-white-label.resource.fields.badge_shape.helper_text')),
                 ])->columns(2),

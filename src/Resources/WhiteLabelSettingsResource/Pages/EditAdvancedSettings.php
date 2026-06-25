@@ -87,12 +87,12 @@ class EditAdvancedSettings extends EditRecord
                         ->label(__('filament-white-label::filament-white-label.resource.fields.polling_interval.label'))
                         ->default(config('filament-white-label.defaults.database_notifications_polling', '30s'))
                         ->options(fn () => [
-                            null   => __('filament-white-label::filament-white-label.resource.options.polling_interval.30s'),
-                            '10s'  => __('filament-white-label::filament-white-label.resource.options.polling_interval.10s'),
-                            '30s'  => __('filament-white-label::filament-white-label.resource.options.polling_interval.30s'),
-                            '60s'  => __('filament-white-label::filament-white-label.resource.options.polling_interval.60s'),
-                            '2m'   => __('filament-white-label::filament-white-label.resource.options.polling_interval.2m'),
-                            '5m'   => __('filament-white-label::filament-white-label.resource.options.polling_interval.5m'),
+                            null => __('filament-white-label::filament-white-label.resource.options.polling_interval.30s'),
+                            '10s' => __('filament-white-label::filament-white-label.resource.options.polling_interval.10s'),
+                            '30s' => __('filament-white-label::filament-white-label.resource.options.polling_interval.30s'),
+                            '60s' => __('filament-white-label::filament-white-label.resource.options.polling_interval.60s'),
+                            '2m' => __('filament-white-label::filament-white-label.resource.options.polling_interval.2m'),
+                            '5m' => __('filament-white-label::filament-white-label.resource.options.polling_interval.5m'),
                         ])
                         ->visible(fn ($get) => $get('metadata.database_notifications')),
                 ])->columns(2),
@@ -102,8 +102,8 @@ class EditAdvancedSettings extends EditRecord
                         ->label(__('filament-white-label::filament-white-label.resource.fields.font_scale.label'))
                         ->default(null)
                         ->options(fn () => [
-                            null   => __('filament-white-label::filament-white-label.resource.options.default'),
-                            '90%'  => __('filament-white-label::filament-white-label.resource.options.font_scale.90'),
+                            null => __('filament-white-label::filament-white-label.resource.options.default'),
+                            '90%' => __('filament-white-label::filament-white-label.resource.options.font_scale.90'),
                             '100%' => __('filament-white-label::filament-white-label.resource.options.font_scale.100'),
                             '110%' => __('filament-white-label::filament-white-label.resource.options.font_scale.110'),
                             '120%' => __('filament-white-label::filament-white-label.resource.options.font_scale.120'),
@@ -114,8 +114,8 @@ class EditAdvancedSettings extends EditRecord
                         ->label(__('filament-white-label::filament-white-label.resource.fields.form_density.label'))
                         ->default('default')
                         ->options(fn () => [
-                            'default'  => __('filament-white-label::filament-white-label.resource.options.default'),
-                            'compact'  => __('filament-white-label::filament-white-label.resource.options.compact'),
+                            'default' => __('filament-white-label::filament-white-label.resource.options.default'),
+                            'compact' => __('filament-white-label::filament-white-label.resource.options.compact'),
                             'spacious' => __('filament-white-label::filament-white-label.resource.options.spacious'),
                         ])
                         ->helperText(__('filament-white-label::filament-white-label.resource.fields.form_density.helper_text')),
@@ -124,8 +124,8 @@ class EditAdvancedSettings extends EditRecord
                         ->label(__('filament-white-label::filament-white-label.resource.fields.table_row_density.label'))
                         ->default('default')
                         ->options(fn () => [
-                            'default'  => __('filament-white-label::filament-white-label.resource.options.default'),
-                            'compact'  => __('filament-white-label::filament-white-label.resource.options.compact'),
+                            'default' => __('filament-white-label::filament-white-label.resource.options.default'),
+                            'compact' => __('filament-white-label::filament-white-label.resource.options.compact'),
                             'spacious' => __('filament-white-label::filament-white-label.resource.options.spacious'),
                         ])
                         ->helperText(__('filament-white-label::filament-white-label.resource.fields.table_row_density.helper_text')),
@@ -134,10 +134,10 @@ class EditAdvancedSettings extends EditRecord
                         ->label(__('filament-white-label::filament-white-label.resource.fields.modal_size.label'))
                         ->default('default')
                         ->options(fn () => [
-                            'default'     => __('filament-white-label::filament-white-label.resource.options.default'),
-                            'small'       => __('filament-white-label::filament-white-label.resource.options.modal_size.small'),
-                            'medium'      => __('filament-white-label::filament-white-label.resource.options.modal_size.medium'),
-                            'large'       => __('filament-white-label::filament-white-label.resource.options.modal_size.large'),
+                            'default' => __('filament-white-label::filament-white-label.resource.options.default'),
+                            'small' => __('filament-white-label::filament-white-label.resource.options.modal_size.small'),
+                            'medium' => __('filament-white-label::filament-white-label.resource.options.modal_size.medium'),
+                            'large' => __('filament-white-label::filament-white-label.resource.options.modal_size.large'),
                             'extra-large' => __('filament-white-label::filament-white-label.resource.options.modal_size.xl'),
                         ])
                         ->helperText(__('filament-white-label::filament-white-label.resource.fields.modal_size.helper_text')),
@@ -147,9 +147,9 @@ class EditAdvancedSettings extends EditRecord
                         ->default('default')
                         ->options(fn () => [
                             'default' => __('filament-white-label::filament-white-label.resource.options.default'),
-                            'none'    => __('filament-white-label::filament-white-label.resource.options.transition_speed.none'),
-                            'fast'    => __('filament-white-label::filament-white-label.resource.options.fast'),
-                            'slow'    => __('filament-white-label::filament-white-label.resource.options.slow'),
+                            'none' => __('filament-white-label::filament-white-label.resource.options.transition_speed.none'),
+                            'fast' => __('filament-white-label::filament-white-label.resource.options.fast'),
+                            'slow' => __('filament-white-label::filament-white-label.resource.options.slow'),
                         ])
                         ->helperText(__('filament-white-label::filament-white-label.resource.fields.transition_speed.helper_text')),
                 ])->columns(2),
