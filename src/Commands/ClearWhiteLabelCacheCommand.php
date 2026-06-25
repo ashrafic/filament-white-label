@@ -6,14 +6,32 @@ namespace FilamentWhiteLabel\Commands;
 
 use FilamentWhiteLabel\Services\WhiteLabel;
 use Illuminate\Console\Command;
+use Symfony\Component\Console\Input\InputOption;
 
 class ClearWhiteLabelCacheCommand extends Command
 {
-    protected $signature = 'white-label:clear-cache
-                            {--tenant= : Clear cache for a specific tenant ID}
-                            {--panel= : Clear cache for a specific panel ID}';
+    protected $signature = 'white-label:clear-cache';
 
-    protected $description = 'Clear the white-label brand settings cache';
+    protected function configure(): void
+    {
+        parent::configure();
+
+        $this->setDescription((string) __('filament-white-label::filament-white-label.commands.clear_cache.description'));
+
+        $this->getDefinition()->addOption(new InputOption(
+            'tenant',
+            null,
+            InputOption::VALUE_OPTIONAL,
+            (string) __('filament-white-label::filament-white-label.commands.clear_cache.option_tenant'),
+        ));
+
+        $this->getDefinition()->addOption(new InputOption(
+            'panel',
+            null,
+            InputOption::VALUE_OPTIONAL,
+            (string) __('filament-white-label::filament-white-label.commands.clear_cache.option_panel'),
+        ));
+    }
 
     public function handle(): int
     {
@@ -22,7 +40,7 @@ class ClearWhiteLabelCacheCommand extends Command
 
         WhiteLabel::clearCache(null, $panelId);
 
-        $this->info('White-label cache cleared.');
+        $this->info((string) __('filament-white-label::filament-white-label.commands.clear_cache.success'));
 
         return self::SUCCESS;
     }
