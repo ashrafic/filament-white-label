@@ -20,6 +20,12 @@ class FilamentWhiteLabelServiceProvider extends ServiceProvider
     {
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'filament-white-label');
 
+        $this->loadTranslationsFrom(__DIR__.'/../../lang', 'filament-white-label');
+
+        $this->publishes([
+            __DIR__.'/../../lang' => $this->app->langPath('vendor/filament-white-label'),
+        ], 'filament-white-label-translations');
+
         $this->publishes([
             __DIR__.'/../../config/filament-white-label.php' => config_path('filament-white-label.php'),
         ], 'filament-white-label-config');
