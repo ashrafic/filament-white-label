@@ -21,7 +21,7 @@ class EditAdvancedSettings extends EditRecord
         return __('filament-white-label::filament-white-label.resource.page.advanced.title');
     }
 
-    public function getNavigationLabel(): string
+    public static function getNavigationLabel(): string
     {
         return __('filament-white-label::filament-white-label.resource.page.advanced.nav_label');
     }

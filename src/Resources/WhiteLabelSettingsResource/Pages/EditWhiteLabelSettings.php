@@ -28,7 +28,7 @@ class EditWhiteLabelSettings extends EditRecord
         return __('filament-white-label::filament-white-label.resource.page.brand.title');
     }
 
-    public function getNavigationLabel(): string
+    public static function getNavigationLabel(): string
     {
         return __('filament-white-label::filament-white-label.resource.page.brand.nav_label');
     }

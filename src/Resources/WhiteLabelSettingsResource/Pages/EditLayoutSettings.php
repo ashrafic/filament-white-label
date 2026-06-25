@@ -23,7 +23,7 @@ class EditLayoutSettings extends EditRecord
         return __('filament-white-label::filament-white-label.resource.page.layout.title');
     }
 
-    public function getNavigationLabel(): string
+    public static function getNavigationLabel(): string
     {
         return __('filament-white-label::filament-white-label.resource.page.layout.nav_label');
     }
