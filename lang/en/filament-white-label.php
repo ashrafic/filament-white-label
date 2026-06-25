@@ -107,6 +107,7 @@ return [
     'resource.fields.footer_text.placeholder' => 'ACME Admin Portal',
     'resource.fields.footer_text.helper_text' => 'Text displayed in the panel footer. Leave empty to hide.',
     'resource.fields.footer_links.label'           => 'Footer Links',
+    'resource.fields.footer_links.helper_text'     => 'Optional links displayed below the footer text.',
     'resource.fields.footer_links.link_label.label' => 'Label',
     'resource.fields.footer_links.link_url.label'  => 'URL',
     'resource.fields.footer_links.add_link'        => 'Add link',
