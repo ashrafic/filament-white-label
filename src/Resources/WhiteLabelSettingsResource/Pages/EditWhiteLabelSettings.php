@@ -23,12 +23,12 @@ class EditWhiteLabelSettings extends EditRecord
 {
     protected static string $resource = WhiteLabelSettingsResource::class;
 
-    public static function getTitle(): string
+    public function getTitle(): string
     {
         return __('filament-white-label::filament-white-label.resource.page.brand.title');
     }
 
-    public static function getNavigationLabel(): string
+    public function getNavigationLabel(): string
     {
         return __('filament-white-label::filament-white-label.resource.page.brand.nav_label');
     }

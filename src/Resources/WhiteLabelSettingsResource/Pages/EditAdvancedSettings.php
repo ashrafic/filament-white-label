@@ -16,12 +16,12 @@ class EditAdvancedSettings extends EditRecord
 {
     protected static string $resource = WhiteLabelSettingsResource::class;
 
-    public static function getTitle(): string
+    public function getTitle(): string
     {
         return __('filament-white-label::filament-white-label.resource.page.advanced.title');
     }
 
-    public static function getNavigationLabel(): string
+    public function getNavigationLabel(): string
     {
         return __('filament-white-label::filament-white-label.resource.page.advanced.nav_label');
     }
