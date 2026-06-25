@@ -16,20 +16,20 @@ class ClearWhiteLabelCacheCommand extends Command
     {
         parent::configure();
 
-        $this->setDescription((string) __('filament-white-label::filament-white-label.commands.clear_cache.description'));
+        $this->setDescription((string) __('filament-white-label::commands.clear_cache.description'));
 
         $this->getDefinition()->addOption(new InputOption(
             'tenant',
             null,
             InputOption::VALUE_OPTIONAL,
-            (string) __('filament-white-label::filament-white-label.commands.clear_cache.option_tenant'),
+            (string) __('filament-white-label::commands.clear_cache.option_tenant'),
         ));
 
         $this->getDefinition()->addOption(new InputOption(
             'panel',
             null,
             InputOption::VALUE_OPTIONAL,
-            (string) __('filament-white-label::filament-white-label.commands.clear_cache.option_panel'),
+            (string) __('filament-white-label::commands.clear_cache.option_panel'),
         ));
     }
 
@@ -40,7 +40,7 @@ class ClearWhiteLabelCacheCommand extends Command
 
         WhiteLabel::clearCache(null, $panelId);
 
-        $this->info((string) __('filament-white-label::filament-white-label.commands.clear_cache.success'));
+        $this->info((string) __('filament-white-label::commands.clear_cache.success'));
 
         return self::SUCCESS;
     }

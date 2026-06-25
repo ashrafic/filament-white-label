@@ -9,7 +9,7 @@ class FontService
     public static function fontOptions(): array
     {
         return [
-            'Inter' => 'Inter '.__('filament-white-label::filament-white-label.fonts.default_suffix'),
+            'Inter' => 'Inter '.__('filament-white-label::fonts.default_suffix'),
             'Roboto' => 'Roboto',
             'Open Sans' => 'Open Sans',
             'Lato' => 'Lato',

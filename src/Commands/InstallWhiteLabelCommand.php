@@ -15,12 +15,12 @@ class InstallWhiteLabelCommand extends Command
     {
         parent::__construct();
 
-        $this->setDescription((string) __('filament-white-label::filament-white-label.commands.install.description'));
+        $this->setDescription((string) __('filament-white-label::commands.install.description'));
     }
 
     public function handle(): int
     {
-        $banner = (string) __('filament-white-label::filament-white-label.commands.install.banner');
+        $banner = (string) __('filament-white-label::commands.install.banner');
 
         $this->info(str_repeat('╔', 46));
         $this->info('║     '.str_pad($banner, 34).'║');
@@ -31,15 +31,15 @@ class InstallWhiteLabelCommand extends Command
         $this->publishMigrations();
 
         $this->newLine();
-        $this->info((string) __('filament-white-label::filament-white-label.commands.install.success'));
+        $this->info((string) __('filament-white-label::commands.install.success'));
         $this->newLine();
-        $this->line((string) __('filament-white-label::filament-white-label.commands.install.next_steps'));
-        $this->line('  '.__('filament-white-label::filament-white-label.commands.install.step_1'));
-        $this->line('  '.__('filament-white-label::filament-white-label.commands.install.step_2'));
-        $this->line('  '.__('filament-white-label::filament-white-label.commands.install.step_3'));
-        $this->line('  '.__('filament-white-label::filament-white-label.commands.install.step_4'));
+        $this->line((string) __('filament-white-label::commands.install.next_steps'));
+        $this->line('  '.__('filament-white-label::commands.install.step_1'));
+        $this->line('  '.__('filament-white-label::commands.install.step_2'));
+        $this->line('  '.__('filament-white-label::commands.install.step_3'));
+        $this->line('  '.__('filament-white-label::commands.install.step_4'));
         $this->newLine();
-        $this->line((string) __('filament-white-label::filament-white-label.commands.install.docs'));
+        $this->line((string) __('filament-white-label::commands.install.docs'));
 
         return self::SUCCESS;
     }
@@ -49,7 +49,7 @@ class InstallWhiteLabelCommand extends Command
         $configPath = config_path('filament-white-label.php');
 
         if (File::exists($configPath)) {
-            $this->line('  '.__('filament-white-label::filament-white-label.commands.install.config_skipped'));
+            $this->line('  '.__('filament-white-label::commands.install.config_skipped'));
 
             return;
         }
@@ -58,7 +58,7 @@ class InstallWhiteLabelCommand extends Command
             '--tag' => 'filament-white-label-config',
         ]);
 
-        $this->line('  '.__('filament-white-label::filament-white-label.commands.install.config_published'));
+        $this->line('  '.__('filament-white-label::commands.install.config_published'));
     }
 
     protected function publishMigrations(): void
@@ -67,6 +67,6 @@ class InstallWhiteLabelCommand extends Command
             '--tag' => 'filament-white-label-migrations',
         ]);
 
-        $this->line('  '.__('filament-white-label::filament-white-label.commands.install.migration_published'));
+        $this->line('  '.__('filament-white-label::commands.install.migration_published'));
     }
 }

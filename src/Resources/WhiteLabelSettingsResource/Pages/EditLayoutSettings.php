@@ -20,12 +20,12 @@ class EditLayoutSettings extends EditRecord
 
     public function getTitle(): string
     {
-        return __('filament-white-label::filament-white-label.resource.page.layout.title');
+        return __('filament-white-label::resource.page.layout.title');
     }
 
     public static function getNavigationLabel(): string
     {
-        return __('filament-white-label::filament-white-label.resource.page.layout.nav_label');
+        return __('filament-white-label::resource.page.layout.nav_label');
     }
 
     protected function getHeaderActions(): array
@@ -67,120 +67,120 @@ class EditLayoutSettings extends EditRecord
         return $schema
             ->columns(1)
             ->schema([
-                Section::make(__('filament-white-label::filament-white-label.resource.sections.navigation'))->schema([
+                Section::make(__('filament-white-label::resource.sections.navigation'))->schema([
                     Toggle::make('metadata.topbar')
-                        ->label(__('filament-white-label::filament-white-label.resource.fields.topbar.label'))
+                        ->label(__('filament-white-label::resource.fields.topbar.label'))
                         ->default(config('filament-white-label.defaults.topbar', true))
-                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.topbar.helper_text')),
+                        ->helperText(__('filament-white-label::resource.fields.topbar.helper_text')),
 
                     Toggle::make('metadata.top_navigation')
-                        ->label(__('filament-white-label::filament-white-label.resource.fields.top_navigation.label'))
+                        ->label(__('filament-white-label::resource.fields.top_navigation.label'))
                         ->live()
                         ->default(config('filament-white-label.defaults.top_navigation', false))
-                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.top_navigation.helper_text')),
+                        ->helperText(__('filament-white-label::resource.fields.top_navigation.helper_text')),
                 ])->columns(2),
 
-                Section::make(__('filament-white-label::filament-white-label.resource.sections.sidebar'))
+                Section::make(__('filament-white-label::resource.sections.sidebar'))
                     ->schema([
                         Toggle::make('metadata.sidebar_collapsible_on_desktop')
-                            ->label(__('filament-white-label::filament-white-label.resource.fields.sidebar_collapsible.label'))
+                            ->label(__('filament-white-label::resource.fields.sidebar_collapsible.label'))
                             ->disabled(fn ($get) => (bool) $get('metadata.top_navigation'))
                             ->default(config('filament-white-label.defaults.sidebar_collapsible_on_desktop', false))
                             ->live()
                             ->afterStateUpdated(fn ($state, $set) => $state && $set('metadata.sidebar_fully_collapsible_on_desktop', false))
-                            ->helperText(__('filament-white-label::filament-white-label.resource.fields.sidebar_collapsible.helper_text')),
+                            ->helperText(__('filament-white-label::resource.fields.sidebar_collapsible.helper_text')),
 
                         Toggle::make('metadata.sidebar_fully_collapsible_on_desktop')
-                            ->label(__('filament-white-label::filament-white-label.resource.fields.sidebar_fully_collapsible.label'))
+                            ->label(__('filament-white-label::resource.fields.sidebar_fully_collapsible.label'))
                             ->disabled(fn ($get) => (bool) $get('metadata.top_navigation'))
                             ->default(config('filament-white-label.defaults.sidebar_fully_collapsible_on_desktop', false))
                             ->live()
                             ->afterStateUpdated(fn ($state, $set) => $state && $set('metadata.sidebar_collapsible_on_desktop', false))
-                            ->helperText(__('filament-white-label::filament-white-label.resource.fields.sidebar_fully_collapsible.helper_text')),
+                            ->helperText(__('filament-white-label::resource.fields.sidebar_fully_collapsible.helper_text')),
 
                         Toggle::make('metadata.collapsible_navigation_groups')
-                            ->label(__('filament-white-label::filament-white-label.resource.fields.collapsible_navigation_groups.label'))
+                            ->label(__('filament-white-label::resource.fields.collapsible_navigation_groups.label'))
                             ->disabled(fn ($get) => (bool) $get('metadata.top_navigation'))
                             ->default(config('filament-white-label.defaults.collapsible_navigation_groups', true))
-                            ->helperText(__('filament-white-label::filament-white-label.resource.fields.collapsible_navigation_groups.helper_text')),
+                            ->helperText(__('filament-white-label::resource.fields.collapsible_navigation_groups.helper_text')),
                     ])->columns(2),
 
-                Section::make(__('filament-white-label::filament-white-label.resource.sections.display'))->schema([
+                Section::make(__('filament-white-label::resource.sections.display'))->schema([
                     Toggle::make('metadata.breadcrumbs')
-                        ->label(__('filament-white-label::filament-white-label.resource.fields.breadcrumbs.label'))
+                        ->label(__('filament-white-label::resource.fields.breadcrumbs.label'))
                         ->default(config('filament-white-label.defaults.breadcrumbs', true))
-                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.breadcrumbs.helper_text')),
+                        ->helperText(__('filament-white-label::resource.fields.breadcrumbs.helper_text')),
                 ]),
 
-                Section::make(__('filament-white-label::filament-white-label.resource.sections.dimensions'))->schema([
+                Section::make(__('filament-white-label::resource.sections.dimensions'))->schema([
                     Select::make('metadata.container_width')
-                        ->label(__('filament-white-label::filament-white-label.resource.fields.content_width.label'))
+                        ->label(__('filament-white-label::resource.fields.content_width.label'))
                         ->default(null)
                         ->options(fn () => [
-                            null => __('filament-white-label::filament-white-label.resource.options.default'),
-                            '1024px' => __('filament-white-label::filament-white-label.resource.options.content_width.1024'),
-                            '1280px' => __('filament-white-label::filament-white-label.resource.options.content_width.1280'),
-                            'full' => __('filament-white-label::filament-white-label.resource.options.content_width.full'),
+                            null => __('filament-white-label::resource.options.default'),
+                            '1024px' => __('filament-white-label::resource.options.content_width.1024'),
+                            '1280px' => __('filament-white-label::resource.options.content_width.1280'),
+                            'full' => __('filament-white-label::resource.options.content_width.full'),
                         ])
-                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.content_width.helper_text')),
+                        ->helperText(__('filament-white-label::resource.fields.content_width.helper_text')),
 
                     Select::make('metadata.sidebar_width')
-                        ->label(__('filament-white-label::filament-white-label.resource.fields.sidebar_width.label'))
+                        ->label(__('filament-white-label::resource.fields.sidebar_width.label'))
                         ->default(null)
                         ->options(fn () => [
-                            null => __('filament-white-label::filament-white-label.resource.options.sidebar_width.320'),
-                            '260px' => __('filament-white-label::filament-white-label.resource.options.sidebar_width.260'),
-                            '300px' => __('filament-white-label::filament-white-label.resource.options.sidebar_width.300'),
-                            '340px' => __('filament-white-label::filament-white-label.resource.options.sidebar_width.340'),
+                            null => __('filament-white-label::resource.options.sidebar_width.320'),
+                            '260px' => __('filament-white-label::resource.options.sidebar_width.260'),
+                            '300px' => __('filament-white-label::resource.options.sidebar_width.300'),
+                            '340px' => __('filament-white-label::resource.options.sidebar_width.340'),
                         ])
-                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.sidebar_width.helper_text')),
+                        ->helperText(__('filament-white-label::resource.fields.sidebar_width.helper_text')),
 
                     Select::make('metadata.heading_size')
-                        ->label(__('filament-white-label::filament-white-label.resource.fields.page_heading_size.label'))
+                        ->label(__('filament-white-label::resource.fields.page_heading_size.label'))
                         ->default('default')
                         ->options(fn () => [
-                            'default' => __('filament-white-label::filament-white-label.resource.options.default'),
-                            'small' => __('filament-white-label::filament-white-label.resource.options.page_heading_size.small'),
-                            'large' => __('filament-white-label::filament-white-label.resource.options.page_heading_size.large'),
+                            'default' => __('filament-white-label::resource.options.default'),
+                            'small' => __('filament-white-label::resource.options.page_heading_size.small'),
+                            'large' => __('filament-white-label::resource.options.page_heading_size.large'),
                         ])
-                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.page_heading_size.helper_text')),
+                        ->helperText(__('filament-white-label::resource.fields.page_heading_size.helper_text')),
 
                     Select::make('metadata.nav_item_spacing')
-                        ->label(__('filament-white-label::filament-white-label.resource.fields.nav_item_spacing.label'))
+                        ->label(__('filament-white-label::resource.fields.nav_item_spacing.label'))
                         ->default('default')
                         ->options(fn () => [
-                            'default' => __('filament-white-label::filament-white-label.resource.options.nav_item_spacing.default'),
-                            'compact' => __('filament-white-label::filament-white-label.resource.options.nav_item_spacing.compact'),
-                            'spacious' => __('filament-white-label::filament-white-label.resource.options.nav_item_spacing.spacious'),
+                            'default' => __('filament-white-label::resource.options.nav_item_spacing.default'),
+                            'compact' => __('filament-white-label::resource.options.nav_item_spacing.compact'),
+                            'spacious' => __('filament-white-label::resource.options.nav_item_spacing.spacious'),
                         ])
-                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.nav_item_spacing.helper_text')),
+                        ->helperText(__('filament-white-label::resource.fields.nav_item_spacing.helper_text')),
                 ])->columns(2),
 
-                Section::make(__('filament-white-label::filament-white-label.resource.sections.footer'))->schema([
+                Section::make(__('filament-white-label::resource.sections.footer'))->schema([
                     TextInput::make('metadata.footer_text')
-                        ->label(__('filament-white-label::filament-white-label.resource.fields.footer_text.label'))
+                        ->label(__('filament-white-label::resource.fields.footer_text.label'))
                         ->maxLength(255)
-                        ->placeholder(__('filament-white-label::filament-white-label.resource.fields.footer_text.placeholder'))
-                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.footer_text.helper_text')),
+                        ->placeholder(__('filament-white-label::resource.fields.footer_text.placeholder'))
+                        ->helperText(__('filament-white-label::resource.fields.footer_text.helper_text')),
 
                     Repeater::make('metadata.footer_links')
-                        ->label(__('filament-white-label::filament-white-label.resource.fields.footer_links.label'))
+                        ->label(__('filament-white-label::resource.fields.footer_links.label'))
                         ->schema([
                             TextInput::make('label')
-                                ->label(__('filament-white-label::filament-white-label.resource.fields.footer_links.link_label.label'))
+                                ->label(__('filament-white-label::resource.fields.footer_links.link_label.label'))
                                 ->required()
                                 ->maxLength(100),
                             TextInput::make('url')
-                                ->label(__('filament-white-label::filament-white-label.resource.fields.footer_links.link_url.label'))
+                                ->label(__('filament-white-label::resource.fields.footer_links.link_url.label'))
                                 ->required()
                                 ->url()
                                 ->maxLength(500),
                         ])
                         ->columns(2)
                         ->defaultItems(0)
-                        ->addActionLabel(__('filament-white-label::filament-white-label.resource.fields.footer_links.add_link'))
+                        ->addActionLabel(__('filament-white-label::resource.fields.footer_links.add_link'))
                         ->collapsible()
-                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.footer_links.helper_text')),
+                        ->helperText(__('filament-white-label::resource.fields.footer_links.helper_text')),
                 ]),
             ]);
     }
