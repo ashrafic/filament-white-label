@@ -16,9 +16,15 @@ class EditAdvancedSettings extends EditRecord
 {
     protected static string $resource = WhiteLabelSettingsResource::class;
 
-    protected static ?string $title = 'Advanced';
+    public function getTitle(): string
+    {
+        return __('filament-white-label::filament-white-label.resource.page.advanced.title');
+    }
 
-    protected static ?string $navigationLabel = 'Advanced';
+    public static function getNavigationLabel(): string
+    {
+        return __('filament-white-label::filament-white-label.resource.page.advanced.nav_label');
+    }
 
     protected function getHeaderActions(): array
     {
@@ -59,93 +65,93 @@ class EditAdvancedSettings extends EditRecord
         return $schema
             ->columns(1)
             ->schema([
-                Section::make('Behavior')->schema([
+                Section::make(__('filament-white-label::filament-white-label.resource.sections.behavior'))->schema([
                     Toggle::make('metadata.unsaved_changes_alerts')
-                        ->label('Unsaved Changes Alerts')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.unsaved_changes.label'))
                         ->default(config('filament-white-label.defaults.unsaved_changes_alerts', false))
-                        ->helperText('Warn before leaving pages with unsaved changes.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.unsaved_changes.helper_text')),
 
                     Toggle::make('metadata.spa_mode')
-                        ->label('SPA Mode')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.spa_mode.label'))
                         ->default(config('filament-white-label.defaults.spa_mode', false))
-                        ->helperText('Single-page application mode for faster navigation.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.spa_mode.helper_text')),
                 ])->columns(2),
 
-                Section::make('Notifications')->schema([
+                Section::make(__('filament-white-label::filament-white-label.resource.sections.notifications'))->schema([
                     Toggle::make('metadata.database_notifications')
-                        ->label('Database Notifications')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.database_notifications.label'))
                         ->default(config('filament-white-label.defaults.database_notifications', false))
-                        ->helperText('Enable database notifications in the topbar/sidebar.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.database_notifications.helper_text')),
 
                     Select::make('metadata.database_notifications_polling')
-                        ->label('Polling Interval')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.polling_interval.label'))
                         ->default(config('filament-white-label.defaults.database_notifications_polling', '30s'))
-                        ->options([
-                            null => 'Default (30s)',
-                            '10s' => '10 seconds',
-                            '30s' => '30 seconds',
-                            '60s' => '1 minute',
-                            '2m' => '2 minutes',
-                            '5m' => '5 minutes',
+                        ->options(fn () => [
+                            null => __('filament-white-label::filament-white-label.resource.options.polling_interval.30s'),
+                            '10s' => __('filament-white-label::filament-white-label.resource.options.polling_interval.10s'),
+                            '30s' => __('filament-white-label::filament-white-label.resource.options.polling_interval.30s'),
+                            '60s' => __('filament-white-label::filament-white-label.resource.options.polling_interval.60s'),
+                            '2m' => __('filament-white-label::filament-white-label.resource.options.polling_interval.2m'),
+                            '5m' => __('filament-white-label::filament-white-label.resource.options.polling_interval.5m'),
                         ])
                         ->visible(fn ($get) => $get('metadata.database_notifications')),
                 ])->columns(2),
 
-                Section::make('Styling')->schema([
+                Section::make(__('filament-white-label::filament-white-label.resource.sections.styling'))->schema([
                     Select::make('metadata.font_scale')
-                        ->label('Font Scale')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.font_scale.label'))
                         ->default(null)
-                        ->options([
-                            null => 'Default (100%)',
-                            '90%' => '90% (Compact)',
-                            '100%' => '100% (Default)',
-                            '110%' => '110% (Large)',
-                            '120%' => '120% (Extra Large)',
+                        ->options(fn () => [
+                            null => __('filament-white-label::filament-white-label.resource.options.default'),
+                            '90%' => __('filament-white-label::filament-white-label.resource.options.font_scale.90'),
+                            '100%' => __('filament-white-label::filament-white-label.resource.options.font_scale.100'),
+                            '110%' => __('filament-white-label::filament-white-label.resource.options.font_scale.110'),
+                            '120%' => __('filament-white-label::filament-white-label.resource.options.font_scale.120'),
                         ])
-                        ->helperText('Global font size multiplier for accessibility or density.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.font_scale.helper_text')),
 
                     Select::make('metadata.form_density')
-                        ->label('Form Density')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.form_density.label'))
                         ->default('default')
-                        ->options([
-                            'default' => 'Default',
-                            'compact' => 'Compact',
-                            'spacious' => 'Spacious',
+                        ->options(fn () => [
+                            'default' => __('filament-white-label::filament-white-label.resource.options.default'),
+                            'compact' => __('filament-white-label::filament-white-label.resource.options.compact'),
+                            'spacious' => __('filament-white-label::filament-white-label.resource.options.spacious'),
                         ])
-                        ->helperText('Padding and spacing within form sections and fields.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.form_density.helper_text')),
 
                     Select::make('metadata.table_row_density')
-                        ->label('Table Row Density')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.table_row_density.label'))
                         ->default('default')
-                        ->options([
-                            'default' => 'Default',
-                            'compact' => 'Compact',
-                            'spacious' => 'Spacious',
+                        ->options(fn () => [
+                            'default' => __('filament-white-label::filament-white-label.resource.options.default'),
+                            'compact' => __('filament-white-label::filament-white-label.resource.options.compact'),
+                            'spacious' => __('filament-white-label::filament-white-label.resource.options.spacious'),
                         ])
-                        ->helperText('Vertical padding of table rows.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.table_row_density.helper_text')),
 
                     Select::make('metadata.modal_size')
-                        ->label('Default Modal Size')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.modal_size.label'))
                         ->default('default')
-                        ->options([
-                            'default' => 'Default',
-                            'small' => 'Small (480px)',
-                            'medium' => 'Medium (640px)',
-                            'large' => 'Large (800px)',
-                            'extra-large' => 'Extra Large (1024px)',
+                        ->options(fn () => [
+                            'default' => __('filament-white-label::filament-white-label.resource.options.default'),
+                            'small' => __('filament-white-label::filament-white-label.resource.options.modal_size.small'),
+                            'medium' => __('filament-white-label::filament-white-label.resource.options.modal_size.medium'),
+                            'large' => __('filament-white-label::filament-white-label.resource.options.modal_size.large'),
+                            'extra-large' => __('filament-white-label::filament-white-label.resource.options.modal_size.xl'),
                         ])
-                        ->helperText('Default max-width for modal dialogs.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.modal_size.helper_text')),
 
                     Select::make('metadata.transition_speed')
-                        ->label('Transition Speed')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.transition_speed.label'))
                         ->default('default')
-                        ->options([
-                            'default' => 'Default',
-                            'none' => 'None',
-                            'fast' => 'Fast',
-                            'slow' => 'Slow',
+                        ->options(fn () => [
+                            'default' => __('filament-white-label::filament-white-label.resource.options.default'),
+                            'none' => __('filament-white-label::filament-white-label.resource.options.transition_speed.none'),
+                            'fast' => __('filament-white-label::filament-white-label.resource.options.fast'),
+                            'slow' => __('filament-white-label::filament-white-label.resource.options.slow'),
                         ])
-                        ->helperText('Duration of CSS transitions on buttons, dropdowns, modals, and sidebar.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.transition_speed.helper_text')),
                 ])->columns(2),
             ]);
     }

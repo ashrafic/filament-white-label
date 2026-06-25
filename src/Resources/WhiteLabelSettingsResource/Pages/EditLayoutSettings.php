@@ -18,9 +18,15 @@ class EditLayoutSettings extends EditRecord
 {
     protected static string $resource = WhiteLabelSettingsResource::class;
 
-    protected static ?string $title = 'Layout';
+    public function getTitle(): string
+    {
+        return __('filament-white-label::filament-white-label.resource.page.layout.title');
+    }
 
-    protected static ?string $navigationLabel = 'Layout';
+    public static function getNavigationLabel(): string
+    {
+        return __('filament-white-label::filament-white-label.resource.page.layout.nav_label');
+    }
 
     protected function getHeaderActions(): array
     {
@@ -61,120 +67,120 @@ class EditLayoutSettings extends EditRecord
         return $schema
             ->columns(1)
             ->schema([
-                Section::make('Navigation')->schema([
+                Section::make(__('filament-white-label::filament-white-label.resource.sections.navigation'))->schema([
                     Toggle::make('metadata.topbar')
-                        ->label('Top Bar')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.topbar.label'))
                         ->default(config('filament-white-label.defaults.topbar', true))
-                        ->helperText('Show the top bar with user menu and notifications.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.topbar.helper_text')),
 
                     Toggle::make('metadata.top_navigation')
-                        ->label('Top Navigation')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.top_navigation.label'))
                         ->live()
                         ->default(config('filament-white-label.defaults.top_navigation', false))
-                        ->helperText('Move navigation from sidebar to top bar. Disables sidebar.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.top_navigation.helper_text')),
                 ])->columns(2),
 
-                Section::make('Sidebar')
+                Section::make(__('filament-white-label::filament-white-label.resource.sections.sidebar'))
                     ->schema([
                         Toggle::make('metadata.sidebar_collapsible_on_desktop')
-                            ->label('Collapsible Sidebar')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.sidebar_collapsible.label'))
                             ->disabled(fn ($get) => (bool) $get('metadata.top_navigation'))
                             ->default(config('filament-white-label.defaults.sidebar_collapsible_on_desktop', false))
                             ->live()
                             ->afterStateUpdated(fn ($state, $set) => $state && $set('metadata.sidebar_fully_collapsible_on_desktop', false))
-                            ->helperText('Allows sidebar to collapse to icons only.'),
+                            ->helperText(__('filament-white-label::filament-white-label.resource.fields.sidebar_collapsible.helper_text')),
 
                         Toggle::make('metadata.sidebar_fully_collapsible_on_desktop')
-                            ->label('Fully Collapsible Sidebar')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.sidebar_fully_collapsible.label'))
                             ->disabled(fn ($get) => (bool) $get('metadata.top_navigation'))
                             ->default(config('filament-white-label.defaults.sidebar_fully_collapsible_on_desktop', false))
                             ->live()
                             ->afterStateUpdated(fn ($state, $set) => $state && $set('metadata.sidebar_collapsible_on_desktop', false))
-                            ->helperText('Allows sidebar to hide completely.'),
+                            ->helperText(__('filament-white-label::filament-white-label.resource.fields.sidebar_fully_collapsible.helper_text')),
 
                         Toggle::make('metadata.collapsible_navigation_groups')
-                            ->label('Collapsible Navigation Groups')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.collapsible_navigation_groups.label'))
                             ->disabled(fn ($get) => (bool) $get('metadata.top_navigation'))
                             ->default(config('filament-white-label.defaults.collapsible_navigation_groups', true))
-                            ->helperText('Allow navigation groups to be expanded/collapsed.'),
+                            ->helperText(__('filament-white-label::filament-white-label.resource.fields.collapsible_navigation_groups.helper_text')),
                     ])->columns(2),
 
-                Section::make('Display')->schema([
+                Section::make(__('filament-white-label::filament-white-label.resource.sections.display'))->schema([
                     Toggle::make('metadata.breadcrumbs')
-                        ->label('Breadcrumbs')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.breadcrumbs.label'))
                         ->default(config('filament-white-label.defaults.breadcrumbs', true))
-                        ->helperText('Show breadcrumb navigation.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.breadcrumbs.helper_text')),
                 ]),
 
-                Section::make('Dimensions')->schema([
+                Section::make(__('filament-white-label::filament-white-label.resource.sections.dimensions'))->schema([
                     Select::make('metadata.container_width')
-                        ->label('Content Width')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.content_width.label'))
                         ->default(null)
-                        ->options([
-                            null => 'Default',
-                            '1024px' => '1024px (Narrow)',
-                            '1280px' => '1280px',
-                            'full' => 'Full Width',
+                        ->options(fn () => [
+                            null => __('filament-white-label::filament-white-label.resource.options.default'),
+                            '1024px' => __('filament-white-label::filament-white-label.resource.options.content_width.1024'),
+                            '1280px' => __('filament-white-label::filament-white-label.resource.options.content_width.1280'),
+                            'full' => __('filament-white-label::filament-white-label.resource.options.content_width.full'),
                         ])
-                        ->helperText('Max-width of the main content area.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.content_width.helper_text')),
 
                     Select::make('metadata.sidebar_width')
-                        ->label('Sidebar Width')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.sidebar_width.label'))
                         ->default(null)
-                        ->options([
-                            null => 'Default (320px)',
-                            '260px' => '260px',
-                            '300px' => '300px',
-                            '340px' => '340px',
+                        ->options(fn () => [
+                            null => __('filament-white-label::filament-white-label.resource.options.sidebar_width.320'),
+                            '260px' => __('filament-white-label::filament-white-label.resource.options.sidebar_width.260'),
+                            '300px' => __('filament-white-label::filament-white-label.resource.options.sidebar_width.300'),
+                            '340px' => __('filament-white-label::filament-white-label.resource.options.sidebar_width.340'),
                         ])
-                        ->helperText('Fixed width of the navigation sidebar.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.sidebar_width.helper_text')),
 
                     Select::make('metadata.heading_size')
-                        ->label('Page Heading Size')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.page_heading_size.label'))
                         ->default('default')
-                        ->options([
-                            'default' => 'Default',
-                            'small' => 'Small',
-                            'large' => 'Large',
+                        ->options(fn () => [
+                            'default' => __('filament-white-label::filament-white-label.resource.options.default'),
+                            'small' => __('filament-white-label::filament-white-label.resource.options.page_heading_size.small'),
+                            'large' => __('filament-white-label::filament-white-label.resource.options.page_heading_size.large'),
                         ])
-                        ->helperText('Font size of page headings (h1).'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.page_heading_size.helper_text')),
 
                     Select::make('metadata.nav_item_spacing')
-                        ->label('Navigation Item Spacing')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.nav_item_spacing.label'))
                         ->default('default')
-                        ->options([
-                            'default' => 'Default',
-                            'compact' => 'Compact',
-                            'spacious' => 'Spacious',
+                        ->options(fn () => [
+                            'default' => __('filament-white-label::filament-white-label.resource.options.nav_item_spacing.default'),
+                            'compact' => __('filament-white-label::filament-white-label.resource.options.nav_item_spacing.compact'),
+                            'spacious' => __('filament-white-label::filament-white-label.resource.options.nav_item_spacing.spacious'),
                         ])
-                        ->helperText('Vertical padding between sidebar navigation items.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.nav_item_spacing.helper_text')),
                 ])->columns(2),
 
-                Section::make('Footer')->schema([
+                Section::make(__('filament-white-label::filament-white-label.resource.sections.footer'))->schema([
                     TextInput::make('metadata.footer_text')
-                        ->label('Footer Text')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.footer_text.label'))
                         ->maxLength(255)
-                        ->placeholder('ACME Admin Portal')
-                        ->helperText('Text displayed in the panel footer. Leave empty to hide.'),
+                        ->placeholder(__('filament-white-label::filament-white-label.resource.fields.footer_text.placeholder'))
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.footer_text.helper_text')),
 
                     Repeater::make('metadata.footer_links')
-                        ->label('Footer Links')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.footer_links.label'))
                         ->schema([
                             TextInput::make('label')
-                                ->label('Label')
+                                ->label(__('filament-white-label::filament-white-label.resource.fields.footer_links.link_label.label'))
                                 ->required()
                                 ->maxLength(100),
                             TextInput::make('url')
-                                ->label('URL')
+                                ->label(__('filament-white-label::filament-white-label.resource.fields.footer_links.link_url.label'))
                                 ->required()
                                 ->url()
                                 ->maxLength(500),
                         ])
                         ->columns(2)
                         ->defaultItems(0)
-                        ->addActionLabel('Add link')
+                        ->addActionLabel(__('filament-white-label::filament-white-label.resource.fields.footer_links.add_link'))
                         ->collapsible()
-                        ->helperText('Optional links displayed below the footer text.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.footer_links.helper_text')),
                 ]),
             ]);
     }

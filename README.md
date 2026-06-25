@@ -32,6 +32,14 @@ php artisan white-label:install
 php artisan migrate
 ```
 
+Publish translations (optional — all strings are translatable):
+
+```bash
+php artisan vendor:publish --tag=filament-white-label-translations
+```
+
+This copies `lang/en/filament-white-label.php` to your app's `lang/vendor/filament-white-label/` directory. Duplicate it for any locale.
+
 Add the trait to your tenant model:
 
 ```php
@@ -105,6 +113,7 @@ Full docs at **[docs.ashraficlabs.com/filament-white-label](https://docs.ashrafi
 | Custom CSS | Sanitized CSS injection (max 50KB) |
 | Login page | Branded auth experience (extends native Filament login) |
 | Footer | Custom text + dynamic label/URL links |
+| i18n | Full translation support — all ~230 strings translatable |
 
 ---
 

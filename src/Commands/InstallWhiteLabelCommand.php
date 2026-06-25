@@ -11,28 +11,35 @@ class InstallWhiteLabelCommand extends Command
 {
     protected $signature = 'white-label:install';
 
-    protected $description = 'Install Filament White-Label — publish config and migrations';
+    public function __construct()
+    {
+        parent::__construct();
+
+        $this->setDescription((string) __('filament-white-label::filament-white-label.commands.install.description'));
+    }
 
     public function handle(): int
     {
-        $this->info('╔══════════════════════════════════════════╗');
-        $this->info('║     Filament White-Label Installer       ║');
-        $this->info('╚══════════════════════════════════════════╝');
+        $banner = (string) __('filament-white-label::filament-white-label.commands.install.banner');
+
+        $this->info(str_repeat('╔', 46));
+        $this->info('║     '.str_pad($banner, 34).'║');
+        $this->info(str_repeat('╚', 46));
         $this->newLine();
 
         $this->publishConfig();
         $this->publishMigrations();
 
         $this->newLine();
-        $this->info('Filament White-Label installed successfully.');
+        $this->info((string) __('filament-white-label::filament-white-label.commands.install.success'));
         $this->newLine();
-        $this->line('Next steps:');
-        $this->line('  1. Review the published migration in <info>database/migrations/</info>');
-        $this->line('  2. Run <info>php artisan migrate</info>');
-        $this->line('  3. Review the config at <info>config/filament-white-label.php</info>');
-        $this->line('  4. Add traits to your Tenant model and PanelProvider');
+        $this->line((string) __('filament-white-label::filament-white-label.commands.install.next_steps'));
+        $this->line('  '.__('filament-white-label::filament-white-label.commands.install.step_1'));
+        $this->line('  '.__('filament-white-label::filament-white-label.commands.install.step_2'));
+        $this->line('  '.__('filament-white-label::filament-white-label.commands.install.step_3'));
+        $this->line('  '.__('filament-white-label::filament-white-label.commands.install.step_4'));
         $this->newLine();
-        $this->line('📖 Documentation: <comment>https://github.com/ashrafic/filament-white-label</comment>');
+        $this->line((string) __('filament-white-label::filament-white-label.commands.install.docs'));
 
         return self::SUCCESS;
     }
@@ -42,7 +49,7 @@ class InstallWhiteLabelCommand extends Command
         $configPath = config_path('filament-white-label.php');
 
         if (File::exists($configPath)) {
-            $this->line('  ⏭  Config already published — skipping.');
+            $this->line('  '.__('filament-white-label::filament-white-label.commands.install.config_skipped'));
 
             return;
         }
@@ -51,7 +58,7 @@ class InstallWhiteLabelCommand extends Command
             '--tag' => 'filament-white-label-config',
         ]);
 
-        $this->line('  ✅ Config published to <info>config/filament-white-label.php</info>');
+        $this->line('  '.__('filament-white-label::filament-white-label.commands.install.config_published'));
     }
 
     protected function publishMigrations(): void
@@ -60,6 +67,6 @@ class InstallWhiteLabelCommand extends Command
             '--tag' => 'filament-white-label-migrations',
         ]);
 
-        $this->line('  ✅ Migration published to <info>database/migrations/</info>');
+        $this->line('  '.__('filament-white-label::filament-white-label.commands.install.migration_published'));
     }
 }

@@ -33,11 +33,20 @@ class WhiteLabelSettingsResource extends Resource
 
     protected static string|BackedEnum|null $navigationIcon = 'heroicon-o-swatch';
 
-    protected static ?string $navigationLabel = 'White Label';
+    public static function getNavigationLabel(): string
+    {
+        return __('filament-white-label::filament-white-label.resource.navigation.label');
+    }
 
-    protected static ?string $label = 'White Label Settings';
+    public static function getLabel(): ?string
+    {
+        return __('filament-white-label::filament-white-label.resource.label.singular');
+    }
 
-    protected static ?string $pluralLabel = 'White Label Settings';
+    public static function getPluralLabel(): ?string
+    {
+        return __('filament-white-label::filament-white-label.resource.label.plural');
+    }
 
     public static function getNavigationGroup(): ?string
     {
@@ -52,18 +61,18 @@ class WhiteLabelSettingsResource extends Resource
     public static function getRecordSubNavigation(Page $page): array
     {
         return [
-            NavigationItem::make('Brand')
-                ->label('Brand')
+            NavigationItem::make(__('filament-white-label::filament-white-label.resource.sub_navigation.brand'))
+                ->label(__('filament-white-label::filament-white-label.resource.sub_navigation.brand'))
                 ->icon('heroicon-o-paint-brush')
                 ->url(fn () => static::getUrl('index'))
                 ->isActiveWhen(fn () => $page instanceof EditWhiteLabelSettings),
-            NavigationItem::make('Layout')
-                ->label('Layout')
+            NavigationItem::make(__('filament-white-label::filament-white-label.resource.sub_navigation.layout'))
+                ->label(__('filament-white-label::filament-white-label.resource.sub_navigation.layout'))
                 ->icon('heroicon-o-rectangle-group')
                 ->url(fn () => static::getUrl('layout'))
                 ->isActiveWhen(fn () => $page instanceof EditLayoutSettings),
-            NavigationItem::make('Advanced')
-                ->label('Advanced')
+            NavigationItem::make(__('filament-white-label::filament-white-label.resource.sub_navigation.advanced'))
+                ->label(__('filament-white-label::filament-white-label.resource.sub_navigation.advanced'))
                 ->icon('heroicon-o-cog-6-tooth')
                 ->url(fn () => static::getUrl('advanced'))
                 ->isActiveWhen(fn () => $page instanceof EditAdvancedSettings),
@@ -75,23 +84,23 @@ class WhiteLabelSettingsResource extends Resource
         return $schema
             ->columns(1)
             ->schema([
-                Section::make('Brand Identity')->schema([
+                Section::make(__('filament-white-label::filament-white-label.resource.sections.brand_identity'))->schema([
                     Grid::make(2)->schema([
                         TextInput::make('metadata.brand_name')
-                            ->label('Brand Name')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.brand_name.label'))
                             ->required()
                             ->maxLength(255)
                             ->placeholder(config('app.name')),
 
                         TextInput::make('metadata.brand_logo_height')
-                            ->label('Logo Height')
-                            ->placeholder('2.5rem')
-                            ->helperText('CSS height value. Leave empty for Filament default.'),
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.logo_height.label'))
+                            ->placeholder(__('filament-white-label::filament-white-label.resource.fields.logo_height.placeholder'))
+                            ->helperText(__('filament-white-label::filament-white-label.resource.fields.logo_height.helper_text')),
                     ]),
 
                     Grid::make(2)->schema([
                         FileUpload::make('metadata.logo_path')
-                            ->label('Logo (Light)')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.logo_light.label'))
                             ->image()
                             ->imageResizeMode('contain')
                             ->directory(static::storageDirectory('logos'))
@@ -100,19 +109,19 @@ class WhiteLabelSettingsResource extends Resource
                             ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/svg+xml', 'image/webp']),
 
                         FileUpload::make('metadata.dark_mode_logo_path')
-                            ->label('Logo (Dark)')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.logo_dark.label'))
                             ->image()
                             ->imageResizeMode('contain')
                             ->directory(static::storageDirectory('logos'))
                             ->disk(config('filament-white-label.disk', 'public'))
                             ->maxSize(2048)
                             ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/svg+xml', 'image/webp'])
-                            ->helperText('Falls back to light logo if not set.'),
+                            ->helperText(__('filament-white-label::filament-white-label.resource.fields.logo_dark.helper_text')),
                     ]),
 
                     Grid::make(2)->schema([
                         FileUpload::make('metadata.favicon_path')
-                            ->label('Favicon')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.favicon.label'))
                             ->image()
                             ->imageResizeMode('cover')
                             ->imageCropAspectRatio('1:1')
@@ -123,52 +132,52 @@ class WhiteLabelSettingsResource extends Resource
                     ]),
                 ])->columns(1),
 
-                Section::make('Colors')->schema([
-                    Select::make('metadata.colors.primary')->label('Primary')
+                Section::make(__('filament-white-label::filament-white-label.resource.sections.colors'))->schema([
+                    Select::make('metadata.colors.primary')->label(__('filament-white-label::filament-white-label.resource.fields.colors.primary.label'))
                         ->default('#3b82f6')
                         ->options(fn () => EditWhiteLabelSettings::paletteOptions())
                         ->searchable(),
 
-                    Select::make('metadata.colors.secondary')->label('Secondary')
+                    Select::make('metadata.colors.secondary')->label(__('filament-white-label::filament-white-label.resource.fields.colors.secondary.label'))
                         ->default('#64748b')
                         ->options(fn () => EditWhiteLabelSettings::paletteOptions())
                         ->searchable(),
 
-                    Select::make('metadata.colors.danger')->label('Danger')
+                    Select::make('metadata.colors.danger')->label(__('filament-white-label::filament-white-label.resource.fields.colors.danger.label'))
                         ->default('#ef4444')
                         ->options(fn () => EditWhiteLabelSettings::paletteOptions())
                         ->searchable(),
 
-                    Select::make('metadata.colors.warning')->label('Warning')
+                    Select::make('metadata.colors.warning')->label(__('filament-white-label::filament-white-label.resource.fields.colors.warning.label'))
                         ->default('#f59e0b')
                         ->options(fn () => EditWhiteLabelSettings::paletteOptions())
                         ->searchable(),
 
-                    Select::make('metadata.colors.success')->label('Success')
+                    Select::make('metadata.colors.success')->label(__('filament-white-label::filament-white-label.resource.fields.colors.success.label'))
                         ->default('#22c55e')
                         ->options(fn () => EditWhiteLabelSettings::paletteOptions())
                         ->searchable(),
 
-                    Select::make('metadata.colors.info')->label('Info')
+                    Select::make('metadata.colors.info')->label(__('filament-white-label::filament-white-label.resource.fields.colors.info.label'))
                         ->default('#3b82f6')
                         ->options(fn () => EditWhiteLabelSettings::paletteOptions())
                         ->searchable(),
                 ])->columns(3),
 
-                Section::make('Typography')->schema([
+                Section::make(__('filament-white-label::filament-white-label.resource.sections.typography'))->schema([
                     Select::make('metadata.font_family')
-                        ->label('Font Family')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.font_family.label'))
                         ->options(fn () => FontService::fontOptions())
                         ->searchable()
                         ->default('Inter'),
                 ]),
 
-                Section::make('Custom CSS')->schema([
+                Section::make(__('filament-white-label::filament-white-label.resource.sections.custom_css'))->schema([
                     Textarea::make('metadata.custom_css')
-                        ->label('Custom CSS')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.custom_css.label'))
                         ->rows(10)
                         ->maxLength(config('filament-white-label.security.max_css_length', 50000))
-                        ->helperText('Custom CSS will be injected into your panel. <script> tags are automatically removed for security.')
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.custom_css.helper_text'))
                         ->visible(fn () => ! config('filament-white-label.security.disable_custom_css', false)),
                 ])->collapsed(),
             ]);
@@ -178,9 +187,15 @@ class WhiteLabelSettingsResource extends Resource
     {
         return $table
             ->columns([
-                ImageColumn::make('metadata.logo_path')->label('Logo')->circular()->size(40),
-                TextColumn::make('metadata.brand_name')->label('Brand')->searchable(),
-                TextColumn::make('updated_at')->label('Last Updated')->dateTime(),
+                ImageColumn::make('metadata.logo_path')
+                    ->label(__('filament-white-label::filament-white-label.resource.table.columns.logo'))
+                    ->circular()->size(40),
+                TextColumn::make('metadata.brand_name')
+                    ->label(__('filament-white-label::filament-white-label.resource.table.columns.brand'))
+                    ->searchable(),
+                TextColumn::make('updated_at')
+                    ->label(__('filament-white-label::filament-white-label.resource.table.columns.updated'))
+                    ->dateTime(),
             ])
             ->actions([
                 EditAction::make(),
