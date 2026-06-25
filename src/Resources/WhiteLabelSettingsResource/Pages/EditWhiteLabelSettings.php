@@ -23,9 +23,15 @@ class EditWhiteLabelSettings extends EditRecord
 {
     protected static string $resource = WhiteLabelSettingsResource::class;
 
-    protected static ?string $title = 'Brand';
+    public static function getTitle(): string
+    {
+        return __('filament-white-label::filament-white-label.resource.page.brand.title');
+    }
 
-    protected static ?string $navigationLabel = 'Brand';
+    public static function getNavigationLabel(): string
+    {
+        return __('filament-white-label::filament-white-label.resource.page.brand.nav_label');
+    }
 
     protected function getHeaderActions(): array
     {
@@ -66,24 +72,24 @@ class EditWhiteLabelSettings extends EditRecord
         return $schema
             ->columns(1)
             ->schema([
-                Section::make('Brand Identity')->schema([
+                Section::make(__('filament-white-label::filament-white-label.resource.sections.brand_identity'))->schema([
                     Grid::make(2)->schema([
                         TextInput::make('metadata.brand_name')
-                            ->label('Brand Name')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.brand_name.label'))
                             ->required()
                             ->maxLength(255)
                             ->default(config('app.name'))
                             ->placeholder(config('app.name')),
 
                         TextInput::make('metadata.brand_logo_height')
-                            ->label('Logo Height')
-                            ->placeholder('2.5rem')
-                            ->helperText('CSS height value. Leave empty for Filament default.'),
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.logo_height.label'))
+                            ->placeholder(__('filament-white-label::filament-white-label.resource.fields.logo_height.placeholder'))
+                            ->helperText(__('filament-white-label::filament-white-label.resource.fields.logo_height.helper_text')),
                     ]),
 
                     Grid::make(2)->schema([
                         FileUpload::make('metadata.logo_path')
-                            ->label('Logo (Light)')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.logo_light.label'))
                             ->image()
                             ->imageResizeMode('contain')
                             ->directory(WhiteLabelSettingsResource::storageDirectory('logos'))
@@ -92,19 +98,19 @@ class EditWhiteLabelSettings extends EditRecord
                             ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/svg+xml', 'image/webp']),
 
                         FileUpload::make('metadata.dark_mode_logo_path')
-                            ->label('Logo (Dark)')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.logo_dark.label'))
                             ->image()
                             ->imageResizeMode('contain')
                             ->directory(WhiteLabelSettingsResource::storageDirectory('logos'))
                             ->disk(config('filament-white-label.disk', 'public'))
                             ->maxSize(2048)
                             ->acceptedFileTypes(['image/png', 'image/jpeg', 'image/svg+xml', 'image/webp'])
-                            ->helperText('Falls back to light logo if not set.'),
+                            ->helperText(__('filament-white-label::filament-white-label.resource.fields.logo_dark.helper_text')),
                     ]),
 
                     Grid::make(2)->schema([
                         FileUpload::make('metadata.favicon_path')
-                            ->label('Favicon')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.favicon.label'))
                             ->image()
                             ->imageResizeMode('cover')
                             ->imageCropAspectRatio('1:1')
@@ -115,10 +121,10 @@ class EditWhiteLabelSettings extends EditRecord
                     ]),
                 ])->columns(1),
 
-                Section::make('Colors')->schema([
-                    Fieldset::make('Primary')->schema([
+                Section::make(__('filament-white-label::filament-white-label.resource.sections.colors'))->schema([
+                    Fieldset::make(__('filament-white-label::filament-white-label.resource.fields.colors.primary.label'))->schema([
                         Select::make('_ui_primary_palette')
-                            ->label('Palette')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.colors.palette.label'))
                             ->options(fn () => static::paletteOptions())
                             ->native(true)
                             ->dehydrated(false)
@@ -141,16 +147,16 @@ class EditWhiteLabelSettings extends EditRecord
                                 }
                             }),
                         ColorPicker::make('metadata.colors.primary')
-                            ->label('Hex')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.colors.hex.label'))
                             ->live()
                             ->afterStateUpdated(function ($state, $set) {
                                 $palette = static::hexToPalette($state);
                                 $set('_ui_primary_palette', $palette ?? 'custom');
                             }),
                     ])->columns(2),
-                    Fieldset::make('Secondary')->schema([
+                    Fieldset::make(__('filament-white-label::filament-white-label.resource.fields.colors.secondary.label'))->schema([
                         Select::make('_ui_secondary_palette')
-                            ->label('Palette')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.colors.palette.label'))
                             ->options(fn () => static::paletteOptions())
                             ->native(true)
                             ->dehydrated(false)
@@ -173,16 +179,16 @@ class EditWhiteLabelSettings extends EditRecord
                                 }
                             }),
                         ColorPicker::make('metadata.colors.secondary')
-                            ->label('Hex')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.colors.hex.label'))
                             ->live()
                             ->afterStateUpdated(function ($state, $set) {
                                 $palette = static::hexToPalette($state);
                                 $set('_ui_secondary_palette', $palette ?? 'custom');
                             }),
                     ])->columns(2),
-                    Fieldset::make('Danger')->schema([
+                    Fieldset::make(__('filament-white-label::filament-white-label.resource.fields.colors.danger.label'))->schema([
                         Select::make('_ui_danger_palette')
-                            ->label('Palette')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.colors.palette.label'))
                             ->options(fn () => static::paletteOptions())
                             ->native(true)
                             ->dehydrated(false)
@@ -205,16 +211,16 @@ class EditWhiteLabelSettings extends EditRecord
                                 }
                             }),
                         ColorPicker::make('metadata.colors.danger')
-                            ->label('Hex')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.colors.hex.label'))
                             ->live()
                             ->afterStateUpdated(function ($state, $set) {
                                 $palette = static::hexToPalette($state);
                                 $set('_ui_danger_palette', $palette ?? 'custom');
                             }),
                     ])->columns(2),
-                    Fieldset::make('Warning')->schema([
+                    Fieldset::make(__('filament-white-label::filament-white-label.resource.fields.colors.warning.label'))->schema([
                         Select::make('_ui_warning_palette')
-                            ->label('Palette')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.colors.palette.label'))
                             ->options(fn () => static::paletteOptions())
                             ->native(true)
                             ->dehydrated(false)
@@ -237,16 +243,16 @@ class EditWhiteLabelSettings extends EditRecord
                                 }
                             }),
                         ColorPicker::make('metadata.colors.warning')
-                            ->label('Hex')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.colors.hex.label'))
                             ->live()
                             ->afterStateUpdated(function ($state, $set) {
                                 $palette = static::hexToPalette($state);
                                 $set('_ui_warning_palette', $palette ?? 'custom');
                             }),
                     ])->columns(2),
-                    Fieldset::make('Success')->schema([
+                    Fieldset::make(__('filament-white-label::filament-white-label.resource.fields.colors.success.label'))->schema([
                         Select::make('_ui_success_palette')
-                            ->label('Palette')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.colors.palette.label'))
                             ->options(fn () => static::paletteOptions())
                             ->native(true)
                             ->dehydrated(false)
@@ -269,16 +275,16 @@ class EditWhiteLabelSettings extends EditRecord
                                 }
                             }),
                         ColorPicker::make('metadata.colors.success')
-                            ->label('Hex')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.colors.hex.label'))
                             ->live()
                             ->afterStateUpdated(function ($state, $set) {
                                 $palette = static::hexToPalette($state);
                                 $set('_ui_success_palette', $palette ?? 'custom');
                             }),
                     ])->columns(2),
-                    Fieldset::make('Info')->schema([
+                    Fieldset::make(__('filament-white-label::filament-white-label.resource.fields.colors.info.label'))->schema([
                         Select::make('_ui_info_palette')
-                            ->label('Palette')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.colors.palette.label'))
                             ->options(fn () => static::paletteOptions())
                             ->native(true)
                             ->dehydrated(false)
@@ -301,7 +307,7 @@ class EditWhiteLabelSettings extends EditRecord
                                 }
                             }),
                         ColorPicker::make('metadata.colors.info')
-                            ->label('Hex')
+                            ->label(__('filament-white-label::filament-white-label.resource.fields.colors.hex.label'))
                             ->live()
                             ->afterStateUpdated(function ($state, $set) {
                                 $palette = static::hexToPalette($state);
@@ -310,71 +316,71 @@ class EditWhiteLabelSettings extends EditRecord
                     ])->columns(2),
                 ])->columns(2),
 
-                Section::make('Typography')->schema([
+                Section::make(__('filament-white-label::filament-white-label.resource.sections.typography'))->schema([
                     Select::make('metadata.font_family')
-                        ->label('Font Family')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.font_family.label'))
                         ->options(fn () => FontService::fontOptions())
                         ->searchable()
                         ->default('Inter'),
                 ]),
 
-                Section::make('Styling')->schema([
+                Section::make(__('filament-white-label::filament-white-label.resource.sections.styling'))->schema([
                     Select::make('metadata.border_radius')
-                        ->label('Border Radius')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.border_radius.label'))
                         ->default('default')
-                        ->options([
-                            'default' => 'Default',
-                            'none' => 'None',
-                            'small' => 'Small',
-                            'medium' => 'Medium',
-                            'large' => 'Large',
-                            'pill' => 'Pill',
+                        ->options(fn () => [
+                            'default' => __('filament-white-label::filament-white-label.resource.options.default'),
+                            'none'    => __('filament-white-label::filament-white-label.resource.options.none'),
+                            'small'   => __('filament-white-label::filament-white-label.resource.options.small'),
+                            'medium'  => __('filament-white-label::filament-white-label.resource.options.medium'),
+                            'large'   => __('filament-white-label::filament-white-label.resource.options.large'),
+                            'pill'    => __('filament-white-label::filament-white-label.resource.options.pill'),
                         ])
-                        ->helperText('Rounded corners on buttons, cards, inputs, modals, and dropdowns.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.border_radius.helper_text')),
 
                     Select::make('metadata.input_border_radius')
-                        ->label('Input Border Radius')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.input_border_radius.label'))
                         ->default(null)
-                        ->options([
-                            null => 'Inherit',
-                            'default' => 'Default',
-                            'none' => 'None',
-                            'small' => 'Small',
-                            'medium' => 'Medium',
-                            'large' => 'Large',
-                            'pill' => 'Pill',
+                        ->options(fn () => [
+                            null        => __('filament-white-label::filament-white-label.resource.options.inherit'),
+                            'default'   => __('filament-white-label::filament-white-label.resource.options.default'),
+                            'none'      => __('filament-white-label::filament-white-label.resource.options.none'),
+                            'small'     => __('filament-white-label::filament-white-label.resource.options.small'),
+                            'medium'    => __('filament-white-label::filament-white-label.resource.options.medium'),
+                            'large'     => __('filament-white-label::filament-white-label.resource.options.large'),
+                            'pill'      => __('filament-white-label::filament-white-label.resource.options.pill'),
                         ])
-                        ->helperText('Override border radius specifically for text inputs and selects.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.input_border_radius.helper_text')),
 
                     Select::make('metadata.shadow_intensity')
-                        ->label('Shadow Intensity')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.shadow_intensity.label'))
                         ->default('default')
-                        ->options([
-                            'default' => 'Default',
-                            'none' => 'None',
-                            'subtle' => 'Subtle',
-                            'pronounced' => 'Pronounced',
+                        ->options(fn () => [
+                            'default'    => __('filament-white-label::filament-white-label.resource.options.default'),
+                            'none'       => __('filament-white-label::filament-white-label.resource.options.none'),
+                            'subtle'     => __('filament-white-label::filament-white-label.resource.options.subtle'),
+                            'pronounced' => __('filament-white-label::filament-white-label.resource.options.pronounced'),
                         ])
-                        ->helperText('Box shadow on cards and dropdown panels.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.shadow_intensity.helper_text')),
 
                     Select::make('metadata.badge_shape')
-                        ->label('Badge Shape')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.badge_shape.label'))
                         ->default('default')
-                        ->options([
-                            'default' => 'Default',
-                            'sharp' => 'Sharp',
-                            'rounded' => 'Rounded',
-                            'pill' => 'Pill',
+                        ->options(fn () => [
+                            'default' => __('filament-white-label::filament-white-label.resource.options.default'),
+                            'sharp'   => __('filament-white-label::filament-white-label.resource.options.sharp'),
+                            'rounded' => __('filament-white-label::filament-white-label.resource.options.rounded'),
+                            'pill'    => __('filament-white-label::filament-white-label.resource.options.pill'),
                         ])
-                        ->helperText('Border radius and padding for badges.'),
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.badge_shape.helper_text')),
                 ])->columns(2),
 
-                Section::make('Custom CSS')->schema([
+                Section::make(__('filament-white-label::filament-white-label.resource.sections.custom_css'))->schema([
                     Textarea::make('metadata.custom_css')
-                        ->label('Custom CSS')
+                        ->label(__('filament-white-label::filament-white-label.resource.fields.custom_css.label'))
                         ->rows(10)
                         ->maxLength(config('filament-white-label.security.max_css_length', 50000))
-                        ->helperText('Custom CSS will be injected into your panel. <script> tags are automatically removed for security.')
+                        ->helperText(__('filament-white-label::filament-white-label.resource.fields.custom_css.helper_text'))
                         ->visible(fn () => ! config('filament-white-label.security.disable_custom_css', false)),
                 ])->collapsed(),
             ]);
@@ -382,7 +388,7 @@ class EditWhiteLabelSettings extends EditRecord
 
     public static function paletteOptions(): array
     {
-        $options = ['custom' => 'Custom hex...'];
+        $options = ['custom' => __('filament-white-label::filament-white-label.resource.fields.colors.custom_hex')];
 
         foreach (Color::all() as $name => $shades) {
             $hex = Color::convertToHex($shades[500]);
