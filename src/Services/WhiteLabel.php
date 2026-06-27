@@ -657,7 +657,11 @@ class WhiteLabel
             return null;
         }
 
-        return Cache::get(static::cacheKey($tenant, $panelId));
+        class_exists(WhiteLabelSettings::class);
+
+        $cached = Cache::get(static::cacheKey($tenant, $panelId));
+
+        return $cached instanceof WhiteLabelSettings ? $cached : null;
     }
 
     protected static function resolveFromDatabase(?Model $tenant, ?string $panelId): ?WhiteLabelSettings
@@ -693,9 +697,12 @@ class WhiteLabel
     protected static function resolveGlobal(?string $panelId): ?WhiteLabelSettings
     {
         $cacheKey = static::cacheKey(null, $panelId);
+
+        class_exists(WhiteLabelSettings::class);
+
         $cached = Cache::get($cacheKey);
 
-        if ($cached) {
+        if ($cached instanceof WhiteLabelSettings) {
             return $cached;
         }
 
