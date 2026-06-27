@@ -32,8 +32,28 @@ php artisan white-label:install
 php artisan migrate
 ```
 
+## Panel Registration
 
-Add the trait to your tenant model:
+Two pieces — both required for the settings page to appear:
+
+```php
+use FilamentWhiteLabel\Resources\WhiteLabelSettingsResource;
+
+$panel
+    ->whiteLabel()                                      // wires up branding
+    ->resources([
+        WhiteLabelSettingsResource::class,              // adds the nav item
+    ]);
+```
+
+- `->whiteLabel()` enables white-label functionality across the panel
+- `WhiteLabelSettingsResource` registers the settings page — without it, no nav item appears
+
+A **White Label** nav item appears with three sub-pages: Brand, Layout, Advanced.
+
+## Tenant Model Setup (Optional)
+
+Add the `HasWhiteLabel` trait to your tenant model only if you want default settings **eagerly created** when a new tenant is created:
 
 ```php
 use FilamentWhiteLabel\Traits\HasWhiteLabel;
@@ -44,13 +64,9 @@ class Team extends Model
 }
 ```
 
-One line in your PanelProvider:
+The trait hooks into the `created` event to auto-create a default settings record.
 
-```php
-$panel->whiteLabel();
-```
-
-Done. Your tenants see a **White Label** settings page.
+**Without the trait**, defaults are created **lazily** — only when the White Label page is first visited. Skip this step for single-tenant setups, or if you don't need the settings row to exist before page visit.
 
 ---
 
@@ -119,14 +135,6 @@ Full docs at **[docs.ashraficlabs.com/filament-white-label](https://docs.ashrafi
 | Config-only | No records exist | `config('filament-white-label.defaults.*')` |
 
 Works **before** and **after** you adopt multi-tenancy.
-
----
-
-## Requirements
-
-- PHP 8.2+
-- Laravel 11+
-- Filament v5.x
 
 ---
 
